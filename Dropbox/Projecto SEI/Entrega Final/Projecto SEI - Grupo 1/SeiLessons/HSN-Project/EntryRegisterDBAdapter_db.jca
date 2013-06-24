@@ -1,0 +1,14 @@
+<adapter-config name="EntryRegisterDBAdapter" adapter="Database Adapter" wsdlLocation="EntryRegisterDBAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/mydb" UIConnectionName="DbConnection" adapterRef=""/>
+  <endpoint-interaction portType="EntryRegisterDBAdapter_ptt" operation="insert">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="EntryRegisterDBAdapter.Registoentrada"/>
+      <property name="DmlType" value="insert"/>
+      <property name="MappingsMetaDataURL" value="EntryRegisterDBAdapter-or-mappings.xml"/>
+      <property name="DetectOmissions" value="true"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

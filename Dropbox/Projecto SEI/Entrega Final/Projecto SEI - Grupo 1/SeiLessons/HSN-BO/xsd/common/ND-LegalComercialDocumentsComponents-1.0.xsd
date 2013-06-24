@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Fernando Pereira (Saphety) -->
+<!-- ================================================== -->
+<!-- ===== Legal Comercial Documents Components  ===== -->
+<!-- ================================================== -->
+<!--
+   Module of Legal Comercial Documents Components
+   Softlimits
+   Version: 1.0
+   Last change: 2008/04/03
+
+   Copyright (C) SOFTLIMITS (2008). All Rights Reserved.
+-->
+<xsd:schema xmlns="urn:netdocs:schemas:document" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:netdocs:schemas:document" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="pt">
+			Módulo com definições de tipos de dados para documentos com validade legal, como por exemplo a Factura.
+		</xsd:documentation>
+	</xsd:annotation>
+	<!-- =================== -->
+	<!-- ===== Redefines ====== -->
+	<!-- =================== -->
+	<xsd:include schemaLocation="ND-BaseComponents-1.0.xsd"/>
+	<!-- ======================== -->
+	<!-- =====  Complex Types ====== -->
+	<!-- ======================== -->
+	<xsd:complexType name="legalDocumentLineItemType">
+		<xsd:annotation>
+			<xsd:documentation>Tipo de dados para linhas de documentos com validade legal</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="documentLineItemType">
+				<xsd:sequence>
+					<xsd:element name="additionalDate" type="documentAdditionalDateType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Informação de tipo data e hora presentes na linha do documento. Por exemplo, data de entrega.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="vatAmount" type="lineVatAmountType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Valor do IVA da Linha.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="charge" type="chargeInformationType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Encargos aplicados à linha do artigo</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="quantityConversionFactor" type="quantityType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Regra JM = Factor de conversão da unidade de quantidade facturada, para a unidade base. No caso das quantidades serem expressas em unidades de base (EA, KGM), este campo vem preenchido com o valor 1, caso contrário deverá ter a quantidade correcta. Exemplo: se a quantidade facturada estiver expressa em caixas (BX) este campo deve conter a quantidade de unidades dentro da caixa.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="taxableAmount" type="nonNegativeDecimalType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Montante tributável da linha</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="netAmount" type="lineNetAmountType">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Montante líquido da linha</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="legalDocumentBaseType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para suportar documentos com validade legal.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="documentType">
+				<xsd:sequence>
+					<xsd:element name="seller" type="billingCompanyInformationType">
+						<xsd:annotation>
+							<xsd:documentation>Vendedor ou fornecedor dos artigos ou serviços</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="buyer" type="billableCompanyInformationType">
+						<xsd:annotation>
+							<xsd:documentation>Comprador dos artigos ou serviços</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="billTo" type="billableCompanyInformationType">
+						<xsd:annotation>
+							<xsd:documentation>Entidade a ser facturada</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="shipTo" type="nonBillableCompanyInformationType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Local de entrega das mercadorias</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="additionalDate" type="documentAdditionalDateType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Informação de tipo data e hora presentes no documento, com exepção da data do documento. Por exemplo, data de entrega.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="reference" type="referenceType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Referências a outros documentos.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="transportInformation" type="transportInformationType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Dados relativos ao transporte das mercadorias</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="currencyCode" type="currencyCodeType">
+						<xsd:annotation>
+							<xsd:documentation>Código da moeda ISO 4217 Alpha 3.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="discount" type="discountInformationType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Descontos globais ao documento</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="charge" type="chargeInformationType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Encargos globais ao documento</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="comment" type="structuredDescriptionType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Comentários e observações globais ao documento.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="senderSoftwareCertificationNumber" type="xsd:string" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Número do certificado do ERP atribuído pela DGCI.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="senderSoftwareDocumentSignatureHash" type="signatureHashSubsetType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Número correspondente à 1º, 11º, 21ª e 31ª do hash da assinatura</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="paymentMethod" type="paymentMethodType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Tipo de dados para definir as diferentes formas possíveis de pagamento</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="ptPublicAdminSicSpecificData" type="ptPublicAdminSicSpecificDataType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Dados specificos para o sistema SIC da administração pública em Portugal</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="lineItem" type="documentLineItemType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Detalhe de artigos ou serviços</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="vatSummary" type="vatSummaryType" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Resumo do IVA, por taxa, aplicados ao documento.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="chargeSummary" type="chargeInformationType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Resumo dos encargos aplicados ao documento. Somatório de todos os encargos, linhas e globais, por tipo de encargo.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="totalVatAmount" type="vatAmountType">
+						<xsd:annotation>
+							<xsd:documentation>Montante total de IVA.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="totalTaxableAmount" type="vatAmountType">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Montante total tributável do IVA.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="totalPackageAmount" type="nonNegativeDecimalType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Montante total das embalagens - Vasilhame</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="totalNetAmount" type="nonNegativeDecimalType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Somatório dos montantes líquidos das linhas</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="totalGrossAmount" type="nonNegativeDecimalType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Somatório dos montantes brutos das linhas</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="totalDiscountAmount" type="nonNegativeDecimalType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Somatório dos montantes de descontos das linhas</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="totalChargeAmount" type="nonNegativeDecimalType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Somatório dos montantes de encargos das linhas</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="totalPayableAmount" type="amountWithText">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="pt">Montante total a pagar</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="scope" type="invoiceScopeEnumType">
+					<xsd:annotation>
+						<xsd:documentation>Define o ambito do tipo de produtos ou serviços incluidos na factura</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="invoiceType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para suportar documentos com validade legal do tipo Factura Electrónica, sendo por isso o tipo de dados base para as Notas de Débito e Crédito.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="legalDocumentBaseType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="creditNoteType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para suportar documentos com validade legal do tipo Nota de crédito.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="invoiceType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="debitNoteType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para suportar documentos com validade legal do tipo Nota de dédito.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="invoiceType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

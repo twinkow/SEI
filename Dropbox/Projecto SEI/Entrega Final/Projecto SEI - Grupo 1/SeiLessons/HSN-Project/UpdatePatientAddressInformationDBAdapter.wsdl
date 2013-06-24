@@ -1,0 +1,21 @@
+<?binding.jca UpdatePatientAddressInformationDBAdapter_db.jca?>
+<wsdl:definitions name="UpdatePatientAddressInformationDBAdapter" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/UpdatePatientAddressInformationDBAdapter" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/UpdatePatientAddressInformationDBAdapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdatePatientAddressInformationDBAdapter">
+    <plt:partnerLinkType name="UpdatePatientAddressInformationDBAdapter_plt">
+        <plt:role name="UpdatePatientAddressInformationDBAdapter_role">
+            <plt:portType name="tns:UpdatePatientAddressInformationDBAdapter_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdatePatientAddressInformationDBAdapter" schemaLocation="xsd/UpdatePatientAddressInformationDBAdapter_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="DoenteCollection_msg">
+        <wsdl:part name="DoenteCollection" element="top:DoenteCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="UpdatePatientAddressInformationDBAdapter_ptt">
+        <wsdl:operation name="merge">
+            <wsdl:input message="tns:DoenteCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

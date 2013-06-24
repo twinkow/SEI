@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registoentrada xmlns="http://saude365.pt">
+   <dataHora>2013-05-06T21:28:49.412+01:00</dataHora>
+   <doente>
+      <nome>Bernardino Seabra</nome>
+      <dataNasc>1955-05-21</dataNasc>
+      <id>605781</id>
+      <seguroSaude>Sim</seguroSaude>
+      <morada>
+         <codigoPostal>2790-180</codigoPostal>
+         <rua>Rua Sertório do Monte Pereira</rua>
+         <num>7</num>
+         <andar>1</andar>
+         <apartamento>A</apartamento>
+         <concelho>Oeiras</concelho>
+         <distrito>Lisboa</distrito>
+         <freguesia>Carnaxide</freguesia>
+      </morada>
+   </doente>
+</registoentrada>

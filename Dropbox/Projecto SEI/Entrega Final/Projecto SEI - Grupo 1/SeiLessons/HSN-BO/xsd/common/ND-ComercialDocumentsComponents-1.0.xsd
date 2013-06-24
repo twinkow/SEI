@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (x64) (http://www.altova.com) by Fernando Pereira (Softlimits, S.A.) -->
+<!-- ================================================== -->
+<!-- ===== Comercial Documents Components  ===== -->
+<!-- ================================================== -->
+<!--
+   Module of Legal Comercial Documents Components
+   Softlimits
+   Version: 1.0
+   Last change: 2008/04/03
+
+   Copyright (C) SOFTLIMITS (2008). All Rights Reserved.
+-->
+<xsd:schema xmlns="urn:netdocs:schemas:document" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msg="urn:netdocs:schemas:message" targetNamespace="urn:netdocs:schemas:document" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="pt">
+			Módulo com definições de tipos de dados para documentos sem validade legal, como por exemplo a Encomenda.
+		</xsd:documentation>
+	</xsd:annotation>
+  <!-- ================== -->
+  <!-- ===== Include   ===== -->
+  <!-- ================== -->
+  <xsd:include schemaLocation="ND-BaseComponents-1.0.xsd"/>
+	<!-- ======================== -->
+	<!-- =====  Complex Types ====== -->
+	<!-- ======================== -->
+	<xsd:complexType name="orderType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para suporta a ordem de compra (encomenda).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="documentWithBaseEntitiesHeaderBodySummary">
+				<xsd:attribute name="orderTypeCode" type="orderTypeEnumType">
+					<xsd:annotation>
+						<xsd:documentation>Tipo de encomenda.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="orderResponseType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para suporta a resposta à ordem de compra (Resposta à Encomenda).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="orderType">
+				<xsd:annotation>
+					<xsd:documentation>A resposta à encomenda deriva da encomenda.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="documentStatusType">
+		<xsd:annotation>
+			<xsd:documentation>Elemento representante da mensagem de estado.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="documentType">
+				<xsd:sequence>
+					<xsd:element name="originalDocumentReference" type="detailedDocumentReferenceType">
+						<xsd:annotation>
+							<xsd:documentation>Dados do documento original para referênciação. Todos os elementos e atributos por debaixo deste elemento devem conter a informação do documento referênciado.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="statusInformation" type="documentStatusInformationType">
+						<xsd:annotation>
+							<xsd:documentation>Informação do estado do documento original</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

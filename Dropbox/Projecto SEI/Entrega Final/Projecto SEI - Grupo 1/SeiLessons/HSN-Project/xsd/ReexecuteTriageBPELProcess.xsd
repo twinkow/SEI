@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://xmlns.oracle.com/SeiLessons/HSN_Project/ReexecuteTriageBPELProcess"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+	<element name="process">
+		<complexType>
+			<sequence>
+				<element name="doenteID" type="int"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="processResponse">
+		<complexType>
+			<sequence>
+				<element name="typeOfTreatment" type="string"/>
+    <element name="level" type="string"/>
+    <element name="classification" type="string"/>
+   </sequence>
+		</complexType>
+	</element>
+</schema>

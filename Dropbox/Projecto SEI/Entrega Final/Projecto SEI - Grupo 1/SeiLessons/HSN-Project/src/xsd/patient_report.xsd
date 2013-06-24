@@ -1,0 +1,45 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://saude365.pt" xmlns:tns="http://saude365.pt"
+     elementFormDefault="qualified">
+    <xsd:element name="relatorio" type="tns:RelatorioType"/>
+    <xsd:complexType name="RelatorioType">
+        <xsd:sequence>
+            <xsd:element name="dataHora" type="xsd:dateTime"/>
+            <xsd:element name="doente" type="tns:DoenteType"/>
+            <xsd:element name="triagem" type="tns:TriagemType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DoenteType">
+        <xsd:sequence>
+            <xsd:element name="nome" type="xsd:string"/>
+            <xsd:element name="dataNasc" type="xsd:date"/>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="seguroSaude" type="xsd:string"/>
+            <xsd:element name="morada" type="tns:MoradaType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MoradaType">
+        <xsd:sequence>
+            <xsd:element name="codigoPostal" type="xsd:string"/>
+            <xsd:element name="rua" type="xsd:string"/>
+            <xsd:element name="num" type="xsd:string"/>
+            <xsd:element name="andar" type="xsd:string"/>
+            <xsd:element name="apartamento" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TriagemType">
+        <xsd:sequence>
+            <xsd:element name="tipo" type="xsd:string"/>
+            <xsd:element name="nivel" type="xsd:string"/>
+            <xsd:element name="medicamento" type="tns:MedicamentoType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MedicamentoType">
+        <xsd:sequence>
+            <xsd:element name="substancia" type="xsd:string"/>
+            <xsd:element name="nome" type="xsd:string"/>
+            <xsd:element name="dose" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
+<!-- XML Schema - XSD -->

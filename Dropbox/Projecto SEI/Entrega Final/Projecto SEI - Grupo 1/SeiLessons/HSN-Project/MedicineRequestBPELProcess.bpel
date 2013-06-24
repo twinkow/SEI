@@ -1,0 +1,156 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Apr 26 00:36:14 WEST 2013
+  Author:  oracle
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="MedicineRequestBPELProcess"
+         targetNamespace="http://xmlns.oracle.com/SeiLessons/HSN_Project/MedicineRequestBPELProcess"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:client="http://xmlns.oracle.com/SeiLessons/HSN_Project/MedicineRequestBPELProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/MedicineStockMedicineIDDBAdapter"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetMedicineQuantityDBAdapter"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/MedicineRequestDBAdapter"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/MedicineStockMedicineIDDBAdapter"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetMedicineQuantityDBAdapter"
+         xmlns:ns6="http://saude365.pt"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/top/MedicineRequestDBAdapter">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="medicinerequestbpelprocess_client"
+                 partnerLinkType="client:MedicineRequestBPELProcess"
+                 myRole="MedicineRequestBPELProcessProvider"/>
+    <partnerLink name="GetMedicineQuantityDBAdapter"
+                 partnerLinkType="ns2:GetMedicineQuantityDBAdapter_plt"
+                 partnerRole="GetMedicineQuantityDBAdapter_role"/>
+    <partnerLink name="MedicineRequestDBAdapter"
+                 partnerLinkType="ns3:MedicineRequestDBAdapter_plt"
+                 partnerRole="MedicineRequestDBAdapter_role"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:MedicineRequestBPELProcessRequestMessage"/>
+    <variable name="medicineStockMedicineIDInputVariable"
+              messageType="ns1:MedicineStockMedicineIDDBAdapterSelect_inputParameters"/>
+    <variable name="medicineStockMedicineIDOutputVariable"
+              messageType="ns1:MedicamentosstockCollection_msg"/>
+    <variable name="getMedicineQuantityInputVariable"
+              messageType="ns2:selectByPrimaryKey_inputParameters"/>
+    <variable name="getMedicineQuantityOutputVariable"
+              messageType="ns2:MedicamentospedidosCollection_msg"/>
+    <variable name="medicineRequestInputVariable"
+              messageType="ns3:MedicamentospedidosCollection_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in MedicineRequestBPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="medicinerequestbpelprocess_client"
+             portType="client:MedicineRequestBPELProcess" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <assign name="AssignMedicineID">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/ns6:medicinesCollectionWithID/ns6:medicinesCollectionWithIDType/ns6:id"/>
+        <to variable="getMedicineQuantityInputVariable"
+            part="selectByPrimaryKey_inputParameters"
+            query="/ns5:MedicamentospedidosPrimaryKey/ns5:medicamentoid"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeGetMedicineQuantity" bpelx:invokeAsDetail="no"
+            inputVariable="getMedicineQuantityInputVariable"
+            outputVariable="getMedicineQuantityOutputVariable"
+            partnerLink="GetMedicineQuantityDBAdapter"
+            portType="ns2:GetMedicineQuantityDBAdapter_ptt"
+            operation="selectByPrimaryKey"/>
+    <switch name="SwitchMedicineAlreadyRequested"
+            xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+      <case condition="boolean(bpws:getVariableData('getMedicineQuantityOutputVariable','MedicamentospedidosCollection','/ns5:MedicamentospedidosCollection/ns5:Medicamentospedidos'))">
+         <bpelx:annotation xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <bpelx:general>
+               <bpelx:property name="userLabel">RequestForMedicineAlreadyExists</bpelx:property>
+            </bpelx:general>
+         </bpelx:annotation>
+         <assign name="IncrementMedicineQuantity">
+            
+            
+         <copy>
+            <from expression="bpws:getVariableData('getMedicineQuantityOutputVariable','MedicamentospedidosCollection','/ns5:MedicamentospedidosCollection/ns5:Medicamentospedidos/ns5:quantidadepedida') + 1 "/>
+            <to variable="medicineRequestInputVariable"
+                part="MedicamentospedidosCollection"
+                query="/ns7:MedicamentospedidosCollection/ns7:Medicamentospedidos/ns7:quantidadepedida"/>
+          </copy><copy>
+            <from variable="getMedicineQuantityOutputVariable"
+                  part="MedicamentospedidosCollection"
+                  query="/ns5:MedicamentospedidosCollection/ns5:Medicamentospedidos/ns5:medicamentoid"/>
+            <to variable="medicineRequestInputVariable"
+                part="MedicamentospedidosCollection"
+                query="/ns7:MedicamentospedidosCollection/ns7:Medicamentospedidos/ns7:medicamentoid"/>
+          </copy></assign>
+      </case>
+      <otherwise>
+         <assign name="AssignMedicineQuantity">
+            
+            
+         <copy>
+            <from expression="1"/>
+            <to variable="medicineRequestInputVariable"
+                part="MedicamentospedidosCollection"
+                query="/ns7:MedicamentospedidosCollection/ns7:Medicamentospedidos/ns7:quantidadepedida"/>
+          </copy><copy>
+            <from variable="getMedicineQuantityInputVariable"
+                  part="selectByPrimaryKey_inputParameters"
+                  query="/ns5:MedicamentospedidosPrimaryKey/ns5:medicamentoid"/>
+            <to variable="medicineRequestInputVariable"
+                part="MedicamentospedidosCollection"
+                query="/ns7:MedicamentospedidosCollection/ns7:Medicamentospedidos/ns7:medicamentoid"/>
+          </copy></assign>
+      </otherwise>
+   </switch>
+    <invoke name="InvokeMedicineRequest" bpelx:invokeAsDetail="no"
+            inputVariable="medicineRequestInputVariable"
+            partnerLink="MedicineRequestDBAdapter"
+            portType="ns3:MedicineRequestDBAdapter_ptt" operation="merge"/>
+  </sequence>
+</process>

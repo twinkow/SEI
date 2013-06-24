@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ElectronicalPrescriptionFileAdapter"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/ElectronicalPrescriptionFileAdapter"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/ElectronicalPrescriptionFileAdapter"
+     xmlns:imp1="http://acssdatamodel.pt"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="WritePrescription_plt" >
+    <plt:role name="WritePrescription_role" >
+      <plt:portType name="tns:WritePrescription_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/ElectronicalPrescriptionFileAdapter"
+              xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://acssdatamodel.pt" schemaLocation="xsd/ACSSDataModel.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="WritePrescription_msg">
+        <wsdl:part name="body" element="imp1:receita"/>
+    </wsdl:message>
+    <wsdl:portType name="WritePrescription_ptt">
+        <wsdl:operation name="WritePrescription">
+            <wsdl:input message="tns:WritePrescription_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

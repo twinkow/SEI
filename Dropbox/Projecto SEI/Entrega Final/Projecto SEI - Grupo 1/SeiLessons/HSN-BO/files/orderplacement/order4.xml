@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?><Order xmlns:imp1="urn:oasis:names:specification:ubl:schema:xsd:Order-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:Order-2">
+   <ns9:UBLVersionID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">2</ns9:UBLVersionID>
+   <ns9:CustomizationID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">urn:oasis:names:specification:ubl:xpath:Order-2.0:sbs-1.0-draft</ns9:CustomizationID>
+   <ns9:ProfileID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">bpid:urn:oasis:names:draft:bpss:ubl-2-sbs-order-with-simple-response-draft</ns9:ProfileID>
+   <ns9:ID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">1ZiagenAbacavir300 mg2013-05-06T17:26:23.495-07:00</ns9:ID>
+   <ns9:SalesOrderID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">2d373131353539373038363538333738</ns9:SalesOrderID>
+   <ns9:CopyIndicator xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">false</ns9:CopyIndicator>
+   <ns9:UUID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">2d383131313138353031393434383431</ns9:UUID>
+   <ns9:IssueDate xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">2013-05-06</ns9:IssueDate>
+   <ns9:Note xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">sample</ns9:Note>
+   <ns12:BuyerCustomerParty xmlns:ns12="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+      <ns9:CustomerAssignedAccountID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">37303735333034373039373032343931</ns9:CustomerAssignedAccountID>
+      <ns9:SupplierAssignedAccountID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">2d353635303638393236353434303832</ns9:SupplierAssignedAccountID>
+      <ns12:Party>
+         <ns12:PartyIdentification>
+            <ns9:ID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">9876543</ns9:ID>
+         </ns12:PartyIdentification>
+         <ns12:PartyName>
+            <ns9:Name xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Hospital Sao Nuno</ns9:Name>
+         </ns12:PartyName>
+         <ns12:PostalAddress>
+            <ns9:StreetName xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Rua da Azoia</ns9:StreetName>
+            <ns9:CityName xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Lisboa</ns9:CityName>
+            <ns9:PostalZone xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">1450-012</ns9:PostalZone>
+            <ns12:AddressLine>
+               <ns9:Line xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Rua da Azoia</ns9:Line>
+            </ns12:AddressLine>
+            <ns12:Country>
+               <ns9:IdentificationCode xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">PT</ns9:IdentificationCode>
+               <ns9:Name xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Portugal</ns9:Name>
+            </ns12:Country>
+         </ns12:PostalAddress>
+         <ns12:PartyTaxScheme>
+            <ns9:RegistrationName xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">District Council</ns9:RegistrationName>
+            <ns9:CompanyID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">35323836373435353734353238383134</ns9:CompanyID>
+            <ns9:ExemptionReason xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Local Authority</ns9:ExemptionReason>
+            <ns12:TaxScheme>
+               <ns9:ID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">PT VAT</ns9:ID>
+               <ns9:TaxTypeCode xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">VAT</ns9:TaxTypeCode>
+            </ns12:TaxScheme>
+         </ns12:PartyTaxScheme>
+         <ns12:Contact>
+            <ns9:Name xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">HSaoNuno</ns9:Name>
+            <ns9:Telephone xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">214472125</ns9:Telephone>
+            <ns9:ElectronicMail xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">hsn@gmail.com</ns9:ElectronicMail>
+         </ns12:Contact>
+      </ns12:Party>
+   </ns12:BuyerCustomerParty>
+   <ns12:SellerSupplierParty xmlns:ns12="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+      <ns9:CustomerAssignedAccountID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">37373137393734313937363333333332</ns9:CustomerAssignedAccountID>
+      <ns12:Party>
+         <ns12:PartyIdentification>
+            <ns9:ID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">123456</ns9:ID>
+         </ns12:PartyIdentification>
+         <ns12:PartyName>
+            <ns9:Name xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Bayer Portugal, S.A</ns9:Name>
+         </ns12:PartyName>
+         <ns12:PostalAddress>
+            <ns9:StreetName xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Rua Quinta do Pinheiro</ns9:StreetName>
+            <ns9:CityName xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Carnaxide</ns9:CityName>
+            <ns9:PostalZone xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">2790-180</ns9:PostalZone>
+            <ns12:AddressLine>
+               <ns9:Line xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Rua Quinta do Pinheiro</ns9:Line>
+            </ns12:AddressLine>
+            <ns12:Country>
+               <ns9:Name xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Portugal</ns9:Name>
+            </ns12:Country>
+         </ns12:PostalAddress>
+         <ns12:Contact>
+            <ns9:Name xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Bayer</ns9:Name>
+            <ns9:Telephone xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">214172121</ns9:Telephone>
+            <ns9:ElectronicMail xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">bayerportugal@gmail.com</ns9:ElectronicMail>
+         </ns12:Contact>
+      </ns12:Party>
+   </ns12:SellerSupplierParty>
+   <ns12:OrderLine xmlns:ns12="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+      <ns12:LineItem>
+         <ns9:ID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">1</ns9:ID>
+         <ns9:Quantity xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" unitCode="NU" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">2</ns9:Quantity>
+         <ns12:Price>
+            <ns9:PriceAmount xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" currencyID="EUR" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">5</ns9:PriceAmount>
+            <ns9:BaseQuantity xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" unitCode="NU" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">2</ns9:BaseQuantity>
+         </ns12:Price>
+         <ns12:Item>
+            <ns9:Name xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">Ziagen</ns9:Name>
+            <ns12:BuyersItemIdentification>
+               <ns9:ID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">9876543</ns9:ID>
+            </ns12:BuyersItemIdentification>
+            <ns12:SellersItemIdentification>
+               <ns9:ID xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">123456</ns9:ID>
+            </ns12:SellersItemIdentification>
+         </ns12:Item>
+      </ns12:LineItem>
+   </ns12:OrderLine>
+</Order>

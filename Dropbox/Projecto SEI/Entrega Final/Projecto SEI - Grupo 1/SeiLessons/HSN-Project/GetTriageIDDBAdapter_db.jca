@@ -1,0 +1,13 @@
+<adapter-config name="GetTriageIDDBAdapter" adapter="Database Adapter" wsdlLocation="GetTriageIDDBAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/mydb" UIConnectionName="DbConnection" adapterRef=""/>
+  <endpoint-interaction portType="GetTriageIDDBAdapter_ptt" operation="GetTriageIDDBAdapter">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="SELECT max(TRIAGEMID) FROM TRIAGEM WHERE (DOENTEID = #DOENTEID)"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <input/>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

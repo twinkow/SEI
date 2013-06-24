@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd"
+            xmlns:tns="http://TargetNamespace.com/MedicinesStockPopulate"
+            targetNamespace="http://TargetNamespace.com/MedicinesStockPopulate"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified"
+
+            nxsd:version="NXSD"
+            nxsd:stream="chars"
+            nxsd:encoding="UTF-8"
+>
+
+
+  <xsd:element name="Root-Element">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="medicine" minOccurs="1" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="C1" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="\t" nxsd:quotedBy="&quot;" />
+              <xsd:element name="C2" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="\t" nxsd:quotedBy="&quot;" />
+              <xsd:element name="C3" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="${eol}" nxsd:quotedBy="&quot;" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>
+<!--NXSDWIZ:/home/oracle/Desktop/medicamentosValidos.txt:-->
+<!--USE-HEADER:false:-->

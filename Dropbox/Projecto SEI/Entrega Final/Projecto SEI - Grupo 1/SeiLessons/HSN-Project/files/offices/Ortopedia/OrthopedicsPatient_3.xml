@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?><OfficePatientElement xmlns="http://pt.saude365">
+   <patientName>Nicolas Ilha</patientName>
+   <patientBirth>1983-10-22T00:00:00.000+00:00</patientBirth>
+   <patientInsurence>Sim</patientInsurence>
+   <patientTreatment>Ortopedia</patientTreatment>
+   <patientLevel>amarelo</patientLevel>
+   <patientHealed/>
+   <doctorComment/>
+</OfficePatientElement>

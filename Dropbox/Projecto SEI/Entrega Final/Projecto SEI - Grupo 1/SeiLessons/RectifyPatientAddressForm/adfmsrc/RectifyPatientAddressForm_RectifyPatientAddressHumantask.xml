@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.61.92"
+          id="RectifyPatientAddressForm_RectifyPatientAddressHumantask"
+          BeanClass="RectifyPatientAddressForm_RectifyPatientAddressHumantask"
+          isJavaBased="false">
+  <MethodAccessor IsCollection="false"
+                  Type="RectifyPatientAddressForm_RectifyPatientAddressHumantask.getTaskDetails"
+                  BeanClass="RectifyPatientAddressForm_RectifyPatientAddressHumantask.getTaskDetails"
+                  id="getTaskDetails" ReturnNodeName="Return">
+    <ParameterInfo id="bpmWorklistContext" Type="java.lang.String"
+                   isStructured="false"/>
+    <ParameterInfo id="bpmWorklistTaskId" Type="java.lang.String"
+                   isStructured="false"/>
+    <ParameterInfo id="bpmWorklistTaskVersion" Type="java.lang.String"
+                   isStructured="false"/>
+  </MethodAccessor>
+</JavaBean>

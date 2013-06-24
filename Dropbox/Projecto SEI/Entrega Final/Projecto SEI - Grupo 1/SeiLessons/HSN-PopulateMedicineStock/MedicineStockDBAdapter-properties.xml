@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="MEDICAMENTOSSTOCK.NOME:db_column_not_null">true</entry>
+   <entry key="MEDICAMENTOSSTOCK.MEDICAMENTOID:db_column_scale">0</entry>
+   <entry key="MEDICAMENTOSSTOCK.QUANTIDADEEXISTENTE:db_column_scale">0</entry>
+   <entry key="MEDICAMENTOSSTOCK.DOSE:db_column_size">255</entry>
+   <entry key="MEDICAMENTOSSTOCK.QUANTIDADEEXISTENTE:db_column_not_null">true</entry>
+   <entry key="MEDICAMENTOSSTOCK.QUANTIDADECRITICA:db_column_type">NUMBER</entry>
+   <entry key="MEDICAMENTOSSTOCK.MEDICAMENTOID:db_column_not_null">true</entry>
+   <entry key="MEDICAMENTOSSTOCK.QUANTIDADEEXISTENTE:db_column_precision">6</entry>
+   <entry key="MEDICAMENTOSSTOCK.QUANTIDADECRITICA:db_column_scale">0</entry>
+   <entry key="MEDICAMENTOSSTOCK.SUBSTANCIA:db_column_type">VARCHAR2</entry>
+   <entry key="MEDICAMENTOSSTOCK.NOME:db_column_type">VARCHAR2</entry>
+   <entry key="MEDICAMENTOSSTOCK.QUANTIDADECRITICA:db_column_precision">6</entry>
+   <entry key="root_descriptor_alias">MEDICAMENTOSSTOCK</entry>
+   <entry key="MEDICAMENTOSSTOCK.DOSE:db_column_not_null">false</entry>
+   <entry key="MEDICAMENTOSSTOCK.MEDICAMENTOID:db_column_precision">6</entry>
+   <entry key="MEDICAMENTOSSTOCK.MEDICAMENTOID:db_column_type">NUMBER</entry>
+   <entry key="MEDICAMENTOSSTOCK.QUANTIDADECRITICA:db_column_not_null">true</entry>
+   <entry key="MEDICAMENTOSSTOCK.QUANTIDADEEXISTENTE:db_column_type">NUMBER</entry>
+   <entry key="MEDICAMENTOSSTOCK:db_table_type">TABLE</entry>
+   <entry key="MEDICAMENTOSSTOCK.DOSE:db_column_type">VARCHAR2</entry>
+   <entry key="MEDICAMENTOSSTOCK:db_column_5">QUANTIDADECRITICA</entry>
+   <entry key="MEDICAMENTOSSTOCK.SUBSTANCIA:db_column_size">255</entry>
+   <entry key="MEDICAMENTOSSTOCK:db_column_4">QUANTIDADEEXISTENTE</entry>
+   <entry key="MEDICAMENTOSSTOCK.NOME:db_column_size">255</entry>
+   <entry key="MEDICAMENTOSSTOCK.SUBSTANCIA:db_column_not_null">false</entry>
+   <entry key="MEDICAMENTOSSTOCK:db_column_3">DOSE</entry>
+   <entry key="MEDICAMENTOSSTOCK:db_column_2">SUBSTANCIA</entry>
+   <entry key="MEDICAMENTOSSTOCK:db_column_1">NOME</entry>
+   <entry key="MEDICAMENTOSSTOCK:db_column_0">MEDICAMENTOID</entry>
+</properties>

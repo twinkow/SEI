@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetTriagemIDDBAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetTriagemIDDBAdapter" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="TriagemCollection" type="TriagemCollection"/>
+   <xs:complexType name="TriagemCollection">
+      <xs:sequence>
+         <xs:element name="Triagem" type="Triagem" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Triagem">
+      <xs:sequence>
+         <xs:element name="triagemid" type="xs:int"/>
+         <xs:element name="doenteid" type="xs:int" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="GetTriagemIDDBAdapterSelect_DOENTEIDInputParameters" type="GetTriagemIDDBAdapterSelect_DOENTEID"/>
+   <xs:complexType name="GetTriagemIDDBAdapterSelect_DOENTEID">
+      <xs:sequence>
+         <xs:element name="DOENTEID" type="xs:int" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

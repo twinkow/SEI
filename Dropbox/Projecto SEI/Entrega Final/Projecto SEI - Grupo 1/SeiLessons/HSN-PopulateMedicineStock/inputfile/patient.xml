@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:relatorio xmlns:ns0="http://saude365.pt">
+   <ns0:dataHora>2211-07-10T09:14:24.7-07:00</ns0:dataHora>
+   <ns0:doente>
+      <ns0:nome>Dalila Lira</ns0:nome>
+      <ns0:dataNasc>2008-11-30</ns0:dataNasc>
+      <ns0:id>540847</ns0:id>
+      <ns0:seguroSaude>Não</ns0:seguroSaude>
+      <ns0:morada>
+         <ns0:codigoPostal>2705-917</ns0:codigoPostal>
+         <ns0:rua>Avenida 29 de Agosto</ns0:rua>
+         <ns0:num>287</ns0:num>
+         <ns0:andar>2</ns0:andar>
+         <ns0:apartamento>50</ns0:apartamento>
+      </ns0:morada>
+   </ns0:doente>
+   <ns0:triagem>
+      <ns0:tipo>Medicina Geral</ns0:tipo>
+      <ns0:nivel>verde</ns0:nivel>
+      <ns0:medicamento>
+         <ns0:substancia>Acarbose</ns0:substancia>
+         <ns0:nome>Glucobay</ns0:nome>
+         <ns0:dose>100 mg</ns0:dose>
+      </ns0:medicamento>
+      <ns0:medicamento>
+         <ns0:substancia>Acarbose</ns0:substancia>
+         <ns0:nome>Glucobay</ns0:nome>
+         <ns0:dose>100 mg</ns0:dose>
+      </ns0:medicamento>
+   </ns0:triagem>
+</ns0:relatorio>

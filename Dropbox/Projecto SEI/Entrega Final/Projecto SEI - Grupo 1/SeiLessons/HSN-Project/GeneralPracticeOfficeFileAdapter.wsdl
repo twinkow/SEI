@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="GeneralPracticeOfficeFileAdapter"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/GeneralPracticeOfficeFileAdapter"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/GeneralPracticeOfficeFileAdapter"
+     xmlns:imp1="http://pt.saude365"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="WritePatient_plt" >
+    <plt:role name="WritePatient_role" >
+      <plt:portType name="tns:WritePatient_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/GeneralPracticeOfficeFileAdapter"
+              xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://pt.saude365" schemaLocation="xsd/OfficePatient.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="WritePatient_msg">
+        <wsdl:part name="body" element="imp1:OfficePatientElement"/>
+    </wsdl:message>
+    <wsdl:portType name="WritePatient_ptt">
+        <wsdl:operation name="WritePatient">
+            <wsdl:input message="tns:WritePatient_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

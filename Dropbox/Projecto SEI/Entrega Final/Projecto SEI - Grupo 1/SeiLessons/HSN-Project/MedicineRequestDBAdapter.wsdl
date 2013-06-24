@@ -1,0 +1,21 @@
+<?binding.jca MedicineRequestDBAdapter_db.jca?>
+<wsdl:definitions name="MedicineRequestDBAdapter" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/MedicineRequestDBAdapter" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/MedicineRequestDBAdapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/MedicineRequestDBAdapter">
+    <plt:partnerLinkType name="MedicineRequestDBAdapter_plt">
+        <plt:role name="MedicineRequestDBAdapter_role">
+            <plt:portType name="tns:MedicineRequestDBAdapter_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/MedicineRequestDBAdapter" schemaLocation="xsd/MedicineRequestDBAdapter_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="MedicamentospedidosCollection_msg">
+        <wsdl:part name="MedicamentospedidosCollection" element="top:MedicamentospedidosCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="MedicineRequestDBAdapter_ptt">
+        <wsdl:operation name="merge">
+            <wsdl:input message="tns:MedicamentospedidosCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

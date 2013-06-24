@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ================================ -->
+<!-- ===== UBL Extensions  ============ -->
+<!-- ================================ -->
+<!--
+   Module of containing Extensions to be used within UBL
+   Softlimits
+   Version: 1.0
+   Last change: 2008/064/09
+
+   Copyright (C) SOFTLIMITS (2008). All Rights Reserved.
+-->
+<xsd:schema xmlns="urn:netdocs:schemas:ublextensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:netdocs:schemas:ublextensions" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="pt">
+			Módulo para conter extensões Netdocs que possam ser usadas no UBL. 
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="ND-SharedBasicDataTypes-1.0.xsd"/>
+	<!-- ======================== -->
+	<!-- =====  Elements  ========== -->
+	<!-- ======================== -->
+	<xsd:element name="binaryDocumentFormat" type="binaryAttachmentType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Para enviar o documento em formatos binários.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

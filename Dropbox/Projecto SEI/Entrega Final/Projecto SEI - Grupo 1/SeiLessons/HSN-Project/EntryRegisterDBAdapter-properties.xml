@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="REGISTOENTRADA:db_table_type">TABLE</entry>
+   <entry key="REGISTOENTRADA.DATAHORA:db_column_not_null">true</entry>
+   <entry key="REGISTOENTRADA.DOENTEID:db_column_not_null">true</entry>
+   <entry key="REGISTOENTRADA.DOENTEID:db_column_scale">0</entry>
+   <entry key="REGISTOENTRADA.DATAHORA:db_column_type">DATE</entry>
+   <entry key="REGISTOENTRADA.DOENTEID:db_column_precision">6</entry>
+   <entry key="root_descriptor_alias">REGISTOENTRADA</entry>
+   <entry key="REGISTOENTRADA.DOENTEID:db_column_type">NUMBER</entry>
+   <entry key="REGISTOENTRADA:db_column_1">DOENTEID</entry>
+   <entry key="REGISTOENTRADA:db_column_0">DATAHORA</entry>
+</properties>

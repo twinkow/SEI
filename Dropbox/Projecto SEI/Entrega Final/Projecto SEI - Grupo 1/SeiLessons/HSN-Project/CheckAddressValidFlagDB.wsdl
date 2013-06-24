@@ -1,0 +1,25 @@
+<?binding.jca CheckAddressValidFlagDB_db.jca?>
+<wsdl:definitions name="CheckAddressValidFlagDB" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/CheckAddressValidFlagDB" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/CheckAddressValidFlagDB" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/CheckAddressValidFlagDB">
+    <plt:partnerLinkType name="CheckAddressValidFlagDB_plt">
+        <plt:role name="CheckAddressValidFlagDB_role">
+            <plt:portType name="tns:CheckAddressValidFlagDB_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/CheckAddressValidFlagDB" schemaLocation="xsd/CheckAddressValidFlagDB_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="CheckAddressValidFlagDBSelect_inputParameters">
+        <wsdl:part name="CheckAddressValidFlagDBSelect_inputParameters" element="top:CheckAddressValidFlagDBSelect_doenteidInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="DoenteCollection_msg">
+        <wsdl:part name="DoenteCollection" element="top:DoenteCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="CheckAddressValidFlagDB_ptt">
+        <wsdl:operation name="CheckAddressValidFlagDBSelect">
+            <wsdl:input message="tns:CheckAddressValidFlagDBSelect_inputParameters"/>
+            <wsdl:output message="tns:DoenteCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

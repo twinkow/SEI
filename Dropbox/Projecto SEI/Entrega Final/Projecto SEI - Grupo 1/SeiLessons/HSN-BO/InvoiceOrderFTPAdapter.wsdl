@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="InvoiceOrderFTPAdapter"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/SeiLessons/HSN-BO/InvoiceOrderFTPAdapter"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/SeiLessons/HSN-BO/InvoiceOrderFTPAdapter"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:imp1="urn:netdocs:schemas:message"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="PutInvoice_plt" >
+    <plt:role name="PutInvoice_role" >
+      <plt:portType name="tns:PutInvoice_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/SeiLessons/HSN-BO/InvoiceOrderFTPAdapter"
+              xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="urn:netdocs:schemas:message" schemaLocation="xsd/maindoc/ND-Message-1.0.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="PutInvoice_msg">
+        <wsdl:part name="body" element="imp1:message"/>
+    </wsdl:message>
+    <wsdl:portType name="PutInvoice_ptt">
+        <wsdl:operation name="PutInvoice">
+            <wsdl:input message="tns:PutInvoice_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

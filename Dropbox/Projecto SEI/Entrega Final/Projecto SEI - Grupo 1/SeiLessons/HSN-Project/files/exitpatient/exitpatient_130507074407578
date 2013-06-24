@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?><exitPatientReport xmlns:imp1="http://saude365.pt/exitpatient" xmlns="http://saude365.pt/exitpatient">
+   <imp1:dateTime>2013-05-07T07:44:07.552-07:00</imp1:dateTime>
+   <imp1:entryReport>
+      <ns2:dataHora xmlns:ns2="http://saude365.pt/registoentrada" xmlns="http://saude365.pt/registoentrada">2013-05-07T05:18:55.000-07:00</ns2:dataHora>
+   </imp1:entryReport>
+   <imp1:triageReport>
+      <top:Triagem xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter">
+         <top:triagemid>1</top:triagemid>
+         <top:doenteid>741514</top:doenteid>
+         <top:tipo>Cirurgia</top:tipo>
+         <top:nivel>verde</top:nivel>
+         <top:classificacao>SUFICIENTE</top:classificacao>
+         <top:datahora>2013-05-07T05:17:54.000-07:00</top:datahora>
+      </top:Triagem>
+   </imp1:triageReport>
+   <imp1:electronicalPrescription>
+      <ns1:CabecalhoReceita xmlns:ns1="http://acssdatamodel.pt" xmlns="http://acssdatamodel.pt">
+         <ns1:Id>2d333337363730333030343430303130</ns1:Id>
+         <ns1:NumeroReceita>31353838323434303733313136323633</ns1:NumeroReceita>
+         <ns1:Data>2013-05-07T07:44:02.478-07:00</ns1:Data>
+         <ns1:Utente>
+            <ns1:Id>741514</ns1:Id>
+            <ns1:Identificao>
+               <ns1:NomeCompleto>Gonçalo Cascais</ns1:NomeCompleto>
+               <ns1:DataNascimento>1930-01-29T00:00:00.000-08:00</ns1:DataNascimento>
+            </ns1:Identificao>
+            <ns1:Morada>
+               <ns1:Rua>Rua Sertório do Monte Pereira</ns1:Rua>
+               <ns1:Porta>7</ns1:Porta>
+               <ns1:Andar>1</ns1:Andar>
+               <ns1:Lugar>A</ns1:Lugar>
+               <ns1:Localidade>Carnaxide</ns1:Localidade>
+               <ns1:DistritoResidencia>Lisboa</ns1:DistritoResidencia>
+               <ns1:ConcelhoResidencia>Oeiras</ns1:ConcelhoResidencia>
+               <ns1:FreguesiaResidencia>
+                  <ns1:Descricao>Carnaxide</ns1:Descricao>
+               </ns1:FreguesiaResidencia>
+               <ns1:CodigoPostal>2790-180</ns1:CodigoPostal>
+            </ns1:Morada>
+         </ns1:Utente>
+      </ns1:CabecalhoReceita>
+      <ns1:ListaLinhasReceita xmlns:ns1="http://acssdatamodel.pt" xmlns="http://acssdatamodel.pt">
+         <ns1:LinhaReceita>
+            <ns1:Id>2d363836333435393031393435313639</ns1:Id>
+            <ns1:NumeroLinha>PT/H/662/02/DC</ns1:NumeroLinha>
+            <ns1:Medicamento>
+               <ns1:Codigo>14</ns1:Codigo>
+               <ns1:Descricao>Acarbose Bluesar 100 mg</ns1:Descricao>
+               <ns1:TitularAIM>Bluepharma - Indústria Farmacêutica, S.A.</ns1:TitularAIM>
+               <ns1:SubstanciaActiva>Acarbose</ns1:SubstanciaActiva>
+               <ns1:FormaFarmaceutica>Comprimido</ns1:FormaFarmaceutica>
+               <ns1:Embalagem>Embalagem de Acarbose Bluesar 100 mg. Via Administracao: Via oral</ns1:Embalagem>
+               <ns1:Dosagem>100 mg</ns1:Dosagem>
+            </ns1:Medicamento>
+            <ns1:SubstituivelGenerico>Sim</ns1:SubstituivelGenerico>
+            <ns1:Quantidade>1</ns1:Quantidade>
+            <ns1:EstadoItem>
+               <ns1:Descricao>Autorizado</ns1:Descricao>
+               <ns1:DataInicio>19 de Junho de 2012</ns1:DataInicio>
+            </ns1:EstadoItem>
+            <ns1:DescricaoDispensa>MSRM</ns1:DescricaoDispensa>
+         </ns1:LinhaReceita>
+         <ns1:LinhaReceita>
+            <ns1:Id>2d313335393735303534313036333439</ns1:Id>
+            <ns1:NumeroLinha>09/H/0074/002</ns1:NumeroLinha>
+            <ns1:Medicamento>
+               <ns1:Codigo>36</ns1:Codigo>
+               <ns1:Descricao>Acarbose Strami 100 mg</ns1:Descricao>
+               <ns1:TitularAIM>Verum Pharma - Produtos Farmacêuticos - Unipessoal, Lda</ns1:TitularAIM>
+               <ns1:SubstanciaActiva>Acarbose</ns1:SubstanciaActiva>
+               <ns1:FormaFarmaceutica>Comprimido</ns1:FormaFarmaceutica>
+               <ns1:Embalagem>Embalagem de Acarbose Strami 100 mg. Via Administracao: Via oral</ns1:Embalagem>
+               <ns1:Dosagem>100 mg</ns1:Dosagem>
+            </ns1:Medicamento>
+            <ns1:SubstituivelGenerico>Não</ns1:SubstituivelGenerico>
+            <ns1:Quantidade>1</ns1:Quantidade>
+            <ns1:EstadoItem>
+               <ns1:Descricao>Autorizado</ns1:Descricao>
+               <ns1:DataInicio>03 de Novembro de 2009</ns1:DataInicio>
+            </ns1:EstadoItem>
+            <ns1:DescricaoDispensa>MSRM</ns1:DescricaoDispensa>
+         </ns1:LinhaReceita>
+      </ns1:ListaLinhasReceita>
+   </imp1:electronicalPrescription>
+</exitPatientReport>

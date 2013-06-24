@@ -1,0 +1,14 @@
+<adapter-config name="CheckAddressValidFlagDB" adapter="Database Adapter" wsdlLocation="CheckAddressValidFlagDB.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/mydb" UIConnectionName="DbConnection" adapterRef=""/>
+  <endpoint-interaction portType="CheckAddressValidFlagDB_ptt" operation="CheckAddressValidFlagDBSelect">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="CheckAddressValidFlagDB.Doente"/>
+      <property name="QueryName" value="CheckAddressValidFlagDBSelect"/>
+      <property name="MappingsMetaDataURL" value="CheckAddressValidFlagDB-or-mappings.xml"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

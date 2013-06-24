@@ -1,0 +1,21 @@
+<?binding.jca MedicinesPrescriptionDBAdapter_db.jca?>
+<wsdl:definitions name="MedicinesPrescriptionDBAdapter" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/MedicinesPrescriptionDBAdapter" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/MedicinesPrescriptionDBAdapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/MedicinesPrescriptionDBAdapter">
+    <plt:partnerLinkType name="MedicinesPrescriptionDBAdapter_plt">
+        <plt:role name="MedicinesPrescriptionDBAdapter_role">
+            <plt:portType name="tns:MedicinesPrescriptionDBAdapter_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/MedicinesPrescriptionDBAdapter" schemaLocation="xsd/MedicinesPrescriptionDBAdapter_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ReceitaCollection_msg">
+        <wsdl:part name="ReceitaCollection" element="top:ReceitaCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="MedicinesPrescriptionDBAdapter_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:ReceitaCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

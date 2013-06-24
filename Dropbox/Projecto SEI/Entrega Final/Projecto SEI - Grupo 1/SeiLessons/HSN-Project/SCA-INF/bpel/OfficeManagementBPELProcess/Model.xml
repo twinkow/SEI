@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="OfficeManagementBPELProcess" targetNamespace="http://xmlns.oracle.com/SeiLessons/HSN_Project/OfficeManagementBPELProcess" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/SeiLessons/HSN_Project/OfficeManagementBPELProcess" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/GetTriageInformationDBAdapter" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns2="http://xmlns.oracle.com/SeiLessons/HSN_Project/ReexecuteTriageBPELProcess" xmlns:xsd="http://www.w3.org/2001/XMLSchema" queryLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116" expressionLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116" suppressJoinFailure="no" enableInstanceCompensation="no" abstractProcess="no" xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetOfficeInformationDBAdapter" xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetOfficeInformationDBAdapter" xmlns:ns5="http://xmlns.oracle.com/OfficeManagementBusinessRule/OfficeManagementBusinessRule_DecisionService_1" xmlns:ns6="http://xmlns.oracle.com/bpel" xmlns:ns7="http://saude365.pt" xmlns:ns8="http://xmlns.oracle.com/bpel/rules" xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/UpdateOfficeOcupationDBAdapter" xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateOfficeOcupationDBAdapter" xmlns:ns11="http://xmlns.oracle.com/SeiLessons/HSN_Project/AssignOfficeBPELProcess" xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/SetMedicinePrescriptionOutdatedDBAdapter" xmlns:ns13="http://xmlns.oracle.com/SeiLessons/HSN_Project/MedicinesPrescriptionOutdatedBPELProcess" xmlns:ns14="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/BackOfficeInputFileAdapter" id="BpPrc0">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="officemanagementbpelprocess_client" partnerLinkType="client:OfficeManagementBPELProcess" myRole="OfficeManagementBPELProcessProvider"/>
+    <partnerLink name="ReexecuteTriageBPELProcess.reexecutetriagebpelprocess_client" partnerLinkType="ns2:ReexecuteTriageBPELProcess" partnerRole="ReexecuteTriageBPELProcessProvider"/>
+    <partnerLink name="GetOfficeInformationDBAdapter" partnerLinkType="ns3:GetOfficeInformationDBAdapter_plt" partnerRole="GetOfficeInformationDBAdapter_role"/>
+    <partnerLink name="OfficeManagementBusinessRule.OfficeManagementBusinessRule_DecisionService_1" partnerLinkType="ns5:OfficeManagementBusinessRule.OfficeManagementBusinessRule_DecisionService_1" partnerRole="IDecisionService"/>
+    <partnerLink name="UpdateOfficeOcupationDBAdapter" partnerLinkType="ns9:UpdateOfficeOcupationDBAdapter_plt" partnerRole="UpdateOfficeOcupationDBAdapter_role"/>
+    <partnerLink name="AssignOfficeBPELProcess.assignofficebpelprocess_client" partnerLinkType="ns11:AssignOfficeBPELProcess" partnerRole="AssignOfficeBPELProcessProvider"/>
+    <partnerLink name="MedicinesPrescriptionOutdatedBPELProcess.medicinesprescriptionoutdatedbpelprocess_client" partnerLinkType="ns13:MedicinesPrescriptionOutdatedBPELProcess" partnerRole="MedicinesPrescriptionOutdatedBPELProcessProvider"/>
+  </partnerLinks>
+  <variables>
+    <variable name="inputVariable" messageType="client:OfficeManagementBPELProcessRequestMessage"/>
+    <variable name="reexecuteTriageInputVariable" messageType="ns2:ReexecuteTriageBPELProcessRequestMessage"/>
+    <variable name="reexecuteTriageOutputVariable" messageType="ns2:ReexecuteTriageBPELProcessResponseMessage"/>
+    <variable name="officeAvailableVariable" type="xsd:int"/>
+    <variable name="getOfficeInformationInputVariable" messageType="ns3:GetOfficeInformationDBAdapterSelect_inputParameters"/>
+    <variable name="getOfficeInformationOutputVariable" messageType="ns3:GabinetesCollection_msg"/>
+    <variable name="officeOcupationInputVariable" messageType="ns9:GabinetesCollection_msg"/>
+    <variable name="assignOfficeProcessInputVariable" messageType="ns11:AssignOfficeBPELProcessRequestMessage"/>
+    <variable name="medicinePrescriptionOutdatedProcessInputVariable" messageType="ns13:MedicinesPrescriptionOutdatedBPELProcessRequestMessage"/>
+    <variable name="triageAuxiliaryVariable" messageType="ns2:ReexecuteTriageBPELProcessResponseMessage"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq0">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in OfficeManagementBPELProcess.wsdl) --><receive name="receiveInput" partnerLink="officemanagementbpelprocess_client" portType="client:OfficeManagementBPELProcess" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+    <assign name="AssignTriageAuxiliary" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" id="BpAss0">
+      
+      
+      
+   <copy>
+        <from variable="inputVariable" part="payload" query="/ns1:GetTriageInformationDBAdapterOutputCollection/ns1:GetTriageInformationDBAdapterOutput/ns1:NIVEL"/>
+        <to variable="triageAuxiliaryVariable" part="payload" query="/ns2:processResponse/ns2:level"/>
+      </copy><copy>
+        <from variable="inputVariable" part="payload" query="/ns1:GetTriageInformationDBAdapterOutputCollection/ns1:GetTriageInformationDBAdapterOutput/ns1:TIPO"/>
+        <to variable="triageAuxiliaryVariable" part="payload" query="/ns2:processResponse/ns2:typeOfTreatment"/>
+      </copy><copy>
+        <from variable="inputVariable" part="payload" query="/ns1:GetTriageInformationDBAdapterOutputCollection/ns1:GetTriageInformationDBAdapterOutput/ns1:CLASSIFICACAO"/>
+        <to variable="triageAuxiliaryVariable" part="payload" query="/ns2:processResponse/ns2:classification"/>
+      </copy></assign>
+    <switch name="SwitchCheckTriage" id="BpSwt0">
+      <case condition="bpws:getVariableData('inputVariable','payload','/ns1:GetTriageInformationDBAdapterOutputCollection/ns1:GetTriageInformationDBAdapterOutput/ns1:CLASSIFICACAO') = &quot;INSUFICIENTE&quot;">
+        <bpelx:annotation>
+          <bpelx:general>
+            <bpelx:property name="userLabel">Triage Insuficient</bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence name="SequenceTriageInsuficient" id="BpSeq1">
+          <assign name="AssignMedicinesPrescriptionOutdatedProcess" id="BpAss1">
+            <copy>
+              <from expression="number(bpws:getVariableData('inputVariable','payload','/ns1:GetTriageInformationDBAdapterOutputCollection/ns1:GetTriageInformationDBAdapterOutput/ns1:TRIAGEMID'))"/>
+              <to variable="medicinePrescriptionOutdatedProcessInputVariable" part="payload" query="/ns13:medicinesPrescriptionOutdatedInput/ns13:triagemID"/>
+            </copy>
+            <copy>
+              <from expression="number(bpws:getVariableData('inputVariable','payload','/ns1:GetTriageInformationDBAdapterOutputCollection/ns1:GetTriageInformationDBAdapterOutput/ns1:DOENTEID'))"/>
+              <to variable="medicinePrescriptionOutdatedProcessInputVariable" part="payload" query="/ns13:medicinesPrescriptionOutdatedInput/ns13:doenteID"/>
+            </copy>
+          </assign>
+          <invoke name="InvokeMedicinesPrescriptionOutdatedProcess" inputVariable="medicinePrescriptionOutdatedProcessInputVariable" bpelx:invokeAsDetail="no" partnerLink="MedicinesPrescriptionOutdatedBPELProcess.medicinesprescriptionoutdatedbpelprocess_client" portType="ns13:MedicinesPrescriptionOutdatedBPELProcess" operation="process" id="BpInv0"/>
+          <assign name="AssignGetOfficeInformation" id="BpAss2">
+            <copy>
+              <from expression="&quot;Triagem&quot;"/>
+              <to variable="getOfficeInformationInputVariable" part="GetOfficeInformationDBAdapterSelect_inputParameters" query="/ns4:GetOfficeInformationDBAdapterSelect_ATENDIMENTOInputParameters/ns4:ATENDIMENTO"/>
+            </copy>
+          </assign>
+          <assign name="InitOfficeAvailableVariable" id="BpAss3">
+            <copy>
+              <from expression="0"/>
+              <to variable="officeAvailableVariable"/>
+            </copy>
+          </assign>
+          <while name="WhileOfficeNotAvailable" condition="bpws:getVariableData('officeAvailableVariable') = 0" id="BpWhl0">
+            <sequence name="SequenceWaitForAvailableOffice" id="BpSeq2">
+              <invoke name="InvokeGetOfficeInformation" bpelx:invokeAsDetail="no" inputVariable="getOfficeInformationInputVariable" outputVariable="getOfficeInformationOutputVariable" partnerLink="GetOfficeInformationDBAdapter" portType="ns3:GetOfficeInformationDBAdapter_ptt" operation="GetOfficeInformationDBAdapterSelect" id="BpInv1"/>
+              <scope name="Rule1" variableAccessSerializable="no" id="BpScp0">
+                <bpelx:annotation>
+                  <bpelx:pattern patternName="bpelx:decide"/>
+                  <bpelx:general>
+                    <bpelx:property name="userLabel">OfficeManagementBusinessRule</bpelx:property>
+                  </bpelx:general>
+                </bpelx:annotation>
+                <variables>
+                  <variable name="dsIn" messageType="ns5:callFunctionStatelessMessage"/>
+                  <variable name="dsOut" messageType="ns5:callFunctionStatelessDecisionMessage"/>
+                </variables>
+                <sequence name="Sequence2" id="BpSeq3">
+                  <assign name="Facts_To_Rule_Service" id="BpAss4">
+                    <copy>
+                      <from variable="getOfficeInformationOutputVariable" part="GabinetesCollection" query="/ns4:GabinetesCollection/ns4:Gabinetes/ns4:tipoatendimento"/>
+                      <to variable="dsIn" part="payload" query="/ns5:callFunctionStateless/ns5:parameterList/ns7:officeInformation/ns7:typeOfTreatment"/>
+                    </copy>
+                    <copy>
+                      <from variable="getOfficeInformationOutputVariable" part="GabinetesCollection" query="/ns4:GabinetesCollection/ns4:Gabinetes/ns4:ocupacao"/>
+                      <to variable="dsIn" part="payload" query="/ns5:callFunctionStateless/ns5:parameterList/ns7:officeInformation/ns7:ocupation"/>
+                    </copy>
+                    <copy>
+                      <from variable="getOfficeInformationOutputVariable" part="GabinetesCollection" query="/ns4:GabinetesCollection/ns4:Gabinetes/ns4:capacidade"/>
+                      <to variable="dsIn" part="payload" query="/ns5:callFunctionStateless/ns5:parameterList/ns7:officeInformation/ns7:capacity"/>
+                    </copy>
+                  </assign>
+                  <assign name="BPEL_Header" id="BpAss5">
+                    <copy>
+                      <from expression="&quot;OfficeManagementBusinessRule_DecisionService_1&quot;"/>
+                      <to variable="dsIn" part="payload" query="@name"/>
+                    </copy>
+                  </assign>
+                  <invoke name="Invoke" partnerLink="OfficeManagementBusinessRule.OfficeManagementBusinessRule_DecisionService_1" portType="ns5:IDecisionService" operation="callFunctionStateless" inputVariable="dsIn" outputVariable="dsOut" id="BpInv2"/>
+                  <assign name="Rule_Service_To_Facts" id="BpAss6">
+                    <copy>
+                      <from variable="dsOut" part="payload" query="/ns5:callFunctionStatelessDecision/ns5:resultList/ns8:int"/>
+                      <to variable="officeAvailableVariable"/>
+                    </copy>
+                  </assign>
+                </sequence>
+              </scope>
+              <wait name="WaitForAvailableOffice" for="'PT30S'" bpelx:skipCondition="bpws:getVariableData('officeAvailableVariable') = 1" id="BpWai0"/>
+            </sequence>
+          </while>
+          <assign name="AssignOfficeOcupation" id="BpAss7">
+            <copy>
+              <from variable="getOfficeInformationOutputVariable" part="GabinetesCollection" query="/ns4:GabinetesCollection/ns4:Gabinetes/ns4:tipoatendimento"/>
+              <to variable="officeOcupationInputVariable" part="GabinetesCollection" query="/ns10:GabinetesCollection/ns10:Gabinetes/ns10:tipoatendimento"/>
+            </copy>
+            <copy>
+              <from expression="bpws:getVariableData('getOfficeInformationOutputVariable','GabinetesCollection','/ns4:GabinetesCollection/ns4:Gabinetes/ns4:ocupacao') + 1"/>
+              <to variable="officeOcupationInputVariable" part="GabinetesCollection" query="/ns10:GabinetesCollection/ns10:Gabinetes/ns10:ocupacao"/>
+            </copy>
+          </assign>
+          <invoke name="InvokeUpdateOfficeOcupation" bpelx:invokeAsDetail="no" inputVariable="officeOcupationInputVariable" partnerLink="UpdateOfficeOcupationDBAdapter" portType="ns9:UpdateOfficeOcupationDBAdapter_ptt" operation="update" id="BpInv3"/>
+          <assign name="AssignPatientID" id="BpAss8">
+            <copy>
+              <from expression="number(bpws:getVariableData('inputVariable','payload','/ns1:GetTriageInformationDBAdapterOutputCollection/ns1:GetTriageInformationDBAdapterOutput/ns1:DOENTEID'))"/>
+              <to variable="reexecuteTriageInputVariable" part="payload" query="/ns2:process/ns2:doenteID"/>
+            </copy>
+          </assign>
+          <bpelx:exec import="java.lang.String" id="BxExe0"/>
+          <bpelx:exec import="pt.saude365.*" id="BxExe1"/>
+          <invoke name="InvokeReexecuteTriage" bpelx:invokeAsDetail="no" inputVariable="reexecuteTriageInputVariable" outputVariable="reexecuteTriageOutputVariable" partnerLink="ReexecuteTriageBPELProcess.reexecutetriagebpelprocess_client" portType="ns2:ReexecuteTriageBPELProcess" operation="process" id="BpInv4"/>
+          <assign name="AssignTriageAuxiliary" id="BpAss9">
+            <copy>
+              <from variable="reexecuteTriageOutputVariable" part="payload" query="/ns2:processResponse/ns2:typeOfTreatment"/>
+              <to variable="triageAuxiliaryVariable" part="payload" query="/ns2:processResponse/ns2:typeOfTreatment"/>
+            </copy>
+            <copy>
+              <from variable="reexecuteTriageOutputVariable" part="payload" query="/ns2:processResponse/ns2:level"/>
+              <to variable="triageAuxiliaryVariable" part="payload" query="/ns2:processResponse/ns2:level"/>
+            </copy>
+            <copy>
+              <from variable="reexecuteTriageOutputVariable" part="payload" query="/ns2:processResponse/ns2:classification"/>
+              <to variable="triageAuxiliaryVariable" part="payload" query="/ns2:processResponse/ns2:classification"/>
+            </copy>
+          </assign>
+          <assign name="AssignOfficeOcupation" id="BpAss10">
+            <copy>
+              <from variable="officeOcupationInputVariable" part="GabinetesCollection" query="/ns10:GabinetesCollection/ns10:Gabinetes/ns10:tipoatendimento"/>
+              <to variable="officeOcupationInputVariable" part="GabinetesCollection" query="/ns10:GabinetesCollection/ns10:Gabinetes/ns10:tipoatendimento"/>
+            </copy>
+            <copy>
+              <from expression="bpws:getVariableData('officeOcupationInputVariable','GabinetesCollection','/ns10:GabinetesCollection/ns10:Gabinetes/ns10:ocupacao') - 1"/>
+              <to variable="officeOcupationInputVariable" part="GabinetesCollection" query="/ns10:GabinetesCollection/ns10:Gabinetes/ns10:ocupacao"/>
+            </copy>
+          </assign>
+          <invoke name="InvokeUpdateOfficeOcupation" bpelx:invokeAsDetail="no" inputVariable="officeOcupationInputVariable" partnerLink="UpdateOfficeOcupationDBAdapter" portType="ns9:UpdateOfficeOcupationDBAdapter_ptt" operation="update" id="BpInv5"/>
+        </sequence>
+      </case>
+    </switch><sequence name="SequenceOfficeAvailabe" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" id="BpSeq4">
+      <assign name="AssignGetOfficeInformation" id="BpAss11">
+        <copy>
+          <from variable="inputVariable" part="payload" query="/ns1:GetTriageInformationDBAdapterOutputCollection/ns1:GetTriageInformationDBAdapterOutput/ns1:TIPO"/>
+          <to variable="getOfficeInformationInputVariable" part="GetOfficeInformationDBAdapterSelect_inputParameters" query="/ns4:GetOfficeInformationDBAdapterSelect_ATENDIMENTOInputParameters/ns4:ATENDIMENTO"/>
+        </copy>
+      </assign>
+      <assign name="InitOfficeAvailableVariable" id="BpAss12">
+        <copy>
+          <from expression="0"/>
+          <to variable="officeAvailableVariable"/>
+        </copy>
+      </assign>
+      <while name="WhileOfficeNotAvailable" condition="bpws:getVariableData('officeAvailableVariable') = 0" id="BpWhl1">
+        <sequence name="SequenceWaitForAvailableOffice" id="BpSeq5">
+          <invoke name="InvokeGetOfficeInformation" bpelx:invokeAsDetail="no" inputVariable="getOfficeInformationInputVariable" outputVariable="getOfficeInformationOutputVariable" partnerLink="GetOfficeInformationDBAdapter" portType="ns3:GetOfficeInformationDBAdapter_ptt" operation="GetOfficeInformationDBAdapterSelect" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" id="BpInv6"/>
+          <scope name="Rule2" variableAccessSerializable="no" id="BpScp1">
+            <bpelx:annotation>
+              <bpelx:pattern patternName="bpelx:decide"/>
+              <bpelx:general>
+                <bpelx:property name="userLabel">OfficeManagementBusinessRule</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <variables>
+              <variable name="dsIn" messageType="ns5:callFunctionStatelessMessage"/>
+              <variable name="dsOut" messageType="ns5:callFunctionStatelessDecisionMessage"/>
+            </variables>
+            <sequence name="Sequence3" id="BpSeq6">
+              <assign name="Facts_To_Rule_Service" id="BpAss13">
+                <copy>
+                  <from variable="getOfficeInformationOutputVariable" part="GabinetesCollection" query="/ns4:GabinetesCollection/ns4:Gabinetes/ns4:tipoatendimento"/>
+                  <to variable="dsIn" part="payload" query="/ns5:callFunctionStateless/ns5:parameterList/ns7:officeInformation/ns7:typeOfTreatment"/>
+                </copy>
+                <copy>
+                  <from variable="getOfficeInformationOutputVariable" part="GabinetesCollection" query="/ns4:GabinetesCollection/ns4:Gabinetes/ns4:capacidade"/>
+                  <to variable="dsIn" part="payload" query="/ns5:callFunctionStateless/ns5:parameterList/ns7:officeInformation/ns7:capacity"/>
+                </copy>
+                <copy>
+                  <from variable="getOfficeInformationOutputVariable" part="GabinetesCollection" query="/ns4:GabinetesCollection/ns4:Gabinetes/ns4:ocupacao"/>
+                  <to variable="dsIn" part="payload" query="/ns5:callFunctionStateless/ns5:parameterList/ns7:officeInformation/ns7:ocupation"/>
+                </copy>
+              </assign>
+              <assign name="BPEL_Header" id="BpAss14">
+                <copy>
+                  <from expression="&quot;OfficeManagementBusinessRule_DecisionService_1&quot;"/>
+                  <to variable="dsIn" part="payload" query="@name"/>
+                </copy>
+              </assign>
+              <invoke name="Invoke" partnerLink="OfficeManagementBusinessRule.OfficeManagementBusinessRule_DecisionService_1" portType="ns5:IDecisionService" operation="callFunctionStateless" inputVariable="dsIn" outputVariable="dsOut" id="BpInv7"/>
+              <assign name="Rule_Service_To_Facts" id="BpAss15">
+                <copy>
+                  <from variable="dsOut" part="payload" query="/ns5:callFunctionStatelessDecision/ns5:resultList/ns8:int"/>
+                  <to variable="officeAvailableVariable"/>
+                </copy>
+              </assign>
+            </sequence>
+          </scope>
+          <wait name="WaitForAvailableOffice" for="'PT30S'" bpelx:skipCondition="bpws:getVariableData('officeAvailableVariable') = 1" id="BpWai1"/>
+        </sequence>
+      </while>
+      <assign name="AssignOfficeOcupation" id="BpAss16">
+        <copy>
+          <from variable="getOfficeInformationOutputVariable" part="GabinetesCollection" query="/ns4:GabinetesCollection/ns4:Gabinetes/ns4:tipoatendimento"/>
+          <to variable="officeOcupationInputVariable" part="GabinetesCollection" query="/ns10:GabinetesCollection/ns10:Gabinetes/ns10:tipoatendimento"/>
+        </copy>
+        <copy>
+          <from expression="bpws:getVariableData('getOfficeInformationOutputVariable','GabinetesCollection','/ns4:GabinetesCollection/ns4:Gabinetes/ns4:ocupacao') + 1"/>
+          <to variable="officeOcupationInputVariable" part="GabinetesCollection" query="/ns10:GabinetesCollection/ns10:Gabinetes/ns10:ocupacao"/>
+        </copy>
+      </assign>
+      <invoke name="InvokeUpdateOfficeOcupation" bpelx:invokeAsDetail="no" inputVariable="officeOcupationInputVariable" partnerLink="UpdateOfficeOcupationDBAdapter" portType="ns9:UpdateOfficeOcupationDBAdapter_ptt" operation="update" id="BpInv8"/>
+      <assign name="AssignOfficeProcessInput" id="BpAss17">
+        <copy>
+          <from variable="triageAuxiliaryVariable" part="payload" query="/ns2:processResponse/ns2:level"/>
+          <to variable="assignOfficeProcessInputVariable" part="payload" query="/ns11:assignOfficeInput/ns11:level"/>
+        </copy>
+        <copy>
+          <from variable="triageAuxiliaryVariable" part="payload" query="/ns2:processResponse/ns2:typeOfTreatment"/>
+          <to variable="assignOfficeProcessInputVariable" part="payload" query="/ns11:assignOfficeInput/ns11:typeOfTreatment"/>
+        </copy>
+        <copy>
+          <from expression="number(bpws:getVariableData('inputVariable','payload','/ns1:GetTriageInformationDBAdapterOutputCollection/ns1:GetTriageInformationDBAdapterOutput/ns1:DOENTEID'))"/>
+          <to variable="assignOfficeProcessInputVariable" part="payload" query="/ns11:assignOfficeInput/ns11:doenteID"/>
+        </copy>
+      </assign>
+      <invoke name="InvokeAssignOfficeProcess" inputVariable="assignOfficeProcessInputVariable" partnerLink="AssignOfficeBPELProcess.assignofficebpelprocess_client" portType="ns11:AssignOfficeBPELProcess" operation="process" bpelx:invokeAsDetail="no" id="BpInv9"/>
+      <assign name="AssignOfficeOcupation" id="BpAss18">
+        <copy>
+          <from variable="officeOcupationInputVariable" part="GabinetesCollection" query="/ns10:GabinetesCollection/ns10:Gabinetes/ns10:tipoatendimento"/>
+          <to variable="officeOcupationInputVariable" part="GabinetesCollection" query="/ns10:GabinetesCollection/ns10:Gabinetes/ns10:tipoatendimento"/>
+        </copy>
+        <copy>
+          <from expression="bpws:getVariableData('officeOcupationInputVariable','GabinetesCollection','/ns10:GabinetesCollection/ns10:Gabinetes/ns10:ocupacao') - 1"/>
+          <to variable="officeOcupationInputVariable" part="GabinetesCollection" query="/ns10:GabinetesCollection/ns10:Gabinetes/ns10:ocupacao"/>
+        </copy>
+      </assign>
+      <bpelx:exec import="java.lang.String" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" id="BxExe2"/>
+      <bpelx:exec import="pt.saude365.*" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" id="BxExe3"/>
+      <invoke name="InvokeUpdateOfficeOcupation" bpelx:invokeAsDetail="no" inputVariable="officeOcupationInputVariable" partnerLink="UpdateOfficeOcupationDBAdapter" portType="ns9:UpdateOfficeOcupationDBAdapter_ptt" operation="update" id="BpInv10"/>
+    </sequence>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Apr 22 12:01:35 WEST 2013
+  Author:  oracle
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

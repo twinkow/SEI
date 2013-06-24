@@ -1,0 +1,34 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions name="ReexecuteTriageBPELProcess"
+                  targetNamespace="http://xmlns.oracle.com/SeiLessons/HSN_Project/ReexecuteTriageBPELProcess"
+                  xmlns:ns2="http://saude365.pt"
+                  xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/PatientTriageDBAdapter"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+                  xmlns:client="http://xmlns.oracle.com/SeiLessons/HSN_Project/ReexecuteTriageBPELProcess"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <plnk:partnerLinkType name="ReexecuteTriageBPELProcess">
+        <plnk:role name="ReexecuteTriageBPELProcessProvider">
+            <plnk:portType name="client:ReexecuteTriageBPELProcess"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/PatientTriageDBAdapter"
+                 location="PatientTriageDBAdapter.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/SeiLessons/HSN_Project/ReexecuteTriageBPELProcess"
+                    schemaLocation="xsd/ReexecuteTriageBPELProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ReexecuteTriageBPELProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="ReexecuteTriageBPELProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ReexecuteTriageBPELProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ReexecuteTriageBPELProcessRequestMessage"/>
+            <wsdl:output message="client:ReexecuteTriageBPELProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

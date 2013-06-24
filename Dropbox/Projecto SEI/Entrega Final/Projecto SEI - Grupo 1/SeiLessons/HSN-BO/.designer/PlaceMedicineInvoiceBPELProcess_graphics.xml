@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<graphics>
+   <diagram optimizeLayout="false" popupEditor="true" fixedWidthSwimlanes="true" roundedPartnerlinks="true" centerZoom="true" validateOnLoad="true" confirmBeforeDelete="true" selectedPartnerLinkColor="0,0,153" swimlaneBackground="240,240,240" swimlaneDividerBackground="218,218,218" graphBackground="255,255,255" selectedBorderBackground="49,105,198" connectedPartnerLinkColor="204,204,255" connectablePartnerLinkColor="0,0,255" unconnectedPartnerLinkColor="192,192,192"/>
+   <annotationfile/>
+   <iconize/>
+   <partnerlink_locations>
+      <partnerlink name="placemedicineinvoicebpelprocess_client" x="3" y="90" side="left"/>
+      <partnerlink name="StoreInvoiceJMSAdapter" x="3" y="832" side="left"/>
+      <partnerlink name="GetMedicineInformationDBAdapter" x="1158" y="466" side="right"/>
+      <partnerlink name="GetHospitalInformationDBAdapter" x="1158" y="283" side="right"/>
+      <partnerlink name="GetSupplierInformationDBAdapter" x="1158" y="189" side="right"/>
+      <partnerlink name="InvoiceOrderFTPAdapter" x="1158" y="649" side="right"/>
+   </partnerlink_locations>
+   <graph_layout viewport="0,310,1291,503" show_swimlanes="true">
+      <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
+      <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
+   </graph_layout>
+   <bookmarks/>
+</graphics>

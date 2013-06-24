@@ -1,0 +1,25 @@
+<?binding.jca GetMedicineStockAndRequestedInformationDBAdapter_db.jca?>
+<wsdl:definitions name="GetMedicineStockAndRequestedInformationDBAdapter" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-BO/GetMedicineStockAndRequestedInformationDBAdapter" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/GetMedicineStockAndRequestedInformationDBAdapter" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-BO/GetMedicineStockAndRequestedInformationDBAdapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="GetMedicineStockAndRequestedInformationDBAdapter_plt">
+        <plt:role name="GetMedicineStockAndRequestedInformationDBAdapter_role">
+            <plt:portType name="tns:GetMedicineStockAndRequestedInformationDBAdapter_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/GetMedicineStockAndRequestedInformationDBAdapter" schemaLocation="xsd/GetMedicineStockAndRequestedInformationDBAdapter.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="GetMedicineStockAndRequestedInformationDBAdapterInput_msg">
+        <wsdl:part name="GetMedicineStockAndRequestedInformationDBAdapterInput_msg" element="db:GetMedicineStockAndRequestedInformationDBAdapterInput"/>
+    </wsdl:message>
+    <wsdl:message name="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection_msg">
+        <wsdl:part name="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection" element="db:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="GetMedicineStockAndRequestedInformationDBAdapter_ptt">
+        <wsdl:operation name="GetMedicineStockAndRequestedInformationDBAdapter">
+            <wsdl:input message="tns:GetMedicineStockAndRequestedInformationDBAdapterInput_msg"/>
+            <wsdl:output message="tns:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

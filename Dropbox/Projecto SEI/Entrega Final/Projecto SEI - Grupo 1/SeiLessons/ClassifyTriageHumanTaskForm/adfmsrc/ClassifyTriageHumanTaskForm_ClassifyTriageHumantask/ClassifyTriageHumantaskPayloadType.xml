@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.61.92"
+          id="ClassifyTriageHumantaskPayloadType"
+          Package="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask"
+          BeanClass="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask.ClassifyTriageHumantaskPayloadType"
+          isJavaBased="false">
+  <AccessorAttribute id="relatorio" IsCollection="true"
+                     BeanClass="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask.RelatorioType"
+                     CollectionBeanClass="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask.RelatorioType_relatorio_Operations">
+    <Properties>
+      <Property Name="minOccurs" Value="1"/>
+      <Property Name="maxOccurs" Value="1"/>
+      <Property Name="LABEL" Value="Relatorio"/>
+      <Property Name="nillable" Value="false"/>
+      <Property Name="originalName" Value="relatorio"/>
+      <Property Name="targetNamespace" Value="http://saude365.pt"/>
+    </Properties>
+  </AccessorAttribute>
+</JavaBean>

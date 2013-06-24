@@ -1,0 +1,609 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Apr 26 15:14:34 WEST 2013
+  Author:  oracle
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ExitPatientBPELProcess"
+         targetNamespace="http://xmlns.oracle.com/SeiLessons/HSN_Project/ExitPatientBPELProcess"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:client="http://xmlns.oracle.com/SeiLessons/HSN_Project/ExitPatientBPELProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetAllPatientInformationDBAdapter"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllPatientInformationDBAdapter"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetPrescriptionInformationDBAdapter"
+         xmlns:ns4="http://acssdatamodel.pt"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/ElectronicalPrescriptionFileAdapter"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetPrescriptionInformationDBAdapter"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetMedicineInformationDBAdapter"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetMedicineInformationDBAdapter"
+         xmlns:ns9="http://saude365.pt/"
+         queryLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116"
+         expressionLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116"
+         suppressJoinFailure="no" enableInstanceCompensation="no"
+         abstractProcess="no" xmlns:ns10="http://saude365.pt"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/MedicineStockMedicineIDDBAdapter"
+         xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/db/top/MedicineStockMedicineIDDBAdapter"
+         xmlns:ns13="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/ExitPatientFileAdapter"
+         xmlns:ns14="http://xmlns.oracle.com/pcbpel/adapter/db/GetTriageInformationDBAdapter"
+         xmlns:ns15="http://saude365.pt/exitpatient"
+         xmlns:ns16="http://xmlns.oracle.com/pcbpel/adapter/jms/SeiLessons/HSN-Project/GetReportInputJMSAdapter"
+         xmlns:ns17="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetEntryRegisterDBAdapter"
+         xmlns:ns18="http://xmlns.oracle.com/pcbpel/adapter/db/GetEntryRegisterDBAdapter"
+         xmlns:ns19="http://saude365.pt/registoentrada"
+         xmlns:ns20="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetAllTriageAssociatedWithPatientDBAdapter"
+         xmlns:ns21="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter"
+         xmlns:ns22="http://xmlns.oracle.com/bpel/workflow/taskService"
+         xmlns:task="http://xmlns.oracle.com/bpel/workflow/task"
+         xmlns:wfcommon="http://xmlns.oracle.com/bpel/workflow/common"
+         xmlns:wf="http://schemas.oracle.com/bpel/extensions/workflow"
+         xmlns:ns23="http://xmlns.oracle.com/bpel/workflow/TaskEvidenceService"
+         xmlns:ns24="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/ExitRecordDBAdapter"
+         xmlns:ns25="http://xmlns.oracle.com/pcbpel/adapter/db/top/ExitRecordDBAdapter">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="exitpatientbpelprocess_client"
+                 partnerLinkType="client:ExitPatientBPELProcess"
+                 myRole="ExitPatientBPELProcessProvider"/>
+    <partnerLink name="GetAllPatientInformationDBAdapter"
+                 partnerLinkType="ns1:GetAllPatientInformationDBAdapter_plt"
+                 partnerRole="GetAllPatientInformationDBAdapter_role"/>
+    <partnerLink name="ElectronicalPrescriptionFileAdapter"
+                 partnerLinkType="ns5:WritePrescription_plt"
+                 partnerRole="WritePrescription_role"/>
+    <partnerLink name="GetMedicineInformationDBAdapter"
+                 partnerLinkType="ns7:GetMedicineInformationDBAdapter_plt"
+                 partnerRole="GetMedicineInformationDBAdapter_role"/>
+    <partnerLink name="FarmaciasPortuguesasService"
+                 partnerLinkType="ns9:FarmaciasPortuguesasService"
+                 partnerRole="FarmaciasPortuguesas"/>
+    <partnerLink name="MedicineStockMedicineIDDBAdapter"
+                 partnerLinkType="ns11:MedicineStockMedicineIDDBAdapter_plt"
+                 partnerRole="MedicineStockMedicineIDDBAdapter_role"/>
+    <partnerLink name="ValidateMedicinesService"
+                 partnerLinkType="ns9:ValidateMedicinesService"
+                 partnerRole="InfarmedService"/>
+    <partnerLink name="ExitPatientFileAdapter"
+                 partnerLinkType="ns13:WritePatient_plt"
+                 partnerRole="WritePatient_role"/>
+    <partnerLink name="GetEntryRegisterDBAdapter"
+                 partnerLinkType="ns17:GetEntryRegisterDBAdapter_plt"
+                 partnerRole="GetEntryRegisterDBAdapter_role"/>
+    <partnerLink name="GetAllTriageAssociatedWithPatientDBAdapter"
+                 partnerLinkType="ns20:GetAllTriageAssociatedWithPatientDBAdapter_plt"
+                 partnerRole="GetAllTriageAssociatedWithPatientDBAdapter_role"/>
+    <partnerLink name="PatientSurveyHumantask.TaskService_1"
+                 partnerLinkType="ns22:TaskService" partnerRole="TaskService"
+                 myRole="TaskServiceCallbackListener"/>
+    <partnerLink name="ExitRecordDBAdapter"
+                 partnerLinkType="ns24:ExitRecordDBAdapter_plt"
+                 partnerRole="ExitRecordDBAdapter_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="inputVariable"
+              messageType="client:ExitPatientBPELProcessRequestMessage"/>
+    <variable name="getAllPatientInformationInputVariable"
+              messageType="ns1:selectByPrimaryKey_inputParameters"/>
+    <variable name="getAllPatientInformationOutputVariable"
+              messageType="ns1:DoenteCollection_msg"/>
+    <variable name="prescriptionVariable" element="ns4:receita"/>
+    <variable name="loopVariable" type="xsd:int"/>
+    <variable name="prescriptionAuxilaryVariable" element="ns4:receita"/>
+    <variable name="electronicalPrescriptionInputVariable"
+              messageType="ns5:WritePrescription_msg"/>
+    <variable name="getMedicineInformationInputVariable"
+              messageType="ns7:selectByPrimaryKey_inputParameters"/>
+    <variable name="getMedicineInformationOutputVariable"
+              messageType="ns7:MedicamentosstockCollection_msg"/>
+    <variable name="farmaciasPortuguesasServiceInputVariable"
+              messageType="ns9:getFarmaciasProximasInput"/>
+    <variable name="farmaciasPortuguesasServiceOutputVariable"
+              messageType="ns9:getFarmaciasProximasOutput"/>
+    <variable name="maxLoopVariable" type="xsd:int"/>
+    <variable name="newMedicinesVariable" element="ns10:medicinesCollection"/>
+    <variable name="medicineStockIDOutputVariable"
+              messageType="ns11:MedicamentosstockCollection_msg"/>
+    <variable name="medicineStockIDInputVariable"
+              messageType="ns11:MedicineStockMedicineIDDBAdapterSelect_inputParameters"/>
+    <variable name="infarmedServiceInputVariable"
+              messageType="ns9:getMedsInfoInput"/>
+    <variable name="infarmedServiceOutputVariable"
+              messageType="ns9:getMedsInfoOutput"/>
+    <variable name="medicineInformationVariable"
+              messageType="ns7:MedicamentosstockCollection_msg"/>
+    <variable name="exitPatientFileInputVariable"
+              messageType="ns13:WritePatient_msg"/>
+    <variable name="exitPatientFilePharmacyVariable"
+              messageType="ns13:WritePatient_msg"/>
+    <variable name="exitPatientElectronicalPrescriptionVariable"
+              messageType="ns13:WritePatient_msg"/>
+    <variable name="getEntryRegisterInputVariable"
+              messageType="ns17:GetEntryRegisterDBAdapterInput_msg"/>
+    <variable name="getEntryRegisterOutputVariable"
+              messageType="ns17:GetEntryRegisterDBAdapterOutputCollection_msg"/>
+    <variable name="getAllTriagesInputVariable"
+              messageType="ns20:GetAllTriageAssociatedWithPatientDBAdapterSelect_inputParameters"/>
+    <variable name="InvokeGetAllTriagesOutputVariable"
+              messageType="ns20:TriagemCollection_msg"/>
+    <variable name="triagesExitPatientVariable"
+              messageType="ns13:WritePatient_msg"/>
+    <variable name="perguntaTempoEsperaVariable" type="xsd:string"/>
+    <variable name="respostaTempoEsperaVariable" type="xsd:string"/>
+    <variable name="perguntaClassificaoAtendimentoVariable" type="xsd:string"/>
+    <variable name="respostaClassificaoAtendimentoVariable" type="xsd:string"/>
+    <variable name="perguntaSatisfacaoReceitaElectronicaVariable" type="xsd:string"/>
+    <variable name="respostaSatisfacaoReceitaElectronicaVariable" type="xsd:string"/>
+    <variable name="PatientSurveyHumantask1_globalVariable"
+              messageType="ns22:taskMessage"/>
+    <variable name="exitRecordInputVariable"
+              messageType="ns24:RegistosaidaCollection_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ExitPatientBPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="exitpatientbpelprocess_client"
+             portType="client:ExitPatientBPELProcess" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <assign name="AssignPatientID">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:patientID"/>
+        <to variable="getAllPatientInformationInputVariable"
+            part="selectByPrimaryKey_inputParameters"
+            query="/ns2:DoentePrimaryKey/ns2:id"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:patientID"/>
+        <to variable="getEntryRegisterInputVariable"
+            part="GetEntryRegisterDBAdapterInput_msg"
+            query="/ns18:GetEntryRegisterDBAdapterInput/ns18:doenteid"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:patientID"/>
+        <to variable="getAllTriagesInputVariable"
+            part="GetAllTriageAssociatedWithPatientDBAdapterSelect_inputParameters"
+            query="/ns21:GetAllTriageAssociatedWithPatientDBAdapterSelect_doenteInputParameters/ns21:doente"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeGetAllPatientInformation"
+            inputVariable="getAllPatientInformationInputVariable"
+            outputVariable="getAllPatientInformationOutputVariable"
+            partnerLink="GetAllPatientInformationDBAdapter"
+            portType="ns1:GetAllPatientInformationDBAdapter_ptt"
+            operation="selectByPrimaryKey" bpelx:invokeAsDetail="no"/>
+    <invoke name="InvokeGetEntryRegister" bpelx:invokeAsDetail="no"
+            inputVariable="getEntryRegisterInputVariable"
+            outputVariable="getEntryRegisterOutputVariable"
+            partnerLink="GetEntryRegisterDBAdapter"
+            portType="ns17:GetEntryRegisterDBAdapter_ptt"
+            operation="GetEntryRegisterDBAdapter"/>
+    <invoke name="InvokeGetAllTriages" bpelx:invokeAsDetail="no"
+            inputVariable="getAllTriagesInputVariable"
+            outputVariable="InvokeGetAllTriagesOutputVariable"
+            partnerLink="GetAllTriageAssociatedWithPatientDBAdapter"
+            portType="ns20:GetAllTriageAssociatedWithPatientDBAdapter_ptt"
+            operation="GetAllTriageAssociatedWithPatientDBAdapterSelect"/>
+    <assign name="InitializeLoopVariables">
+      <copy>
+        <from expression="1"/>
+        <to variable="loopVariable"/>
+      </copy>
+      <copy>
+        <from expression="2"/>
+        <to variable="maxLoopVariable"/>
+      </copy>
+      <copy>
+        <from expression='"empty"'/>
+        <to variable="newMedicinesVariable"
+            query="/ns10:medicinesCollection/ns10:medicinesCollectionType/ns10:substance"/>
+      </copy>
+      <copy>
+        <from expression='"empty"'/>
+        <to variable="newMedicinesVariable"
+            query="/ns10:medicinesCollection/ns10:medicinesCollectionType/ns10:name"/>
+      </copy>
+      <copy>
+        <from expression='"empty"'/>
+        <to variable="newMedicinesVariable"
+            query="/ns10:medicinesCollection/ns10:medicinesCollectionType/ns10:dosage"/>
+      </copy>
+    </assign>
+    <while name="WhileMedicinesExist"
+           condition="bpws:getVariableData('loopVariable') &lt;=  bpws:getVariableData('maxLoopVariable')">
+      <sequence>
+          <bpelx:exec import="pt.saude365.*" />
+    <bpelx:exec import="java.util.Random"/>
+        <bpelx:exec name="GenerateNewMedicinesActivity" version="1.5"
+                    language="java">
+          <![CDATA[String medicamentoString = ReexecuteTriage.generateMedicine();
+String[] medicamento = medicamentoString.split("\\$");
+addAuditTrailEntry(medicamento[0] + " " + medicamento[1] + " " + medicamento[2]);
+setVariableData("newMedicinesVariable","/ns10:medicinesCollection/ns10:medicinesCollectionType/ns10:substance", medicamento[0]);
+setVariableData("newMedicinesVariable","/ns10:medicinesCollection/ns10:medicinesCollectionType/ns10:name", medicamento[1]);
+setVariableData("newMedicinesVariable","/ns10:medicinesCollection/ns10:medicinesCollectionType/ns10:dosage", medicamento[2]);]]>
+        </bpelx:exec>
+        <assign name="TransformNewMedicinesToMedicineStockID">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:doXSLTransformForDoc('xsl/TransformationNewMedicineToMedicineStockID.xsl', $newMedicinesVariable)"/>
+            <to variable="medicineStockIDInputVariable"
+                part="MedicineStockMedicineIDDBAdapterSelect_inputParameters"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeMedicineStockID"
+                inputVariable="medicineStockIDInputVariable"
+                outputVariable="medicineStockIDOutputVariable"
+                partnerLink="MedicineStockMedicineIDDBAdapter"
+                portType="ns11:MedicineStockMedicineIDDBAdapter_ptt"
+                operation="MedicineStockMedicineIDDBAdapterSelect"
+                bpelx:invokeAsDetail="no"/>
+        <assign name="AssignMedicineID">
+          <copy>
+            <from variable="medicineStockIDOutputVariable"
+                  part="MedicamentosstockCollection"
+                  query="/ns12:MedicamentosstockCollection/ns12:Medicamentosstock/ns12:medicamentoid"/>
+            <to variable="getMedicineInformationInputVariable"
+                part="selectByPrimaryKey_inputParameters"
+                query="/ns8:MedicamentosstockPrimaryKey/ns8:medicamentoid"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeGetMedicineInformation"
+                inputVariable="getMedicineInformationInputVariable"
+                outputVariable="getMedicineInformationOutputVariable"
+                partnerLink="GetMedicineInformationDBAdapter"
+                portType="ns7:GetMedicineInformationDBAdapter_ptt"
+                operation="selectByPrimaryKey" bpelx:invokeAsDetail="no"/>
+        <switch name="Switch1">
+          <case condition="ora:countNodes('getMedicineInformationOutputVariable','MedicamentosstockCollection','/ns8:MedicamentosstockCollection/ns8:Medicamentosstock/ns8:medicinesinformationCollection/ns8:Medicinesinformation') = 0">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">Medicine Information Not Present</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence name="Sequence1">
+              <assign name="TransformInfarmedService">
+                <bpelx:annotation>
+                  <bpelx:pattern>transformation</bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from expression="ora:doXSLTransformForDoc('xsl/TransformationInfarmedService.xsl', $newMedicinesVariable)"/>
+                  <to variable="infarmedServiceInputVariable"
+                      part="parameters"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeInfarmedService" bpelx:invokeAsDetail="no"
+                      inputVariable="infarmedServiceInputVariable"
+                      outputVariable="infarmedServiceOutputVariable"
+                      partnerLink="ValidateMedicinesService"
+                      portType="ns9:InfarmedService" operation="getMedsInfo"/>
+              <assign name="TransformInfarmedServiceToMedicineInformationVariable">
+                <bpelx:annotation>
+                  <bpelx:pattern>transformation</bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from expression="ora:doXSLTransformForDoc('xsl/TransformationInfarmedServiceToMedicineInformationVariable.xsl', $infarmedServiceOutputVariable.parameters, 'medicineStockIDOutputVariable.MedicamentosstockCollection', $medicineStockIDOutputVariable.MedicamentosstockCollection)"/>
+                  <to variable="medicineInformationVariable"
+                      part="MedicamentosstockCollection"/>
+                </copy>
+              </assign>
+            </sequence>
+          </case>
+          <otherwise>
+            <assign name="TransformMedicineInformationVariable">
+              <bpelx:annotation>
+                <bpelx:pattern>transformation</bpelx:pattern>
+              </bpelx:annotation>
+              <copy>
+                <from expression="ora:doXSLTransformForDoc('xsl/TransformationMedicineInformation.xsl', $getMedicineInformationOutputVariable.MedicamentosstockCollection)"/>
+                <to variable="medicineInformationVariable"
+                    part="MedicamentosstockCollection"/>
+              </copy>
+            </assign>
+          </otherwise>
+        </switch>
+        <assign name="TransformPrescriptionAuxiliaryVariable">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:doXSLTransformForDoc('xsl/TransformationPrescriptionAuxiliaryVariable.xsl', $medicineInformationVariable.MedicamentosstockCollection)"/>
+            <to variable="prescriptionAuxilaryVariable"/>
+          </copy>
+        </assign>
+        <assign name="AssignPrescriptionVariable">
+          <bpelx:append>
+            <bpelx:from variable="prescriptionAuxilaryVariable"
+                        query="/ns4:receita/ns4:ListaLinhasReceita/ns4:LinhaReceita"/>
+            <bpelx:to variable="prescriptionVariable"
+                      query="/ns4:receita/ns4:ListaLinhasReceita"/>
+          </bpelx:append>
+        </assign>
+        <assign name="IncrementLoopVariable">
+          <copy>
+            <from expression="bpws:getVariableData('loopVariable') + 1"/>
+            <to variable="loopVariable"/>
+          </copy>
+        </assign>
+      </sequence>
+    </while>
+    <assign name="TransformElectronicalPrescription">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/TransformationElectronicalPrescription.xsl', $getAllPatientInformationOutputVariable.DoenteCollection, 'prescriptionVariable', $prescriptionVariable)"/>
+        <to variable="electronicalPrescriptionInputVariable" part="body"/>
+      </copy>
+    </assign>
+    <assign name="TransformElectronicalPrescriptionExitPatientFile">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/TransformationElectronicalPrescriptionExitPatientFile.xsl', $electronicalPrescriptionInputVariable.body)"/>
+        <to variable="exitPatientElectronicalPrescriptionVariable" part="body"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeElectronicalPrescription" bpelx:invokeAsDetail="no"
+            inputVariable="electronicalPrescriptionInputVariable"
+            partnerLink="ElectronicalPrescriptionFileAdapter"
+            portType="ns5:WritePrescription_ptt" operation="WritePrescription"/>
+    <assign name="TransformFarmaciasPortuguesas">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/TransformationFarmaciasPortuguesas.xsl', $getAllPatientInformationOutputVariable.DoenteCollection)"/>
+        <to variable="farmaciasPortuguesasServiceInputVariable"
+            part="parameters"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeFarmaciasPortuguesasService" bpelx:invokeAsDetail="no"
+            inputVariable="farmaciasPortuguesasServiceInputVariable"
+            outputVariable="farmaciasPortuguesasServiceOutputVariable"
+            partnerLink="FarmaciasPortuguesasService"
+            portType="ns9:FarmaciasPortuguesas"
+            operation="getFarmaciasProximas"/>
+    <assign name="TransformPharmacyExitPatientFile">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/TransformationExitPatientFile.xsl', $farmaciasPortuguesasServiceOutputVariable.parameters)"/>
+        <to variable="exitPatientFilePharmacyVariable" part="body"/>
+      </copy>
+    </assign>
+    <assign name="TransformTriagesExitPatientFile">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/TransformationTriagesExitPatientFile.xsl', $InvokeGetAllTriagesOutputVariable.TriagemCollection)"/>
+        <to variable="triagesExitPatientVariable" part="body"/>
+      </copy>
+    </assign>
+    <scope name="PatientSurveyHumantask1"
+           xmlns:wf="http://schemas.oracle.com/bpel/extensions/workflow"
+           wf:key="PatientSurveyHumantask1_globalVariable">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:workflow"></bpelx:pattern>
+        <bpelx:general>
+          <bpelx:property name="userLabel">PatientSurveyHumantask</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <variables>
+        <variable name="initiateTaskInput"
+                  messageType="ns22:initiateTaskMessage"/>
+        <variable name="initiateTaskResponseMessage"
+                  messageType="ns22:initiateTaskResponseMessage"/>
+      </variables>
+      <sequence>
+        <assign name="PatientSurveyHumantask1_AssignTaskAttributes">
+          <copy>
+            <from expression="number(3)"/>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns22:initiateTask/task:task/task:priority"/>
+          </copy>
+          <copy>
+            <from><payload xmlns="http://xmlns.oracle.com/bpel/workflow/task">
+ <perguntatempoespera xmlns="http://xmlns.oracle.com/bpel/workflow/task"/>
+ <respostatempoespera xmlns="http://xmlns.oracle.com/bpel/workflow/task"/>
+ <perguntaclassificacaoatendimento xmlns="http://xmlns.oracle.com/bpel/workflow/task"/>
+ <respostaclassificacaoatendimento xmlns="http://xmlns.oracle.com/bpel/workflow/task"/>
+ <perguntasatisfacaoreceitaelectronica xmlns="http://xmlns.oracle.com/bpel/workflow/task"/>
+ <respostasatisfacaoreceitaelectronica xmlns="http://xmlns.oracle.com/bpel/workflow/task"/>
+</payload></from>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns22:initiateTask/task:task/task:payload"/>
+          </copy>
+          <copy>
+            <from variable="perguntaTempoEsperaVariable"/>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns22:initiateTask/task:task/task:payload/task:perguntatempoespera"/>
+          </copy>
+          <copy>
+            <from variable="respostaTempoEsperaVariable"/>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns22:initiateTask/task:task/task:payload/task:respostatempoespera"/>
+          </copy>
+          <copy>
+            <from variable="perguntaClassificaoAtendimentoVariable"/>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns22:initiateTask/task:task/task:payload/task:perguntaclassificacaoatendimento"/>
+          </copy>
+          <copy>
+            <from variable="respostaClassificaoAtendimentoVariable"/>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns22:initiateTask/task:task/task:payload/task:respostaclassificacaoatendimento"/>
+          </copy>
+          <copy>
+            <from variable="perguntaSatisfacaoReceitaElectronicaVariable"/>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns22:initiateTask/task:task/task:payload/task:perguntasatisfacaoreceitaelectronica"/>
+          </copy>
+          <copy>
+            <from variable="respostaSatisfacaoReceitaElectronicaVariable"/>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns22:initiateTask/task:task/task:payload/task:respostasatisfacaoreceitaelectronica"/>
+          </copy>
+        </assign>
+        <invoke name="initiateTask_PatientSurveyHumantask1"
+                partnerLink="PatientSurveyHumantask.TaskService_1"
+                operation="initiateTask" portType="ns22:TaskService"
+                inputVariable="initiateTaskInput"
+                outputVariable="initiateTaskResponseMessage"/>
+        <receive name="receiveCompletedTask_PatientSurveyHumantask1"
+                 partnerLink="PatientSurveyHumantask.TaskService_1"
+                 portType="ns22:TaskServiceCallback" operation="onTaskCompleted"
+                 variable="PatientSurveyHumantask1_globalVariable"
+                 createInstance="no"/>
+      </sequence>
+    </scope>
+    <switch name="taskSwitch">
+      <case condition="$PatientSurveyHumantask1_globalVariable.payload/task:systemAttributes/task:outcome = 'OK'">
+        <bpelx:annotation>
+          <bpelx:pattern>Task outcome is OK</bpelx:pattern>
+          <bpelx:general>
+            <bpelx:property name="userLabel">Task outcome is OK</bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence>
+          <assign>
+            <copy>
+              <from variable="PatientSurveyHumantask1_globalVariable"
+                    part="payload"
+                    query="/task:task/task:payload/task:perguntatempoespera"/>
+              <to variable="perguntaTempoEsperaVariable"/>
+            </copy>
+            <copy>
+              <from variable="PatientSurveyHumantask1_globalVariable"
+                    part="payload"
+                    query="/task:task/task:payload/task:respostatempoespera"/>
+              <to variable="respostaTempoEsperaVariable"/>
+            </copy>
+            <copy>
+              <from variable="PatientSurveyHumantask1_globalVariable"
+                    part="payload"
+                    query="/task:task/task:payload/task:perguntaclassificacaoatendimento"/>
+              <to variable="perguntaClassificaoAtendimentoVariable"/>
+            </copy>
+            <copy>
+              <from variable="PatientSurveyHumantask1_globalVariable"
+                    part="payload"
+                    query="/task:task/task:payload/task:respostaclassificacaoatendimento"/>
+              <to variable="respostaClassificaoAtendimentoVariable"/>
+            </copy>
+            <copy>
+              <from variable="PatientSurveyHumantask1_globalVariable"
+                    part="payload"
+                    query="/task:task/task:payload/task:perguntasatisfacaoreceitaelectronica"/>
+              <to variable="perguntaSatisfacaoReceitaElectronicaVariable"/>
+            </copy>
+            <copy>
+              <from variable="PatientSurveyHumantask1_globalVariable"
+                    part="payload"
+                    query="/task:task/task:payload/task:respostasatisfacaoreceitaelectronica"/>
+              <to variable="respostaSatisfacaoReceitaElectronicaVariable"/>
+            </copy>
+          </assign>
+        </sequence>
+      </case>
+    </switch>
+    <assign name="AssignExitRecord">
+      <copy>
+        <from expression="number(bpws:getVariableData('inputVariable','payload','/client:process/client:patientID'))"/>
+        <to variable="exitRecordInputVariable" part="RegistosaidaCollection"
+            query="/ns25:RegistosaidaCollection/ns25:Registosaida/ns25:doenteid"/>
+      </copy>
+      <copy>
+        <from expression="xp20:current-dateTime()"/>
+        <to variable="exitRecordInputVariable" part="RegistosaidaCollection"
+            query="/ns25:RegistosaidaCollection/ns25:Registosaida/ns25:datahora"/>
+      </copy>
+      <copy>
+        <from variable="respostaTempoEsperaVariable"/>
+        <to variable="exitRecordInputVariable" part="RegistosaidaCollection"
+            query="/ns25:RegistosaidaCollection/ns25:Registosaida/ns25:satisfacaotempoespera"/>
+      </copy>
+      <copy>
+        <from variable="respostaClassificaoAtendimentoVariable"/>
+        <to variable="exitRecordInputVariable" part="RegistosaidaCollection"
+            query="/ns25:RegistosaidaCollection/ns25:Registosaida/ns25:classificacaoatendimento"/>
+      </copy>
+      <copy>
+        <from variable="respostaSatisfacaoReceitaElectronicaVariable"/>
+        <to variable="exitRecordInputVariable" part="RegistosaidaCollection"
+            query="/ns25:RegistosaidaCollection/ns25:Registosaida/ns25:satisfacaoreceitaelectronica"/>
+      </copy>
+      <copy>
+        <from variable="PatientSurveyHumantask1_globalVariable" part="payload"
+              query="/task:task/task:userComment/task:comment"/>
+        <to variable="exitRecordInputVariable" part="RegistosaidaCollection"
+            query="/ns25:RegistosaidaCollection/ns25:Registosaida/ns25:comentarios"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeExitRecord" bpelx:invokeAsDetail="no"
+            inputVariable="exitRecordInputVariable"
+            partnerLink="ExitRecordDBAdapter"
+            portType="ns24:ExitRecordDBAdapter_ptt" operation="merge"/>
+    <assign name="TransformExitPatientFile">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/TransformationInformationToExitPatient.xsl', $exitPatientFilePharmacyVariable.body, 'triagesExitPatientVariable.body', $triagesExitPatientVariable.body, 'getEntryRegisterOutputVariable.GetEntryRegisterDBAdapterOutputCollection', $getEntryRegisterOutputVariable.GetEntryRegisterDBAdapterOutputCollection, 'getAllPatientInformationOutputVariable.DoenteCollection', $getAllPatientInformationOutputVariable.DoenteCollection, 'electronicalPrescriptionInputVariable.body', $electronicalPrescriptionInputVariable.body)"/>
+        <to variable="exitPatientFileInputVariable" part="body"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeExitPatientFile"
+            inputVariable="exitPatientFileInputVariable"
+            partnerLink="ExitPatientFileAdapter"
+            portType="ns13:WritePatient_ptt" operation="WritePatient"
+            bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

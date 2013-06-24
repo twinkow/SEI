@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?><receita xmlns:ns1="http://acssdatamodel.pt" xmlns="http://acssdatamodel.pt">
+   <ns1:CabecalhoReceita>
+      <ns1:Id>2d333033343135373931343435333331</ns1:Id>
+      <ns1:NumeroReceita>2d343430393737333337353130383333</ns1:NumeroReceita>
+      <ns1:Data>2013-05-07T05:54:43.071-07:00</ns1:Data>
+      <ns1:Utente>
+         <ns1:Id>741514</ns1:Id>
+         <ns1:Identificao>
+            <ns1:NomeCompleto>Gonçalo Cascais</ns1:NomeCompleto>
+            <ns1:DataNascimento>1930-01-29T00:00:00.000-08:00</ns1:DataNascimento>
+         </ns1:Identificao>
+         <ns1:Morada>
+            <ns1:Rua>Rua Sertório do Monte Pereira</ns1:Rua>
+            <ns1:Porta>7</ns1:Porta>
+            <ns1:Andar>1</ns1:Andar>
+            <ns1:Lugar>A</ns1:Lugar>
+            <ns1:Localidade>Carnaxide</ns1:Localidade>
+            <ns1:DistritoResidencia>Lisboa</ns1:DistritoResidencia>
+            <ns1:ConcelhoResidencia>Oeiras</ns1:ConcelhoResidencia>
+            <ns1:FreguesiaResidencia>
+               <ns1:Descricao>Carnaxide</ns1:Descricao>
+            </ns1:FreguesiaResidencia>
+            <ns1:CodigoPostal>2790-180</ns1:CodigoPostal>
+         </ns1:Morada>
+      </ns1:Utente>
+   </ns1:CabecalhoReceita>
+   <ns1:ListaLinhasReceita>
+      <ns1:LinhaReceita>
+         <ns1:Id>31303637383037373231333335333637</ns1:Id>
+         <ns1:NumeroLinha>07/H/0199/001</ns1:NumeroLinha>
+         <ns1:Medicamento>
+            <ns1:Codigo>13</ns1:Codigo>
+            <ns1:Descricao>Acarbose Bluepharma 50 mg</ns1:Descricao>
+            <ns1:TitularAIM>Bluepharma Genéricos - Comércio de Medicamentos, S.A.</ns1:TitularAIM>
+            <ns1:SubstanciaActiva>Acarbose</ns1:SubstanciaActiva>
+            <ns1:FormaFarmaceutica>Comprimido</ns1:FormaFarmaceutica>
+            <ns1:Embalagem>Embalagem de Acarbose Bluepharma 50 mg. Via Administracao: Via oral</ns1:Embalagem>
+            <ns1:Dosagem>50 mg</ns1:Dosagem>
+         </ns1:Medicamento>
+         <ns1:SubstituivelGenerico>Sim</ns1:SubstituivelGenerico>
+         <ns1:Quantidade>1</ns1:Quantidade>
+         <ns1:EstadoItem>
+            <ns1:Descricao>Autorizado</ns1:Descricao>
+            <ns1:DataInicio>30 de Abril de 2008</ns1:DataInicio>
+         </ns1:EstadoItem>
+         <ns1:DescricaoDispensa>MSRM</ns1:DescricaoDispensa>
+      </ns1:LinhaReceita>
+      <ns1:LinhaReceita>
+         <ns1:Id>33343034363839343832333138323733</ns1:Id>
+         <ns1:NumeroLinha>07/H/0434/002</ns1:NumeroLinha>
+         <ns1:Medicamento>
+            <ns1:Codigo>22</ns1:Codigo>
+            <ns1:Descricao>Acarbose Generis 100 mg</ns1:Descricao>
+            <ns1:TitularAIM>Generis Farmacêutica, S.A.</ns1:TitularAIM>
+            <ns1:SubstanciaActiva>Acarbose</ns1:SubstanciaActiva>
+            <ns1:FormaFarmaceutica>Comprimido</ns1:FormaFarmaceutica>
+            <ns1:Embalagem>Embalagem de Acarbose Generis 100 mg. Via Administracao: Via oral</ns1:Embalagem>
+            <ns1:Dosagem>100 mg</ns1:Dosagem>
+         </ns1:Medicamento>
+         <ns1:SubstituivelGenerico>Sim</ns1:SubstituivelGenerico>
+         <ns1:Quantidade>1</ns1:Quantidade>
+         <ns1:EstadoItem>
+            <ns1:Descricao>Autorizado</ns1:Descricao>
+            <ns1:DataInicio>26 de Maio de 2008</ns1:DataInicio>
+         </ns1:EstadoItem>
+         <ns1:DescricaoDispensa>MSRM</ns1:DescricaoDispensa>
+      </ns1:LinhaReceita>
+   </ns1:ListaLinhasReceita>
+</receita>
