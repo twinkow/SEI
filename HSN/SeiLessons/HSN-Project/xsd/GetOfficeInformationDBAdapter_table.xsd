@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetOfficeInformationDBAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetOfficeInformationDBAdapter" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="GabinetesCollection" type="GabinetesCollection"/>
+   <xs:complexType name="GabinetesCollection">
+      <xs:sequence>
+         <xs:element name="Gabinetes" type="Gabinetes" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Gabinetes">
+      <xs:sequence>
+         <xs:element name="tipoatendimento">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="255"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="capacidade" type="xs:int" minOccurs="0" nillable="true"/>
+         <xs:element name="ocupacao" type="xs:int" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="GetOfficeInformationDBAdapterSelect_ATENDIMENTOInputParameters" type="GetOfficeInformationDBAdapterSelect_ATENDIMENTO"/>
+   <xs:complexType name="GetOfficeInformationDBAdapterSelect_ATENDIMENTO">
+      <xs:sequence>
+         <xs:element name="ATENDIMENTO" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

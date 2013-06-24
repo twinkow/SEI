@@ -1,0 +1,43 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="TriagemCollection" type="TriagemCollection"/>
+   <xs:complexType name="TriagemCollection">
+      <xs:sequence>
+         <xs:element name="Triagem" type="Triagem" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Triagem">
+      <xs:sequence>
+         <xs:element name="triagemid" type="xs:int"/>
+         <xs:element name="doenteid" type="xs:int" minOccurs="0"/>
+         <xs:element name="tipo" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="255"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="nivel" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="255"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="classificacao" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="255"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="datahora" type="xs:dateTime" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="GetAllTriageAssociatedWithPatientDBAdapterSelect_doenteInputParameters" type="GetAllTriageAssociatedWithPatientDBAdapterSelect_doente"/>
+   <xs:complexType name="GetAllTriageAssociatedWithPatientDBAdapterSelect_doente">
+      <xs:sequence>
+         <xs:element name="doente" type="xs:int" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

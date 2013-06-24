@@ -1,0 +1,48 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="InvoiceStatusFTPAdapter"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/SeiLessons/HSN-BO/InvoiceStatusFTPAdapter"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:ns1="urn:netdocs:schemas:document"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/SeiLessons/HSN-BO/InvoiceStatusFTPAdapter"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="urn:netdocs:schemas:message"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+    <plt:partnerLinkType name="GetInvoiceStatus_plt">
+        <plt:role name="GetInvoiceStatus_role">
+            <plt:portType name="tns:GetInvoiceStatus_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+             xmlns:ns1="urn:netdocs:schemas:document" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/SeiLessons/HSN-BO/InvoiceStatusFTPAdapter"
+             xmlns:pc="http://xmlns.oracle.com/pcbpel/" xmlns:imp1="urn:netdocs:schemas:message"
+             xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+            <import namespace="urn:netdocs:schemas:message" schemaLocation="xsd/maindoc/ND-Message-1.0.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+             xmlns:ns1="urn:netdocs:schemas:document" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/SeiLessons/HSN-BO/InvoiceStatusFTPAdapter"
+             xmlns:pc="http://xmlns.oracle.com/pcbpel/" xmlns:imp1="urn:netdocs:schemas:message"
+             xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+            <xsd:import namespace="urn:netdocs:schemas:document" schemaLocation="xsd/maindoc/ND-Invoice-1.0.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+             xmlns:ns1="urn:netdocs:schemas:document" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/SeiLessons/HSN-BO/InvoiceStatusFTPAdapter"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+             xmlns:imp1="urn:netdocs:schemas:message" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+            <xsd:import namespace="urn:netdocs:schemas:document" schemaLocation="xsd/maindoc/ND-DocumentStatus-1.0.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="GetInvoiceStatus_msg">
+        <wsdl:part name="body" element="imp1:message"/>
+    </wsdl:message>
+    <wsdl:portType name="GetInvoiceStatus_ptt">
+        <wsdl:operation name="GetInvoiceStatus">
+            <wsdl:input message="tns:GetInvoiceStatus_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

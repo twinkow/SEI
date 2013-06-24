@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://saude365.pt/exitpatient"
+            targetNamespace="http://saude365.pt/exitpatient"
+            xmlns:triage="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter"
+            xmlns:prescription="http://acssdatamodel.pt"
+            xmlns:relatorio="http://saude365.pt"
+            xmlns:entryregister="http://saude365.pt/registoentrada"
+            elementFormDefault="qualified">
+  <xsd:import schemaLocation="entryregister.xsd"
+              namespace="http://saude365.pt/registoentrada"/>
+  <xsd:import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter"
+              schemaLocation="GetAllTriageAssociatedWithPatientDBAdapter_table.xsd"/>
+  <xsd:import schemaLocation="ACSSDataModel.xsd"
+              namespace="http://acssdatamodel.pt"/>
+  <xsd:element name="exitPatientReport">
+    <xsd:annotation>
+      <xsd:documentation>A sample element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="dateTime" type="xsd:dateTime"/>
+        <xsd:element name="entryReport"
+                     type="entryregister:registoEntradaTipo"/>
+        <xsd:element name="triageReport"
+                     type="triage:TriagemCollection"/>
+        <xsd:element name="electronicalPrescription"
+                     type="prescription:ReceitaType"/>
+        <xsd:element name="localPharmacies" type="farmaciasInformation"
+                     maxOccurs="unbounded" minOccurs="0"/>
+        <xsd:element name="informationalQuiz" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="farmaciasInformation">
+    <xsd:sequence>
+      <xsd:element name="concelho" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="directorTecnico" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="distrito" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="farmaciaName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="freguesia" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="morada" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="telefone" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

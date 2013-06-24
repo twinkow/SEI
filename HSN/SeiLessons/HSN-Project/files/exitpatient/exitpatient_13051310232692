@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?><exitPatientReport xmlns:imp1="http://saude365.pt/exitpatient" xmlns="http://saude365.pt/exitpatient">
+   <imp1:dateTime>2013-05-13T10:23:26.082+01:00</imp1:dateTime>
+   <imp1:entryReport>
+      <ns2:dataHora xmlns:ns2="http://saude365.pt/registoentrada" xmlns="http://saude365.pt/registoentrada">2013-05-13T18:50:00.000+01:00</ns2:dataHora>
+      <ns2:doente xmlns:ns2="http://saude365.pt/registoentrada" xmlns="http://saude365.pt/registoentrada">
+         <ns2:nome>Alexandre Almeida</ns2:nome>
+         <ns2:dataNasc>1990-09-19T00:00:00.000+01:00</ns2:dataNasc>
+         <ns2:id>123456</ns2:id>
+         <ns2:seguroSaude>Sim</ns2:seguroSaude>
+         <ns2:morada>
+            <ns2:codigoPostal>2790-180</ns2:codigoPostal>
+            <ns2:rua>Rua Sertório do Monte Pereira</ns2:rua>
+            <ns2:num>7</ns2:num>
+            <ns2:andar>1</ns2:andar>
+            <ns2:apartamento>A</ns2:apartamento>
+            <ns2:concelho>Oeiras</ns2:concelho>
+            <ns2:distrito>Lisboa</ns2:distrito>
+            <ns2:freguesia>Carnaxide</ns2:freguesia>
+         </ns2:morada>
+      </ns2:doente>
+   </imp1:entryReport>
+   <imp1:triageReport>
+      <top:Triagem xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter">
+         <top:triagemid>1</top:triagemid>
+         <top:doenteid>123456</top:doenteid>
+         <top:tipo>Ortopedia</top:tipo>
+         <top:nivel>verde</top:nivel>
+         <top:classificacao>SUFICIENTE</top:classificacao>
+         <top:datahora>2013-06-13T10:45:00.000+01:00</top:datahora>
+      </top:Triagem>
+   </imp1:triageReport>
+   <imp1:electronicalPrescription>
+      <ns1:CabecalhoReceita xmlns:ns1="http://acssdatamodel.pt" xmlns="http://acssdatamodel.pt">
+         <ns1:Id>36363037323032323236393335363137</ns1:Id>
+         <ns1:NumeroReceita>2d353132393932363137343536383231</ns1:NumeroReceita>
+         <ns1:Data>2013-05-13T10:22:40.254+01:00</ns1:Data>
+         <ns1:Utente>
+            <ns1:Id>123456</ns1:Id>
+            <ns1:Identificao>
+               <ns1:NomeCompleto>Alexandre Almeida</ns1:NomeCompleto>
+               <ns1:DataNascimento>1990-09-19T00:00:00.000+01:00</ns1:DataNascimento>
+            </ns1:Identificao>
+            <ns1:Morada>
+               <ns1:Rua>Rua Sertório do Monte Pereira</ns1:Rua>
+               <ns1:Porta>7</ns1:Porta>
+               <ns1:Andar>1</ns1:Andar>
+               <ns1:Lugar>A</ns1:Lugar>
+               <ns1:Localidade>Carnaxide</ns1:Localidade>
+               <ns1:DistritoResidencia>Lisboa</ns1:DistritoResidencia>
+               <ns1:ConcelhoResidencia>Oeiras</ns1:ConcelhoResidencia>
+               <ns1:FreguesiaResidencia>
+                  <ns1:Descricao>Carnaxide</ns1:Descricao>
+               </ns1:FreguesiaResidencia>
+               <ns1:CodigoPostal>2790-180</ns1:CodigoPostal>
+            </ns1:Morada>
+         </ns1:Utente>
+      </ns1:CabecalhoReceita>
+      <ns1:ListaLinhasReceita xmlns:ns1="http://acssdatamodel.pt" xmlns="http://acssdatamodel.pt">
+         <ns1:LinhaReceita>
+            <ns1:Id>32343338383934383234333438363632</ns1:Id>
+            <ns1:NumeroLinha>07/H/0199/002</ns1:NumeroLinha>
+            <ns1:Medicamento>
+               <ns1:Codigo>10</ns1:Codigo>
+               <ns1:Descricao>Acarbose Bluepharma 100 mg</ns1:Descricao>
+               <ns1:TitularAIM>Bluepharma Genéricos - Comércio de Medicamentos, S.A.</ns1:TitularAIM>
+               <ns1:SubstanciaActiva>Acarbose</ns1:SubstanciaActiva>
+               <ns1:FormaFarmaceutica>Comprimido</ns1:FormaFarmaceutica>
+               <ns1:Embalagem>Embalagem de Acarbose Bluepharma 100 mg. Via Administracao: Via oral</ns1:Embalagem>
+               <ns1:Dosagem>100 mg</ns1:Dosagem>
+            </ns1:Medicamento>
+            <ns1:SubstituivelGenerico>Sim</ns1:SubstituivelGenerico>
+            <ns1:Quantidade>1</ns1:Quantidade>
+            <ns1:EstadoItem>
+               <ns1:Descricao>Autorizado</ns1:Descricao>
+               <ns1:DataInicio>30 de Abril de 2008</ns1:DataInicio>
+            </ns1:EstadoItem>
+            <ns1:DescricaoDispensa>MSRM</ns1:DescricaoDispensa>
+         </ns1:LinhaReceita>
+         <ns1:LinhaReceita>
+            <ns1:Id>33343639303437373135353335303037</ns1:Id>
+            <ns1:NumeroLinha>04/H/0090/001</ns1:NumeroLinha>
+            <ns1:Medicamento>
+               <ns1:Codigo>3</ns1:Codigo>
+               <ns1:Descricao>Ben-U-Ron 1000 mg</ns1:Descricao>
+               <ns1:TitularAIM>Bene Farmacêutica, Lda.</ns1:TitularAIM>
+               <ns1:SubstanciaActiva>Paracetamol</ns1:SubstanciaActiva>
+               <ns1:FormaFarmaceutica>Comprimido</ns1:FormaFarmaceutica>
+               <ns1:Embalagem>Embalagem de Ben-U-Ron 1000 mg. Via Administracao: Via oral</ns1:Embalagem>
+               <ns1:Dosagem>1000 mg</ns1:Dosagem>
+            </ns1:Medicamento>
+            <ns1:SubstituivelGenerico>Não</ns1:SubstituivelGenerico>
+            <ns1:Quantidade>1</ns1:Quantidade>
+            <ns1:EstadoItem>
+               <ns1:Descricao>Autorizado</ns1:Descricao>
+               <ns1:DataInicio>04 de Março de 2005</ns1:DataInicio>
+            </ns1:EstadoItem>
+            <ns1:DescricaoDispensa>MSRM</ns1:DescricaoDispensa>
+         </ns1:LinhaReceita>
+      </ns1:ListaLinhasReceita>
+   </imp1:electronicalPrescription>
+   <imp1:localPharmacies xmlns:ns5="http://saude365.pt" xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/GetTriageInformationDBAdapter">
+      <imp1:concelho>Oeiras</imp1:concelho>
+      <imp1:directorTecnico>Ana Patrícia da Cruz Martins Strubing Gomes</imp1:directorTecnico>
+      <imp1:distrito>Lisboa</imp1:distrito>
+      <imp1:farmaciaName>Farmácia Alegro</imp1:farmaciaName>
+      <imp1:freguesia>Carnaxide</imp1:freguesia>
+      <imp1:morada>C.C. Alegro, Loja 072, Est. Nacional 117, 2610-183 Outurela</imp1:morada>
+      <imp1:telefone>214159898</imp1:telefone>
+   </imp1:localPharmacies>
+</exitPatientReport>

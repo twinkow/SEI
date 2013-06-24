@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:registoentrada xmlns:ns0="http://saude365.pt/registoentrada">
+   <ns0:dataHora>2013-05-11T09:15:20.084-07:00</ns0:dataHora>
+   <ns0:doente>
+      <ns0:nome>Graça Gil</ns0:nome>
+      <ns0:dataNasc>1975-10-16</ns0:dataNasc>
+      <ns0:id>730495</ns0:id>
+      <ns0:seguroSaude>Não</ns0:seguroSaude>
+      <ns0:morada>
+         <ns0:codigoPostal>2790-180</ns0:codigoPostal>
+         <ns0:rua>Rua Sertório do Monte Pereira</ns0:rua>
+         <ns0:num>7</ns0:num>
+         <ns0:andar>1</ns0:andar>
+         <ns0:apartamento>A</ns0:apartamento>
+         <ns0:concelho>Oeiras</ns0:concelho>
+         <ns0:distrito>Lisboa</ns0:distrito>
+         <ns0:freguesia>Carnaxide</ns0:freguesia>
+      </ns0:morada>
+   </ns0:doente>
+</ns0:registoentrada>

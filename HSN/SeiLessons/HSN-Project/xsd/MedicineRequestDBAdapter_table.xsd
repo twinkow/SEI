@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/MedicineRequestDBAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/MedicineRequestDBAdapter" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="MedicamentospedidosCollection" type="MedicamentospedidosCollection"/>
+   <xs:complexType name="MedicamentospedidosCollection">
+      <xs:sequence>
+         <xs:element name="Medicamentospedidos" type="Medicamentospedidos" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Medicamentospedidos">
+      <xs:sequence>
+         <xs:element name="medicamentoid" type="xs:int"/>
+         <xs:element name="quantidadepedida" type="xs:int" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

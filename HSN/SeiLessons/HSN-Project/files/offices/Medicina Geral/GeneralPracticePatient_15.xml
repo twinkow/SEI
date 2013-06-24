@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?><OfficePatientElement xmlns="http://pt.saude365">
+   <patientName>Nuno Almeida</patientName>
+   <patientBirth>1986-09-12T00:00:00.000+01:00</patientBirth>
+   <patientInsurence>Sim</patientInsurence>
+   <patientTreatment>Medicina Geral</patientTreatment>
+   <patientLevel>amarelo</patientLevel>
+   <patientHealed/>
+   <doctorComment/>
+</OfficePatientElement>

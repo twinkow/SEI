@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.61.92"
+          id="shortHistoryType"
+          Package="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask"
+          BeanClass="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask.shortHistoryType"
+          isJavaBased="false">
+  <AccessorAttribute id="task" IsCollection="true"
+                     BeanClass="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask.shortHistoryTaskType"
+                     CollectionBeanClass="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask.shortHistoryTaskType_task_Operations">
+    <Properties>
+      <Property Name="minOccurs" Value="0"/>
+      <Property Name="maxOccurs" Value="2147483640"/>
+      <Property Name="LABEL" Value="Task"/>
+      <Property Name="nillable" Value="false"/>
+      <Property Name="originalName" Value="task"/>
+      <Property Name="targetNamespace"
+                Value="http://xmlns.oracle.com/bpel/workflow/task"/>
+    </Properties>
+  </AccessorAttribute>
+</JavaBean>

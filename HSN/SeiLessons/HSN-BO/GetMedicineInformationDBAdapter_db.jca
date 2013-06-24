@@ -1,0 +1,13 @@
+<adapter-config name="GetMedicineInformationDBAdapter" adapter="Database Adapter" wsdlLocation="GetMedicineInformationDBAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/mydb" UIConnectionName="DbConnection" adapterRef=""/>
+  <endpoint-interaction portType="GetMedicineInformationDBAdapter_ptt" operation="selectByPrimaryKey">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="GetMedicineInformationDBAdapter.Medicamentosstock"/>
+      <property name="QueryName" value="readObject"/>
+      <property name="MappingsMetaDataURL" value="GetMedicineInformationDBAdapter-or-mappings.xml"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

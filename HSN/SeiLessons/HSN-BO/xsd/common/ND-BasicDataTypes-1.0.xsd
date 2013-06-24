@@ -1,0 +1,1670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ================================ -->
+<!-- ===== Basic Data Types  ============ -->
+<!-- ================================ -->
+<!--
+   Module of Basic Data Types
+   Softlimits
+   Version: 1.0
+   Last change: 2008/04/03
+
+   Copyright (C) SOFTLIMITS (2008). All Rights Reserved.
+-->
+<xsd:schema xmlns="urn:netdocs:schemas:document" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:netdocs:schemas:document" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="pt">
+			Módulo para conter os tipos de dados mais simples utilizados nos componentes para documentos. 
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="ND-SharedBasicDataTypes-1.0.xsd"/>
+	<!-- ======================== -->
+	<!-- =====   Simple Types  ====== -->
+	<!-- ======================== -->
+	<xsd:simpleType name="signatureHashSubsetType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Caracteres correspondentes à 1º, 11º, 21ª e 31ª do hash da assinatura</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="percentageType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para percentagens, que permite valores entre 0% e 100%</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:decimal">
+			<xsd:minInclusive value="0.00"/>
+			<xsd:maxInclusive value="100.00"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="vatNumberType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para números de contribuínte</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="50"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="referenceIdType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Identificador de referência</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="nonEmptyString"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="commercialRegistrationType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Número de registo comercial</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="nonEmptyString">
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="commercialRegistrationLocationType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Conservatória do registo comercial</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="nonEmptyString">
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="socialCapitalType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para capital social de uma entidade</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="nonEmptyString">
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="currencyCodeType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para código ISO 4217 das moedas. Exemplos: EUR - Euro; USD - Dolar Americano; GBP - Libra esterlina </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="currencyCodeEnumType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="unitOfMeasureType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para código de unidade de medida, segundo UNECE Recommendation 20 (http://www.unece.org/cefact/recommendations/rec_index.htm). Não valida se o código existe. Exemplos: KGM - Kilo; WTT - Watt </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="nonEmptyString">
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="itemCodeType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para códigos de artigo, que não sejam o GTIN.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="nonEmptyString"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="gtinCodeType">
+		<xsd:restriction base="xsd:integer">
+			<xsd:pattern value="\d{14}|\d{13}|\d{12}|\d{8}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ibanCodeType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de dados para conter IBANs segundo EBS204 Version 3.2 (http://www.ecbs.org/)
+			THE IIBAN FORMAT
+				Up to 34 contiguous alphanumeric characters containing the following consecutive components:
+				- country code : 2 letter country code as specified in ISO 3166, of the country in which the bank/branch servicing the IBAN resides;
+				- check digits : 2 digits calculated as specified in clause 6;
+				- Basic Bank Account Number (BBAN): up to 30 alphanumeric characters, 0-9, A-Z (only uppercase), no separators.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="15"/>
+			<xsd:maxLength value="34"/>
+			<xsd:pattern value="[A-Z][A-Z]\d\d[A-Z0-9]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="nibCodeType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">
+			Tipo de dados para conter NIB.
+			http://www.bportugal.pt/publish/cadernos/transferenciascredito.pdf: O Número de Identificação Bancária é um elemento de informação normalizado, utilizado na identificação de contas bancárias domiciliadas em Portugal. É composto por 21 dígitos, sendo os 4 primeiros o código do banco no qual a conta está domiciliada, seguidos do código do balcão ou agência (4 dígitos,que poderão ser zeros se o banco não utilizar esta referência), do número de conta (11 dígitos) e de dois dígitos de controlo.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="21"/>
+			<xsd:maxLength value="21"/>
+			<xsd:pattern value="\d{21}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="debitAuthorizationType">
+		<xsd:restriction base="nonEmptyString"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="paymentEntityCodeType">
+		<xsd:restriction base="nonEmptyString"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="paymentReferenceType">
+		<xsd:restriction base="nonEmptyString"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="batchNumberInformationType">
+		<xsd:restriction base="nonEmptyString"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="userIdType">
+		<xsd:annotation>
+			<xsd:documentation>Identificação de utilizadores</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="nonEmptyString">
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="userNameType">
+		<xsd:annotation>
+			<xsd:documentation>Nome de utilizadores</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="nonEmptyString">
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="userPassWordType">
+		<xsd:annotation>
+			<xsd:documentation>Password de utilizadores</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="nonEmptyString">
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- ========================== -->
+	<!-- ===== Enumerated Types ====== -->
+	<!-- ========================== -->
+	<xsd:simpleType name="documentStatusEnumType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Possíveis estados dos documentos</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="ACCEPTED">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Documento aceite</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="REJECTED">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Documento rejeitado</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="INTEGRATEDBYRECIPIENT">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Documento integrado pelo destinatário</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="documentFunctionEnumType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Função do documento</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="ADD">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Novo documento a ser adicionado</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CANCEL">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Cancelar um documento anterior. Deve ser refeirodo o documento a cancelar.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CHANGE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Alteração a um documento anterior. Deve ser refeirodo o documento a cancelar.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="purposeEnumType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt"/>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="ORIGINAL">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Documento original.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DUPLICATE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Duplicado do documento</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<!--xsd:enumeration value="OTHER"><xsd:documentation xml:lang="pt">...</xsd:documentation></xsd:annotation></xsd:enumeration-->
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="discountTypeEnumType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de descontos</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="PROMOTIONAL"/>
+			<xsd:enumeration value="FINANCIAL"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="chargeTypeEnumType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Tipo de encargos</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="ALCOHOL">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Imposto de alcool</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AUTHORROYALTIES">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Taxa de direitos de autor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ROYALTIES">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Taxa de royalties</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BEE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Taxa de Lampadas BEE</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TIRE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Taxa de Pneus</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ECOBATTERY">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Taxa de ecopilhas</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ECOVALUE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Taxa de ecovalor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GREENDOT">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Taxa de ponto verde</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ECOLUB">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Taxa de ecolub</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ECOREEE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Taxa de reee</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="FREIGHT">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Custos de transporte - portes</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WAREHOUSING">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Custos de armazenagem</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PALLET">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Custos de paletização</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="OTHERSERVICES">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Outros custos</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="invoiceScopeEnumType">
+		<xsd:annotation>
+			<xsd:documentation>Define o tipo de produtos ou serviços ambrangidos.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="MAINTENANCE">
+				<xsd:annotation>
+					<xsd:documentation>Manutenção</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SERVICES">
+				<xsd:annotation>
+					<xsd:documentation>Serviços</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IMMOVABLE">
+				<xsd:annotation>
+					<xsd:documentation>Imobilizado</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="orderTypeEnumType">
+		<xsd:annotation>
+			<xsd:documentation>Possíveis tipos de encomenda.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="NORMAL">
+				<xsd:annotation>
+					<xsd:documentation>Encomenda normal</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="URGENT">
+				<xsd:annotation>
+					<xsd:documentation>Encomenda urgente</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="RETURN">
+				<xsd:annotation>
+					<xsd:documentation>Devoluções</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BONUS">
+				<xsd:annotation>
+					<xsd:documentation>Ordem de compra bonús</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="COLLECTION">
+				<xsd:annotation>
+					<xsd:documentation>Encomenda coleção</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MANUFACTURER">
+				<xsd:annotation>
+					<xsd:documentation>Encomenda elaborada pelo fabricante</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CROSSDOCKING">
+				<xsd:annotation>
+					<xsd:documentation>Encomenda cross docking</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="referenceEnumType">
+		<xsd:annotation>
+			<xsd:documentation>Tipos de referências</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="INVOICE">
+				<xsd:annotation>
+					<xsd:documentation>Factura comercial</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CREDITNOTE">
+				<xsd:annotation>
+					<xsd:documentation>Nota de crédito</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DEBITNOTE">
+				<xsd:annotation>
+					<xsd:documentation>Nota de débito</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ORDER">
+				<xsd:annotation>
+					<xsd:documentation>Encomenda</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ORDERRESPONSE">
+				<xsd:annotation>
+					<xsd:documentation>Resposta à encomenda</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DESPATCHADVICE">
+				<xsd:annotation>
+					<xsd:documentation>Guia de remessa</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="RECEIPTADVICE">
+				<xsd:annotation>
+					<xsd:documentation>Guia de recepção</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="COSTCENTER">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Centro de Custo</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GOODSRETURN">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Guia de Devolução</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="INVOICETYPE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Tipo de Factura</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="RMS">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Requisição de Material e Serviços (Requisition Materials and Services)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SRM">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Gestão de Relacionamento com Fornecedor (supplier relationship management)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UBS-docDP">
+				<xsd:annotation>
+					<xsd:documentation>UBS printinterface document</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UBS-printinterface">
+				<xsd:annotation>
+					<xsd:documentation>UBS printinterface message</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ENTITY">
+				<xsd:annotation>
+					<xsd:documentation>Entidade</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="USER">
+				<xsd:annotation>
+					<xsd:documentation>Utilizador</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CONSUMER">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Utilizador do tipo consumidor final</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EPALINVOICEFLATFILE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Ficheiro de facturas da Epal</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UBSCONSUMERREGISTRATIONREQUEST">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Pedido de registo de consumidores do UBS</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MTR">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Matrícula do Contentor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CONTRACTID">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Número de contrato</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CONTRACTCONSUMERID">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">ID de localização do consumidor relativo ao contrato</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CLIENTNUMBER">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Número de cliente pelo fornecedor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="documentEnumType">
+		<xsd:annotation>
+			<xsd:documentation>Tipos de documento</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="sharedDocumentEnumType">
+			<xsd:enumeration value="INVOICE">
+				<xsd:annotation>
+					<xsd:documentation>Factura comercial</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CREDITNOTE">
+				<xsd:annotation>
+					<xsd:documentation>Nota de crédito</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DEBITNOTE">
+				<xsd:annotation>
+					<xsd:documentation>Nota de débito</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ORDER">
+				<xsd:annotation>
+					<xsd:documentation>Encomenda</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ORDERRESPONSE">
+				<xsd:annotation>
+					<xsd:documentation>Resposta à encomenda</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DESPATCHADVICE">
+				<xsd:annotation>
+					<xsd:documentation>Guia de remessa</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="RECEIPTADVICE">
+				<xsd:annotation>
+					<xsd:documentation>Guia de recepção</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UBS-docDP">
+				<xsd:annotation>
+					<xsd:documentation>UBS printinterface document</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UBS-printinterface">
+				<xsd:annotation>
+					<xsd:documentation>UBS printinterface message</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ENTITY">
+				<xsd:annotation>
+					<xsd:documentation>Entidade</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="USER">
+				<xsd:annotation>
+					<xsd:documentation>Utilizador</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CONSUMER">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Utilizador do tipo consumidor final</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EPALINVOICEFLATFILE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Ficheiro de facturas da Epal</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UBSCONSUMERREGISTRATIONREQUEST">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Pedido de registo de consumidores do UBS</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="deliveryRelatedDateEnumType">
+		<xsd:annotation>
+			<xsd:documentation>Tipos de datas relativas a entregas</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="documentDateEnumType">
+			<xsd:enumeration value="DELIVERY">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora de entrega</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DELIVERYREQUESTED">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora de entrega desejada</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DELIVERYLATEST">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora limite de entrega</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DEPARTURE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora de envio</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="documentDateEnumType">
+		<xsd:annotation>
+			<xsd:documentation>Tipos de datas relativas ao documento</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="DUE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data de vencimento do documento</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PREPAYMENT">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data de recebimento do pagamento caso seja antecipado</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DELIVERY">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora de entrega</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DELIVERYREQUESTED">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora de entrega desejada</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DELIVERYLATEST">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora limite de entrega</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DEPARTURE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora de envio</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CUSTOMERAVAILABLE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora de colocação à disposição</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LOADDATE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora de carregamento da encomenda</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UNLOADDATE">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="pt">Data e hora prevista de entrega da encomenda</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="itemDateEnumType">
+		<xsd:annotation>
+			<xsd:documentation>Tipos de datas relativas a artigos</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="VALIDITYEND">
+				<xsd:annotation>
+					<xsd:documentation>Data de validade</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="documentLineDateEnumType">
+		<xsd:annotation>
+			<xsd:documentation>Tipos de datas para linhas de documentos</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="documentDateEnumType itemDateEnumType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="currencyCodeEnumType">
+		<xsd:annotation>
+			<xsd:documentation>Lista de códigos ISO 4217 das moedas.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="ALL">
+				<xsd:annotation>
+					<xsd:documentation>Lek (Albania)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DZD">
+				<xsd:annotation>
+					<xsd:documentation>Algerian Dinar (Algeria)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AZN">
+				<xsd:annotation>
+					<xsd:documentation>Azerbaijanian Manat (Azerbaijan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ARS">
+				<xsd:annotation>
+					<xsd:documentation>Argentine Peso (Argentina)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AUD">
+				<xsd:annotation>
+					<xsd:documentation>Australian Dollar (Australia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BSD">
+				<xsd:annotation>
+					<xsd:documentation>Bahamian Dollar (Bahamas)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BHD">
+				<xsd:annotation>
+					<xsd:documentation>Bahraini Dinar (Bahrain)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BDT">
+				<xsd:annotation>
+					<xsd:documentation>Taka (Bangladesh)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AMD">
+				<xsd:annotation>
+					<xsd:documentation>Armenian Dram (Armenia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BBD">
+				<xsd:annotation>
+					<xsd:documentation>Barbados Dollar (Barbados)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BMD">
+				<xsd:annotation>
+					<xsd:documentation>Bermudian Dollar (customarily known as Bermuda Dollar)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BTN">
+				<xsd:annotation>
+					<xsd:documentation>Ngultrum (Bhutan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BOB">
+				<xsd:annotation>
+					<xsd:documentation>Boliviano (Bolivia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BWP">
+				<xsd:annotation>
+					<xsd:documentation>Pula (Botswana)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BZD">
+				<xsd:annotation>
+					<xsd:documentation>Belize Dollar (Belize)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SBD">
+				<xsd:annotation>
+					<xsd:documentation>Solomon Islands Dollar (Solomon Islands)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BND">
+				<xsd:annotation>
+					<xsd:documentation>Brunei Dollar (Brunei)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MMK">
+				<xsd:annotation>
+					<xsd:documentation>Kyat (Myanmar)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BIF">
+				<xsd:annotation>
+					<xsd:documentation>Burundi Franc (Burundi)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KHR">
+				<xsd:annotation>
+					<xsd:documentation>Riel (Cambodia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CAD">
+				<xsd:annotation>
+					<xsd:documentation>Canadian Dollar (Canada)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CVE">
+				<xsd:annotation>
+					<xsd:documentation>Cape Verde Escudo (Cape Verde)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KYD">
+				<xsd:annotation>
+					<xsd:documentation>Cayman Islands Dollar (Cayman Islands)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LKR">
+				<xsd:annotation>
+					<xsd:documentation>Sri Lanka Rupee (Sri Lanka)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CLP">
+				<xsd:annotation>
+					<xsd:documentation>Chilean Peso (Chile)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CNY">
+				<xsd:annotation>
+					<xsd:documentation>Yuan Renminbi (People's Republic of China)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="COP">
+				<xsd:annotation>
+					<xsd:documentation>Colombian Peso (Colombia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KMF">
+				<xsd:annotation>
+					<xsd:documentation>Comoro Franc (Comoros)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CRC">
+				<xsd:annotation>
+					<xsd:documentation>Costa Rican Colon (Costa Rica)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="HRK">
+				<xsd:annotation>
+					<xsd:documentation>Croatian Kuna (Croatia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CUP">
+				<xsd:annotation>
+					<xsd:documentation>Cuban Peso (Cuba)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CYP">
+				<xsd:annotation>
+					<xsd:documentation>Cyprus Pound (Cyprus)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CZK">
+				<xsd:annotation>
+					<xsd:documentation>Czech Koruna (Czech Republic)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DKK">
+				<xsd:annotation>
+					<xsd:documentation>Danish Krone (Denmark, Faroe Islands)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DOP">
+				<xsd:annotation>
+					<xsd:documentation>Dominican Peso (Dominican Republic)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SVC">
+				<xsd:annotation>
+					<xsd:documentation>El Salvador Colon</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ETB">
+				<xsd:annotation>
+					<xsd:documentation>Ethiopian Birr (Ethiopia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ERN">
+				<xsd:annotation>
+					<xsd:documentation>Nakfa (Eritrea)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EEK">
+				<xsd:annotation>
+					<xsd:documentation>Kroon (Estonia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="FKP">
+				<xsd:annotation>
+					<xsd:documentation>Falkland Islands Pound (Falkland Islands)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="FJD">
+				<xsd:annotation>
+					<xsd:documentation>Fiji Dollar (Fiji)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DJF">
+				<xsd:annotation>
+					<xsd:documentation>Djibouti Franc (Djibouti)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GMD">
+				<xsd:annotation>
+					<xsd:documentation>Dalasi (Gambia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GHC">
+				<xsd:annotation>
+					<xsd:documentation>Cedi (Ghana)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GIP">
+				<xsd:annotation>
+					<xsd:documentation>Gibraltar Pound (Gibraltar)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GTQ">
+				<xsd:annotation>
+					<xsd:documentation>Quetzal (Guatemala                                                                                                                                                                                                                                                                         </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GNF">
+				<xsd:annotation>
+					<xsd:documentation>Guinea Franc (Guinea)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GYD">
+				<xsd:annotation>
+					<xsd:documentation>Guyana Dollar (Guyana)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="HTG">
+				<xsd:annotation>
+					<xsd:documentation>Haiti Gourde (Haiti)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="HNL">
+				<xsd:annotation>
+					<xsd:documentation>Lempira (Honduras)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="HKD">
+				<xsd:annotation>
+					<xsd:documentation>Hong Kong Dollar (Hong Kong)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="HUF">
+				<xsd:annotation>
+					<xsd:documentation>Forint (Hungary)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ISK">
+				<xsd:annotation>
+					<xsd:documentation>Iceland Krona (Iceland)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="INR">
+				<xsd:annotation>
+					<xsd:documentation>Indian Rupee (Bhutan, India)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IDR">
+				<xsd:annotation>
+					<xsd:documentation>Rupiah (Indonesia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IRR">
+				<xsd:annotation>
+					<xsd:documentation>Iranian Rial (Iran)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IQD">
+				<xsd:annotation>
+					<xsd:documentation>Iraqi Dinar (Iraq)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ILS">
+				<xsd:annotation>
+					<xsd:documentation>New Israeli Shekel (Israel)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="JMD">
+				<xsd:annotation>
+					<xsd:documentation>Jamaican Dollar (Jamaica)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="JPY">
+				<xsd:annotation>
+					<xsd:documentation>Yen (Japan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KZT">
+				<xsd:annotation>
+					<xsd:documentation>Tenge (Kazakhstan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="JOD">
+				<xsd:annotation>
+					<xsd:documentation>Jordanian Dinar (Jordan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KES">
+				<xsd:annotation>
+					<xsd:documentation>Kenyan Shilling (Kenya)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KPW">
+				<xsd:annotation>
+					<xsd:documentation>North Korean Won (North Korea)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KRW">
+				<xsd:annotation>
+					<xsd:documentation>Won (South Korea)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KWD">
+				<xsd:annotation>
+					<xsd:documentation>Kuwaiti Dinar (Kuwait)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KGS">
+				<xsd:annotation>
+					<xsd:documentation>Som (Kyrgyzstan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LAK">
+				<xsd:annotation>
+					<xsd:documentation>Kip (Laos)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LBP">
+				<xsd:annotation>
+					<xsd:documentation>Lebanese Pound (Lebanon)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LSL">
+				<xsd:annotation>
+					<xsd:documentation>Loti (Lesotho)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LVL">
+				<xsd:annotation>
+					<xsd:documentation>Latvian Lats (Latvia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LRD">
+				<xsd:annotation>
+					<xsd:documentation>Liberian Dollar (Liberia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LYD">
+				<xsd:annotation>
+					<xsd:documentation>Libyan Dinar (Libya)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LTL">
+				<xsd:annotation>
+					<xsd:documentation>Lithuanian Litas (Lithuania)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MOP">
+				<xsd:annotation>
+					<xsd:documentation>Pataca (Macau)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MWK">
+				<xsd:annotation>
+					<xsd:documentation>Kwacha (Malawi)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MYR">
+				<xsd:annotation>
+					<xsd:documentation>Malaysian Ringgit (Malaysia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MVR">
+				<xsd:annotation>
+					<xsd:documentation>Rufiyaa (Maldives)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MTL">
+				<xsd:annotation>
+					<xsd:documentation>Maltese Lira (Malta)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MRO">
+				<xsd:annotation>
+					<xsd:documentation>Ouguiya (Mauritania)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MUR">
+				<xsd:annotation>
+					<xsd:documentation>Mauritius Rupee (Mauritius)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MXN">
+				<xsd:annotation>
+					<xsd:documentation>Mexican Peso (Mexico)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MNT">
+				<xsd:annotation>
+					<xsd:documentation>Tugrik (Mongolia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MDL">
+				<xsd:annotation>
+					<xsd:documentation>Moldovan Leu (Moldova)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MAD">
+				<xsd:annotation>
+					<xsd:documentation>Moroccan Dirham (Morocco, Western Sahara)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="OMR">
+				<xsd:annotation>
+					<xsd:documentation>Rial Omani (Oman)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NAD">
+				<xsd:annotation>
+					<xsd:documentation>Namibian Dollar (Namibia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NPR">
+				<xsd:annotation>
+					<xsd:documentation>Nepalese Rupee (Nepal)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ANG">
+				<xsd:annotation>
+					<xsd:documentation>Netherlands Antillian Guilder (Netherlands Antilles)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AWG">
+				<xsd:annotation>
+					<xsd:documentation>Aruban Guilder (Aruba)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="VUV">
+				<xsd:annotation>
+					<xsd:documentation>Vatu (Vanuatu)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NZD">
+				<xsd:annotation>
+					<xsd:documentation>New Zealand Dollar (Cook Islands, New Zealand, Niue, Pitcairn, Tokelau)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NIO">
+				<xsd:annotation>
+					<xsd:documentation>Cordoba Oro (Nicaragua)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NGN">
+				<xsd:annotation>
+					<xsd:documentation>Naira (Nigeria)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NOK">
+				<xsd:annotation>
+					<xsd:documentation>Norwegian Krone (Norway)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PKR">
+				<xsd:annotation>
+					<xsd:documentation>Pakistan Rupee (Pakistan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PAB">
+				<xsd:annotation>
+					<xsd:documentation>Balboa (Panama)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PGK">
+				<xsd:annotation>
+					<xsd:documentation>Kina (Papua New Guinea)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PYG">
+				<xsd:annotation>
+					<xsd:documentation>Guarani (Paraguay)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PEN">
+				<xsd:annotation>
+					<xsd:documentation>Nuevo Sol (Peru)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PHP">
+				<xsd:annotation>
+					<xsd:documentation>Philippine Peso (Philippines)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GWP">
+				<xsd:annotation>
+					<xsd:documentation>Guinea-Bissau Peso</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="QAR">
+				<xsd:annotation>
+					<xsd:documentation>Qatari Rial (Qatar)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="RUB">
+				<xsd:annotation>
+					<xsd:documentation>Russian Ruble (Russia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="RWF">
+				<xsd:annotation>
+					<xsd:documentation>Rwanda Franc (Rwanda)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SHP">
+				<xsd:annotation>
+					<xsd:documentation>Saint Helena Pound (Saint Helena)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="STD">
+				<xsd:annotation>
+					<xsd:documentation>Dobra (São Tomé and Príncipe)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SAR">
+				<xsd:annotation>
+					<xsd:documentation>Saudi Riyal (Saudi Arabia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SCR">
+				<xsd:annotation>
+					<xsd:documentation>Seychelles Rupee (Seychelles)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SLL">
+				<xsd:annotation>
+					<xsd:documentation>Leone (Sierra Leone)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SGD">
+				<xsd:annotation>
+					<xsd:documentation>Singapore Dollar (Singapore)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SKK">
+				<xsd:annotation>
+					<xsd:documentation>Slovak Koruna (Slovakia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="VND">
+				<xsd:annotation>
+					<xsd:documentation>Dong (Vietnam)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SIT">
+				<xsd:annotation>
+					<xsd:documentation>Tolar (Slovenia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SOS">
+				<xsd:annotation>
+					<xsd:documentation>Somali Shilling (Somalia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ZAR">
+				<xsd:annotation>
+					<xsd:documentation>Rand (Lesotho, Namibia, South Africa)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ZWD">
+				<xsd:annotation>
+					<xsd:documentation>Zimbabwe Dollar (Zimbabwe)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SDD">
+				<xsd:annotation>
+					<xsd:documentation>Sudanese Dinar (Sudan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SZL">
+				<xsd:annotation>
+					<xsd:documentation>Lilangeni (Swaziland)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SEK">
+				<xsd:annotation>
+					<xsd:documentation>Swedish Krona (Sweden)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CHF">
+				<xsd:annotation>
+					<xsd:documentation>Swiss Franc (Switzerland)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SYP">
+				<xsd:annotation>
+					<xsd:documentation>Syrian Pound (Syria)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="THB">
+				<xsd:annotation>
+					<xsd:documentation>Baht (Thailand)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TOP">
+				<xsd:annotation>
+					<xsd:documentation>Pa'anga (Tonga)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TTD">
+				<xsd:annotation>
+					<xsd:documentation>Trinidad and Tobago Dollar (Trinidad and Tobago)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AED">
+				<xsd:annotation>
+					<xsd:documentation>UAE Dirham (United Arab Emirates)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TND">
+				<xsd:annotation>
+					<xsd:documentation>Tunisian Dinar (Tunisia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TMM">
+				<xsd:annotation>
+					<xsd:documentation>Manat (Turkmenistan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UGX">
+				<xsd:annotation>
+					<xsd:documentation>Uganda Shilling (Uganda)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MKD">
+				<xsd:annotation>
+					<xsd:documentation>Denar (Macedonia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EGP">
+				<xsd:annotation>
+					<xsd:documentation>Egyptian Pound (Egypt)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GBP">
+				<xsd:annotation>
+					<xsd:documentation>Pound Sterling (United Kingdom)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TZS">
+				<xsd:annotation>
+					<xsd:documentation>Tanzanian Shilling (Tanzania)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="USD">
+				<xsd:annotation>
+					<xsd:documentation>US Dollar (American Samoa, British Indian Ocean Territory, Ecuador, El Salvador, Guam, Haiti, Marshall Islands, Micronesia, Northern Mariana Islands, Palau, Panama, Palau, East Timor, Turks and Caicos Islands, United States, Virgin Islands, Western Samoa)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UYU">
+				<xsd:annotation>
+					<xsd:documentation>Peso Uruguayo (Uruguay)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UZS">
+				<xsd:annotation>
+					<xsd:documentation>Uzbekistan Som (Uzbekistan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="VEB">
+				<xsd:annotation>
+					<xsd:documentation>Bolivar (Venezuela)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WST">
+				<xsd:annotation>
+					<xsd:documentation>Tala (Samoa)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="YER">
+				<xsd:annotation>
+					<xsd:documentation>Yemeni Rial (Yemen)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CSD">
+				<xsd:annotation>
+					<xsd:documentation>Serbian Dinar (Serbia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ZMK">
+				<xsd:annotation>
+					<xsd:documentation>Kwacha (Zambia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TWD">
+				<xsd:annotation>
+					<xsd:documentation>New Taiwan Dollar (Taiwan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MZM">
+				<xsd:annotation>
+					<xsd:documentation>Metical (Mozambique)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="RON">
+				<xsd:annotation>
+					<xsd:documentation>New Leu (Romania)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TRY">
+				<xsd:annotation>
+					<xsd:documentation>New Turkish Lira (Turkey)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XAF">
+				<xsd:annotation>
+					<xsd:documentation>CFA Franc BEAC (Cameroon, Central African Republic, Congo, Chad, Equatorial Guinea, Gabon)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XCD">
+				<xsd:annotation>
+					<xsd:documentation>East Caribbean Dollar (Anguilla, Antigua and Barbuda, Dominica, Grenada, Montserrat, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XOF">
+				<xsd:annotation>
+					<xsd:documentation>CFA Franc BCEAO (Benin, Burkina Faso, Côte d'Ivoire, Guinea-Bissau, Mali, Niger, Senegal, Togo)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XPF">
+				<xsd:annotation>
+					<xsd:documentation>CFP franc (French Polynesia, New Caledonia, Wallis and Futuna)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XBA">
+				<xsd:annotation>
+					<xsd:documentation>European Composite Unit (EURCO)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XBB">
+				<xsd:annotation>
+					<xsd:documentation>European Monetary Unit (E.M.U.-6)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XBC">
+				<xsd:annotation>
+					<xsd:documentation>European Unit of Account 9 (E.U.A.-9)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XBD">
+				<xsd:annotation>
+					<xsd:documentation>European Unit of Account 17 (E.U.A.-17)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XAU">
+				<xsd:annotation>
+					<xsd:documentation>Gold (one Troy ounce)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XDR">
+				<xsd:annotation>
+					<xsd:documentation>Special Drawing Rights (IMF)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XAG">
+				<xsd:annotation>
+					<xsd:documentation>Silver (one Troy ounce)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XPT">
+				<xsd:annotation>
+					<xsd:documentation>Platinum (one Troy ounce)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XTS">
+				<xsd:annotation>
+					<xsd:documentation>Code reserved for testing purposes                                                                                                                                                                                                                                                         </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XPD">
+				<xsd:annotation>
+					<xsd:documentation>Palladium (one Troy ounce)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SRD">
+				<xsd:annotation>
+					<xsd:documentation>Surinam Dollar (Suriname)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MGA">
+				<xsd:annotation>
+					<xsd:documentation>Malagasy Ariary (Madagascar)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="COU">
+				<xsd:annotation>
+					<xsd:documentation>Unidad de Valor Real (Colombia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AFN">
+				<xsd:annotation>
+					<xsd:documentation>Afghani (Afghanistan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TJS">
+				<xsd:annotation>
+					<xsd:documentation>Somoni (Tajikistan)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AOA">
+				<xsd:annotation>
+					<xsd:documentation>Kwanza (Angola)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BYR">
+				<xsd:annotation>
+					<xsd:documentation>Belarussian Ruble (Belarus)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BGN">
+				<xsd:annotation>
+					<xsd:documentation>Bulgarian Lev (Bulgaria)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CDF">
+				<xsd:annotation>
+					<xsd:documentation>Franc Congolais (Democratic Republic of Congo)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BAM">
+				<xsd:annotation>
+					<xsd:documentation>Convertible Marks (Bosnia and Herzegovina)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EUR">
+				<xsd:annotation>
+					<xsd:documentation>Euro (Andorra, Austria, Belgium, Finland, France, French Guiana, French Southern Territories, Germany, Greece, Guadeloupe, Ireland, Italy, Luxembourg, Martinique, Mayotte, Monaco, Montenegro, Netherlands, Portugal, Reunion, Saint Pierre and Miquelon, San Marino, Spain, Vatican City)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MXV">
+				<xsd:annotation>
+					<xsd:documentation>Mexican Unidad de Inversion (UDI)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UAH">
+				<xsd:annotation>
+					<xsd:documentation>Hryvnia (Ukraine)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GEL">
+				<xsd:annotation>
+					<xsd:documentation>Lari (Georgia)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BOV">
+				<xsd:annotation>
+					<xsd:documentation>Bolivian Mvdol (Funds code)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PLN">
+				<xsd:annotation>
+					<xsd:documentation>Zloty (Poland)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BRL">
+				<xsd:annotation>
+					<xsd:documentation>Brazilian Real (Brazil)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CLF">
+				<xsd:annotation>
+					<xsd:documentation>Unidades de formento (Funds code)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XFO">
+				<xsd:annotation>
+					<xsd:documentation>Gold-franc (Special settlement currency)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="XFU">
+				<xsd:annotation>
+					<xsd:documentation>UIC franc (Special settlement currency)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="VEF">
+				<xsd:annotation>
+					<xsd:documentation>Bolívar Fuerte </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="languageCodeTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation>Lista de códigos de idioma</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="pt">
+				<xsd:annotation>
+					<xsd:documentation>Português</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="en">
+				<xsd:annotation>
+					<xsd:documentation>Inglês</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="userRoleTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation>Lista de perfis de utilizador</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="editDocuments"/>
+			<xsd:enumeration value="viewDocuments"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="companySubDivisionTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation>Tipos de divisões organicas nas empresas</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="DEPARTMENT"/>
+			<xsd:enumeration value="STORE"/>
+			<xsd:enumeration value="WHEREHOUSE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="documentPlatformTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation>Tipos de plataformas do documento (Electrónico / Papel)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="ELECTRONIC"/>
+			<xsd:enumeration value="PAPER"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- ======================== -->
+	<!-- ===== Attribute groups ====== -->
+	<!-- ======================== -->
+	<xsd:attributeGroup name="documentAttributesGroup">
+		<xsd:annotation>
+			<xsd:documentation>Grupo de atributos comuns à maior parte dos documentos</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="documentNumber" type="referenceIdType" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="pt">Número do documento</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="documentDate" type="xsd:date" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="pt">Data do documento</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="schemaVersion" type="nonEmptyString" use="required" fixed="1.0">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="pt">Versão do schema utilizada</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="purpose" type="purposeEnumType" use="optional" default="ORIGINAL">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="pt">Documento original, duplicado ...</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="function" type="documentFunctionEnumType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="pt">Novo documento, actualização ou cancelamento de um documento anterior</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="documentPlatform" type="documentPlatformTypeEnum" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="pt">Tipo de plataforma do documento (Electrónico / Papel)</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+</xsd:schema>

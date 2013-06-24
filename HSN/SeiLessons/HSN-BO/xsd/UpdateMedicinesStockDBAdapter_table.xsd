@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateMedicinesStockDBAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateMedicinesStockDBAdapter" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="MedicamentosstockCollection" type="MedicamentosstockCollection"/>
+   <xs:complexType name="MedicamentosstockCollection">
+      <xs:sequence>
+         <xs:element name="Medicamentosstock" type="Medicamentosstock" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Medicamentosstock">
+      <xs:sequence>
+         <xs:element name="medicamentoid" type="xs:int"/>
+         <xs:element name="quantidadeexistente" type="xs:int" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

@@ -1,0 +1,17 @@
+<adapter-config name="ReceiveMedicineStock" adapter="File Adapter" wsdlLocation="ReceiveMedicineStock.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter" UIincludeWildcard="*.txt"/>
+  <endpoint-activation portType="ReadFile_ptt" operation="ReadFile">
+    <activation-spec className="oracle.tip.adapter.file.inbound.FileActivationSpec">
+      <property name="DeleteFile" value="true"/>
+      <property name="MinimumAge" value="0"/>
+      <property name="PhysicalDirectory" value="/home/oracle/jdeveloper/mywork/SeiLessons/HSN-PopulateMedicineStock/inputfile"/>
+      <property name="Recursive" value="true"/>
+      <property name="PollingFrequency" value="5"/>
+      <property name="PhysicalArchiveDirectory" value="/home/oracle/jdeveloper/mywork/SeiLessons/HSN-PopulateMedicineStock/archive"/>
+      <property name="IncludeFiles" value=".*\.txt"/>
+      <property name="UseHeaders" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

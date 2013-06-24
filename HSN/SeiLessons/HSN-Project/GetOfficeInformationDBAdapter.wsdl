@@ -1,0 +1,25 @@
+<?binding.jca GetOfficeInformationDBAdapter_db.jca?>
+<wsdl:definitions name="GetOfficeInformationDBAdapter" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetOfficeInformationDBAdapter" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetOfficeInformationDBAdapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetOfficeInformationDBAdapter">
+    <plt:partnerLinkType name="GetOfficeInformationDBAdapter_plt">
+        <plt:role name="GetOfficeInformationDBAdapter_role">
+            <plt:portType name="tns:GetOfficeInformationDBAdapter_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetOfficeInformationDBAdapter" schemaLocation="xsd/GetOfficeInformationDBAdapter_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="GetOfficeInformationDBAdapterSelect_inputParameters">
+        <wsdl:part name="GetOfficeInformationDBAdapterSelect_inputParameters" element="top:GetOfficeInformationDBAdapterSelect_ATENDIMENTOInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="GabinetesCollection_msg">
+        <wsdl:part name="GabinetesCollection" element="top:GabinetesCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="GetOfficeInformationDBAdapter_ptt">
+        <wsdl:operation name="GetOfficeInformationDBAdapterSelect">
+            <wsdl:input message="tns:GetOfficeInformationDBAdapterSelect_inputParameters"/>
+            <wsdl:output message="tns:GabinetesCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

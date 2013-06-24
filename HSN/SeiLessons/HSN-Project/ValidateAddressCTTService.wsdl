@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions
+     name="ValidateAddressCTTService"
+     targetNamespace="http://saude365.pt/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://saude365.pt/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    >
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://saude365.pt/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://saude365.pt/">
+            <xsd:complexType name="validateAddressCTT">
+                <xsd:sequence>
+                    <xsd:element name="postCode" type="xsd:string"/>
+                    <xsd:element name="street" type="xsd:string"/>
+                    <xsd:element name="number" type="xsd:string"/>
+                    <xsd:element name="floor" type="xsd:string"/>
+                    <xsd:element name="apartment" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="validateAddressCTT" type="tns:validateAddressCTT"/>
+            <xsd:complexType name="validateAddressCTTResponse">
+                <xsd:sequence>
+                    <xsd:element name="return" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="validateAddressCTTResponse" type="tns:validateAddressCTTResponse"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="validateAddressCTTInput">
+        <wsdl:part name="parameters" element="tns:validateAddressCTT"/>
+    </wsdl:message>
+    <wsdl:message name="validateAddressCTTOutput">
+        <wsdl:part name="parameters" element="tns:validateAddressCTTResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ValidateAddressCTT">
+        <wsdl:operation name="validateAddressCTT">
+            <wsdl:input message="tns:validateAddressCTTInput" xmlns:ns1="http://www.w3.org/2006/05/addressing/wsdl"
+                 ns1:Action=""/>
+            <wsdl:output message="tns:validateAddressCTTOutput" xmlns:ns1="http://www.w3.org/2006/05/addressing/wsdl"
+                 ns1:Action=""/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ValidateAddressCTTSoapHttp" type="tns:ValidateAddressCTT">
+        <soap12:binding style="document" transport="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
+        <wsdl:operation name="validateAddressCTT">
+            <soap12:operation soapAction="" soapActionRequired="false"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ValidateAddressCTTService">
+        <wsdl:port name="ValidateAddressCTTSoap12HttpPort" binding="tns:ValidateAddressCTTSoapHttp">
+            <soap12:address location="http://localhost:7001/SeiLessons-HSN-Project-context-root/ValidateAddressCTTSoap12HttpPort"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?><receita xmlns:ns1="http://acssdatamodel.pt" xmlns="http://acssdatamodel.pt">
+   <ns1:CabecalhoReceita>
+      <ns1:Id>33313637303330303134383939393835</ns1:Id>
+      <ns1:NumeroReceita>32353431333538383038393131323133</ns1:NumeroReceita>
+      <ns1:Data>2013-05-13T10:37:56.991+01:00</ns1:Data>
+      <ns1:Utente>
+         <ns1:Id>543344</ns1:Id>
+         <ns1:Identificao>
+            <ns1:NomeCompleto>Nuno Almeida</ns1:NomeCompleto>
+            <ns1:DataNascimento>1986-09-12T00:00:00.000+01:00</ns1:DataNascimento>
+         </ns1:Identificao>
+         <ns1:Morada>
+            <ns1:Rua>Rua José Duro</ns1:Rua>
+            <ns1:Porta>2</ns1:Porta>
+            <ns1:Andar>6</ns1:Andar>
+            <ns1:Lugar>F</ns1:Lugar>
+            <ns1:Localidade>São João de Brito</ns1:Localidade>
+            <ns1:DistritoResidencia>Lisboa</ns1:DistritoResidencia>
+            <ns1:ConcelhoResidencia>Lisboa</ns1:ConcelhoResidencia>
+            <ns1:FreguesiaResidencia>
+               <ns1:Descricao>São João de Brito</ns1:Descricao>
+            </ns1:FreguesiaResidencia>
+            <ns1:CodigoPostal>1700-261</ns1:CodigoPostal>
+         </ns1:Morada>
+      </ns1:Utente>
+   </ns1:CabecalhoReceita>
+   <ns1:ListaLinhasReceita>
+      <ns1:LinhaReceita>
+         <ns1:Id>2d373431313634363232363430343538</ns1:Id>
+         <ns1:NumeroLinha>G32/94</ns1:NumeroLinha>
+         <ns1:Medicamento>
+            <ns1:Codigo>6</ns1:Codigo>
+            <ns1:Descricao>Amoxicilina Generis 1000 mg</ns1:Descricao>
+            <ns1:TitularAIM>Generis Farmacêutica, S.A.</ns1:TitularAIM>
+            <ns1:SubstanciaActiva>Amoxicilina</ns1:SubstanciaActiva>
+            <ns1:FormaFarmaceutica>Comprimido revestido</ns1:FormaFarmaceutica>
+            <ns1:Embalagem>Embalagem de Amoxicilina Generis 1000 mg. Via Administracao: Via oral</ns1:Embalagem>
+            <ns1:Dosagem>1000 mg</ns1:Dosagem>
+         </ns1:Medicamento>
+         <ns1:SubstituivelGenerico>Sim</ns1:SubstituivelGenerico>
+         <ns1:Quantidade>1</ns1:Quantidade>
+         <ns1:EstadoItem>
+            <ns1:Descricao>Autorizado</ns1:Descricao>
+            <ns1:DataInicio>14 de Junho de 2000</ns1:DataInicio>
+         </ns1:EstadoItem>
+         <ns1:DescricaoDispensa>MSRM</ns1:DescricaoDispensa>
+      </ns1:LinhaReceita>
+      <ns1:LinhaReceita>
+         <ns1:Id>2d383832373137353938303831373638</ns1:Id>
+         <ns1:NumeroLinha/>
+         <ns1:Medicamento>
+            <ns1:Codigo>5</ns1:Codigo>
+            <ns1:Descricao>null </ns1:Descricao>
+            <ns1:TitularAIM/>
+            <ns1:SubstanciaActiva/>
+            <ns1:FormaFarmaceutica/>
+            <ns1:Embalagem>Embalagem de null . Via Administracao: </ns1:Embalagem>
+            <ns1:Dosagem/>
+         </ns1:Medicamento>
+         <ns1:SubstituivelGenerico/>
+         <ns1:Quantidade>1</ns1:Quantidade>
+         <ns1:EstadoItem>
+            <ns1:Descricao/>
+            <ns1:DataInicio/>
+         </ns1:EstadoItem>
+         <ns1:DescricaoDispensa/>
+      </ns1:LinhaReceita>
+   </ns1:ListaLinhasReceita>
+</receita>

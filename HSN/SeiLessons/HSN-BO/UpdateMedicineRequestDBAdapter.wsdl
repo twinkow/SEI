@@ -1,0 +1,21 @@
+<?binding.jca UpdateMedicineRequestDBAdapter_db.jca?>
+<wsdl:definitions name="UpdateMedicineRequestDBAdapter" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-BO/UpdateMedicineRequestDBAdapter" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-BO/UpdateMedicineRequestDBAdapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateMedicineRequestDBAdapter">
+    <plt:partnerLinkType name="UpdateMedicineRequestDBAdapter_plt">
+        <plt:role name="UpdateMedicineRequestDBAdapter_role">
+            <plt:portType name="tns:UpdateMedicineRequestDBAdapter_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateMedicineRequestDBAdapter" schemaLocation="xsd/UpdateMedicineRequestDBAdapter_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="MedicamentospedidosCollection_msg">
+        <wsdl:part name="MedicamentospedidosCollection" element="top:MedicamentospedidosCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="UpdateMedicineRequestDBAdapter_ptt">
+        <wsdl:operation name="update">
+            <wsdl:input message="tns:MedicamentospedidosCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

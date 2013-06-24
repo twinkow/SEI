@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.61.92"
+          id="commentType_userComment_Operations"
+          Package="RectifyPatientAddressForm_RectifyPatientAddressHumantask"
+          BeanClass="RectifyPatientAddressForm_RectifyPatientAddressHumantask.commentType_userComment_Operations"
+          isJavaBased="false">
+  <BuiltinOperation id="CreateInsert"/>
+  <BuiltinOperation id="Delete"/>
+</JavaBean>

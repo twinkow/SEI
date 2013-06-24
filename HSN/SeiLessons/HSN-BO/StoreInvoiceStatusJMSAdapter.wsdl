@@ -1,0 +1,28 @@
+<wsdl:definitions
+     name="StoreInvoiceStatusJMSAdapter"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/SeiLessons/HSN-BO/StoreInvoiceStatusJMSAdapter"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/SeiLessons/HSN-BO/StoreInvoiceStatusJMSAdapter"
+     xmlns:imp1="urn:netdocs:schemas:document"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Produce_Message_plt" >
+    <plt:role name="Produce_Message_role" >
+      <plt:portType name="tns:Produce_Message_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="urn:netdocs:schemas:document" schemaLocation="xsd/maindoc/ND-DocumentStatus-1.0.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="Produce_Message_msg">
+        <wsdl:part name="body" element="imp1:documentStatus"/>
+    </wsdl:message>
+    <wsdl:portType name="Produce_Message_ptt">
+        <wsdl:operation name="Produce_Message">
+            <wsdl:input message="tns:Produce_Message_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

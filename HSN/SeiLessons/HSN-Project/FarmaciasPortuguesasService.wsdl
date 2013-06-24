@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions
+     name="FarmaciasPortuguesasService"
+     targetNamespace="http://saude365.pt/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://saude365.pt/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    >
+    <wsdl:types>
+        <xs:schema version="1.0" targetNamespace="http://saude365.pt/types" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:complexType name="farmaciasInformation">
+                <xs:sequence>
+                    <xs:element name="concelho" type="xs:string" minOccurs="0"/>
+                    <xs:element name="directorTecnico" type="xs:string" minOccurs="0"/>
+                    <xs:element name="distrito" type="xs:string" minOccurs="0"/>
+                    <xs:element name="farmaciaName" type="xs:string" minOccurs="0"/>
+                    <xs:element name="freguesia" type="xs:string" minOccurs="0"/>
+                    <xs:element name="morada" type="xs:string" minOccurs="0"/>
+                    <xs:element name="telefone" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://saude365.pt/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://saude365.pt/"
+             xmlns:ns1="http://saude365.pt/types">
+            <import namespace="http://saude365.pt/types"/>
+            <xsd:complexType name="getFarmaciasProximas">
+                <xsd:sequence>
+                    <xsd:element name="distrito" type="xsd:string"/>
+                    <xsd:element name="concelho" type="xsd:string"/>
+                    <xsd:element name="freguesia" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="getFarmaciasProximas" type="tns:getFarmaciasProximas"/>
+            <xsd:complexType name="getFarmaciasProximasResponse">
+                <xsd:sequence>
+                    <xsd:element name="return" minOccurs="0" maxOccurs="unbounded" type="ns1:farmaciasInformation"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="getFarmaciasProximasResponse" type="tns:getFarmaciasProximasResponse"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="getFarmaciasProximasInput">
+        <wsdl:part name="parameters" element="tns:getFarmaciasProximas"/>
+    </wsdl:message>
+    <wsdl:message name="getFarmaciasProximasOutput">
+        <wsdl:part name="parameters" element="tns:getFarmaciasProximasResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="FarmaciasPortuguesas">
+        <wsdl:operation name="getFarmaciasProximas">
+            <wsdl:input message="tns:getFarmaciasProximasInput" xmlns:ns1="http://www.w3.org/2006/05/addressing/wsdl"
+                 ns1:Action=""/>
+            <wsdl:output message="tns:getFarmaciasProximasOutput" xmlns:ns1="http://www.w3.org/2006/05/addressing/wsdl"
+                 ns1:Action=""/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="FarmaciasPortuguesasSoapHttp" type="tns:FarmaciasPortuguesas">
+        <soap12:binding style="document" transport="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
+        <wsdl:operation name="getFarmaciasProximas">
+            <soap12:operation soapAction="" soapActionRequired="false"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="FarmaciasPortuguesasService">
+        <wsdl:port name="FarmaciasPortuguesasSoap12HttpPort" binding="tns:FarmaciasPortuguesasSoapHttp">
+            <soap12:address location="http://localhost:7001/SeiLessons-HSN-Project-context-root/FarmaciasPortuguesasSoap12HttpPort"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

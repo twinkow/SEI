@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.61.92"
+          id="preActionUserStepsType"
+          Package="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask"
+          BeanClass="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask.preActionUserStepsType"
+          isJavaBased="false">
+  <AccessorAttribute id="preActionUserStep" IsCollection="true"
+                     BeanClass="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask.preActionUserStepType"
+                     CollectionBeanClass="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask.preActionUserStepType_preActionUserStep_Operations">
+    <Properties>
+      <Property Name="minOccurs" Value="0"/>
+      <Property Name="maxOccurs" Value="2147483640"/>
+      <Property Name="LABEL" Value="Pre Action User Step"/>
+      <Property Name="nillable" Value="false"/>
+      <Property Name="originalName" Value="preActionUserStep"/>
+      <Property Name="targetNamespace"
+                Value="http://xmlns.oracle.com/bpel/workflow/task"/>
+    </Properties>
+  </AccessorAttribute>
+</JavaBean>

@@ -1,0 +1,13 @@
+<adapter-config name="GetHospitalInformationDBAdapter" adapter="Database Adapter" wsdlLocation="GetHospitalInformationDBAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/mydb" UIConnectionName="DbConnection" adapterRef=""/>
+  <endpoint-interaction portType="GetHospitalInformationDBAdapter_ptt" operation="GetHospitalInformationDBAdapter">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="select * from hospitalinfo where rownum=1"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <input/>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

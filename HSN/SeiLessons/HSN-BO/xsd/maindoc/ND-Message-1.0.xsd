@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../../xsl/xsd2Html.xsl"?>
+<!-- ================================================== -->
+<!-- ===== Message   ===== -->
+<!-- ================================================== -->
+<!--
+   Module of Message related components
+   Softlimits
+   Version: 1.0
+   Last change: 2008/04/03
+
+   Copyright (C) SOFTLIMITS (2008). All Rights Reserved.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:netdocs:schemas:message" targetNamespace="urn:netdocs:schemas:message" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="pt">
+			Módulo que define a estrutura da mensagem. Esta estrutura é a que deve envelopar os documentos quando são enviados.
+		</xsd:documentation>
+	</xsd:annotation>
+	<!-- ================== -->
+	<!-- ===== Includes   ===== -->
+	<!-- ================== -->
+	<xsd:include schemaLocation="../common/ND-BaseMessageComponents-1.0.xsd"/>
+	<!-- =================== -->
+	<!-- ===== Elements   ===== -->
+	<!-- =================== -->
+	<xsd:element name="message" type="messageType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="pt">Elemento que encapsula os documentos a ser enviados. Permite o envio do documento em XML, bem como em formatos binários. Permite também a inclusão de anexos ao documento principal. Por exemplo, para além da factura XML, pode ser enviada a factura em PDF bem como imagens dos comprovativos das despesas.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,34 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ValidateMedicinesBPELProcess"
+     targetNamespace="http://xmlns.oracle.com/SeiLessons/HSN_Project/ValidateMedicinesBPELProcess"
+     xmlns:ns1="http://saude365.pt"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/SeiLessons/HSN_Project/ValidateMedicinesBPELProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="ValidateMedicinesBPELProcess">
+        <plnk:role name="ValidateMedicinesBPELProcessProvider">
+            <plnk:portType name="client:ValidateMedicinesBPELProcess"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://saude365.pt" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/SeiLessons/HSN_Project/ValidateMedicinesBPELProcess"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://saude365.pt" schemaLocation="xsd/medicines.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ValidateMedicinesBPELProcessRequestMessage">
+        <wsdl:part name="payload" element="ns1:medicinesCollection"/>
+    </wsdl:message>
+    <wsdl:message name="ValidateMedicinesBPELProcessResponseMessage">
+        <wsdl:part name="payload" element="ns1:prescriptionElement"/>
+    </wsdl:message>
+    <wsdl:portType name="ValidateMedicinesBPELProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ValidateMedicinesBPELProcessRequestMessage"/>
+            <wsdl:output message="client:ValidateMedicinesBPELProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

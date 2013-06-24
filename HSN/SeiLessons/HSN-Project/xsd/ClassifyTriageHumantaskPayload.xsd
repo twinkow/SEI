@@ -1,0 +1,9 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<schema targetNamespace="http://xmlns.oracle.com/bpel/workflow/task" xmlns:tns="http://xmlns.oracle.com/bpel/workflow/task" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns0="http://saude365.pt">
+   <import namespace="http://saude365.pt" schemaLocation="../SCA-INF/classes/xsd/patient_report.xsd"/>
+   <complexType name="ClassifyTriageHumantaskPayloadType">
+      <sequence>
+         <element ref="ns0:relatorio"/>
+      </sequence>
+   </complexType>
+</schema>

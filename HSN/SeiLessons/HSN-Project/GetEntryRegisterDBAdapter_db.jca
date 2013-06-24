@@ -1,0 +1,13 @@
+<adapter-config name="GetEntryRegisterDBAdapter" adapter="Database Adapter" wsdlLocation="GetEntryRegisterDBAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/mydb" UIConnectionName="DbConnection" adapterRef=""/>
+  <endpoint-interaction portType="GetEntryRegisterDBAdapter_ptt" operation="GetEntryRegisterDBAdapter">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="SELECT DATAHORA FROM REGISTOENTRADA WHERE DOENTEID = (#doenteid)"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <input/>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

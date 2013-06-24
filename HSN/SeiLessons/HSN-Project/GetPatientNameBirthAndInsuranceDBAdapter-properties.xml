@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="root_descriptor_alias">DOENTE</entry>
+   <entry key="DOENTE.NUMERO:db_column_scale">0</entry>
+   <entry key="DOENTE.RUA:db_column_not_null">false</entry>
+   <entry key="DOENTE.SEGURO:db_column_type">VARCHAR2</entry>
+   <entry key="DOENTE.ID:db_column_not_null">true</entry>
+   <entry key="DOENTE.ID:db_column_scale">0</entry>
+   <entry key="DOENTE.NUMERO:db_column_precision">6</entry>
+   <entry key="DOENTE.APARTAMENTO:db_column_type">VARCHAR2</entry>
+   <entry key="DOENTE.NOME:db_column_type">VARCHAR2</entry>
+   <entry key="DOENTE.MORADAVALIDA:db_column_not_null">false</entry>
+   <entry key="DOENTE.RUA:db_column_type">VARCHAR2</entry>
+   <entry key="DOENTE.MORADAVALIDA:db_column_precision">1</entry>
+   <entry key="DOENTE.SEGURO:db_column_size">255</entry>
+   <entry key="DOENTE.APARTAMENTO:db_column_not_null">false</entry>
+   <entry key="DOENTE.ANDAR:db_column_precision">6</entry>
+   <entry key="DOENTE.NOME:db_column_size">255</entry>
+   <entry key="DOENTE.APARTAMENTO:db_column_size">255</entry>
+   <entry key="DOENTE.MORADAVALIDA:db_column_type">NUMBER</entry>
+   <entry key="DOENTE.RUA:db_column_size">255</entry>
+   <entry key="DOENTE.NUMERO:db_column_not_null">false</entry>
+   <entry key="DOENTE.CODIGOPOSTAL:db_column_not_null">true</entry>
+   <entry key="DOENTE.NOME:db_column_not_null">false</entry>
+   <entry key="DOENTE.ANDAR:db_column_scale">0</entry>
+   <entry key="DOENTE:db_column_9">MORADAVALIDA</entry>
+   <entry key="DOENTE.ANDAR:db_column_not_null">false</entry>
+   <entry key="DOENTE:db_column_8">CODIGOPOSTAL</entry>
+   <entry key="DOENTE:db_column_7">APARTAMENTO</entry>
+   <entry key="DOENTE:db_column_6">ANDAR</entry>
+   <entry key="DOENTE:db_column_5">NUMERO</entry>
+   <entry key="DOENTE:db_column_4">RUA</entry>
+   <entry key="DOENTE:db_column_3">SEGURO</entry>
+   <entry key="DOENTE:db_column_2">DATANASC</entry>
+   <entry key="DOENTE.ID:db_column_precision">6</entry>
+   <entry key="DOENTE:db_column_1">NOME</entry>
+   <entry key="DOENTE:db_column_0">ID</entry>
+   <entry key="DOENTE.ID:db_column_type">NUMBER</entry>
+   <entry key="DOENTE.CODIGOPOSTAL:db_column_type">VARCHAR2</entry>
+   <entry key="DOENTE.MORADAVALIDA:db_column_scale">0</entry>
+   <entry key="DOENTE:db_table_type">TABLE</entry>
+   <entry key="DOENTE.ANDAR:db_column_type">NUMBER</entry>
+   <entry key="DOENTE.DATANASC:db_column_type">DATE</entry>
+   <entry key="DOENTE.SEGURO:db_column_not_null">false</entry>
+   <entry key="DOENTE.CODIGOPOSTAL:db_column_size">255</entry>
+   <entry key="DOENTE.DATANASC:db_column_not_null">false</entry>
+   <entry key="DOENTE.NUMERO:db_column_type">NUMBER</entry>
+</properties>

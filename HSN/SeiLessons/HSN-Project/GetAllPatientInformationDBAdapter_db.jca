@@ -1,0 +1,13 @@
+<adapter-config name="GetAllPatientInformationDBAdapter" adapter="Database Adapter" wsdlLocation="GetAllPatientInformationDBAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/mydb" UIConnectionName="DbConnection" adapterRef=""/>
+  <endpoint-interaction portType="GetAllPatientInformationDBAdapter_ptt" operation="selectByPrimaryKey">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="GetAllPatientInformationDBAdapter.Doente"/>
+      <property name="QueryName" value="readObject"/>
+      <property name="MappingsMetaDataURL" value="GetAllPatientInformationDBAdapter-or-mappings.xml"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="REGISTOSAIDA.CLASSIFICACAOATENDIMENTO:db_column_type">VARCHAR2</entry>
+   <entry key="REGISTOSAIDA.DATAHORA:db_column_not_null">true</entry>
+   <entry key="REGISTOSAIDA:db_column_5">COMENTARIOS</entry>
+   <entry key="REGISTOSAIDA:db_column_4">SATISFACAOTEMPOESPERA</entry>
+   <entry key="REGISTOSAIDA.SATISFACAOTEMPOESPERA:db_column_type">VARCHAR2</entry>
+   <entry key="REGISTOSAIDA:db_column_3">CLASSIFICACAOATENDIMENTO</entry>
+   <entry key="REGISTOSAIDA:db_column_2">SATISFACAORECEITAELECTRONICA</entry>
+   <entry key="REGISTOSAIDA.DATAHORA:db_column_type">DATE</entry>
+   <entry key="REGISTOSAIDA:db_column_1">DOENTEID</entry>
+   <entry key="REGISTOSAIDA:db_column_0">DATAHORA</entry>
+   <entry key="REGISTOSAIDA.COMENTARIOS:db_column_size">255</entry>
+   <entry key="REGISTOSAIDA.SATISFACAORECEITAELECTRONICA:db_column_size">255</entry>
+   <entry key="REGISTOSAIDA.DOENTEID:db_column_not_null">true</entry>
+   <entry key="REGISTOSAIDA:db_table_type">TABLE</entry>
+   <entry key="REGISTOSAIDA.SATISFACAOTEMPOESPERA:db_column_not_null">false</entry>
+   <entry key="REGISTOSAIDA.CLASSIFICACAOATENDIMENTO:db_column_size">255</entry>
+   <entry key="REGISTOSAIDA.COMENTARIOS:db_column_not_null">false</entry>
+   <entry key="REGISTOSAIDA.SATISFACAOTEMPOESPERA:db_column_size">255</entry>
+   <entry key="REGISTOSAIDA.DOENTEID:db_column_precision">6</entry>
+   <entry key="root_descriptor_alias">REGISTOSAIDA</entry>
+   <entry key="REGISTOSAIDA.DOENTEID:db_column_type">NUMBER</entry>
+   <entry key="REGISTOSAIDA.COMENTARIOS:db_column_type">VARCHAR2</entry>
+   <entry key="REGISTOSAIDA.SATISFACAORECEITAELECTRONICA:db_column_type">VARCHAR2</entry>
+   <entry key="REGISTOSAIDA.CLASSIFICACAOATENDIMENTO:db_column_not_null">false</entry>
+   <entry key="REGISTOSAIDA.DOENTEID:db_column_scale">0</entry>
+   <entry key="REGISTOSAIDA.SATISFACAORECEITAELECTRONICA:db_column_not_null">false</entry>
+</properties>

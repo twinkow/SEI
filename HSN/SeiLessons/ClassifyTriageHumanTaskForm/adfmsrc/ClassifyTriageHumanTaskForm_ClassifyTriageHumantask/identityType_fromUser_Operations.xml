@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.61.92"
+          id="identityType_fromUser_Operations"
+          Package="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask"
+          BeanClass="ClassifyTriageHumanTaskForm_ClassifyTriageHumantask.identityType_fromUser_Operations"
+          isJavaBased="false">
+  <BuiltinOperation id="CreateInsert"/>
+  <BuiltinOperation id="Delete"/>
+</JavaBean>

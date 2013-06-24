@@ -1,0 +1,18 @@
+<adapter-config name="InvoiceStatusFTPAdapter" adapter="FTP Adapter" wsdlLocation="InvoiceStatusFTPAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/Ftp/FtpAdapter" UIincludeWildcard="*.*\@L-QA-BES01"/>
+  <endpoint-activation portType="GetInvoiceStatus_ptt" operation="GetInvoiceStatus">
+    <activation-spec className="oracle.tip.adapter.ftp.inbound.FTPActivationSpec">
+      <property name="DeleteFile" value="true"/>
+      <property name="MinimumAge" value="0"/>
+      <property name="PhysicalDirectory" value="IN/IST01"/>
+      <property name="Recursive" value="true"/>
+      <property name="PollingFrequency" value="5"/>
+      <property name="FileType" value="ascii"/>
+      <property name="PhysicalArchiveDirectory" value="/home/oracle/jdeveloper/mywork/SeiLessons/HSN-BO/files/archive"/>
+      <property name="IncludeFiles" value=".*\..*\@L-QA-BES01"/>
+      <property name="UseHeaders" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

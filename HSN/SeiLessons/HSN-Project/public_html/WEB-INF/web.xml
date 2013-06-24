@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
+  <filter>
+    <filter-name>JpsFilter</filter-name>
+    <filter-class>oracle.security.jps.ee.http.JpsFilter</filter-class>
+    <init-param>
+      <param-name>enable.anonymous</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>JpsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>ValidateAddressCTTSoap12HttpPort</servlet-name>
+    <servlet-class>pt.saude365.ValidateAddressCTT</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>InfarmedServiceSoap12HttpPort</servlet-name>
+    <servlet-class>pt.saude365.InfarmedService</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>FarmaciasPortuguesasSoap12HttpPort</servlet-name>
+    <servlet-class>pt.saude365.FarmaciasPortuguesas</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ValidateAddressCTTSoap12HttpPort</servlet-name>
+    <url-pattern>/ValidateAddressCTTSoap12HttpPort</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>InfarmedServiceSoap12HttpPort</servlet-name>
+    <url-pattern>/InfarmedServiceSoap12HttpPort</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FarmaciasPortuguesasSoap12HttpPort</servlet-name>
+    <url-pattern>/FarmaciasPortuguesasSoap12HttpPort</url-pattern>
+  </servlet-mapping>
+</web-app>

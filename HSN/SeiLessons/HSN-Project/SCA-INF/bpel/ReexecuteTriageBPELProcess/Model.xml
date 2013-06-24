@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ReexecuteTriageBPELProcess" targetNamespace="http://xmlns.oracle.com/SeiLessons/HSN_Project/ReexecuteTriageBPELProcess" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/SeiLessons/HSN_Project/ReexecuteTriageBPELProcess" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetOfficeInformationDBAdapter" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns2="http://xmlns.oracle.com/OfficesOcupationBusinessRule/OfficesOcupationBusinessRule_DecisionService_1" xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/PatientTriageDBAdapter" xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/PatientTriageDBAdapter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://saude365.pt" xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetOfficeInformationDBAdapter" xmlns:ns7="http://xmlns.oracle.com/SeiLessons/HSN_Project/MedicineRequestBPELProcess" xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/MedicineStockMedicineIDDBAdapter" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns9="http://xmlns.oracle.com/SeiLessons/HSN_Project/MedicinesPrescriptionBPELProcess" xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/db/top/MedicineStockMedicineIDDBAdapter" xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/TriageOfficeFileAdapter" xmlns:ns12="http://pt.saude365" xmlns:ns13="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetPatientNameBirthAndInsuranceDBAdapter" xmlns:ns14="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetPatientInformationDBAdapter" xmlns:ns15="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-Project/BackOfficeInputFileAdapter" xmlns:ns16="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetTriageIDDBAdapter" xmlns:ns17="http://xmlns.oracle.com/pcbpel/adapter/db/GetTriageIDDBAdapter" xmlns:ns18="http://xmlns.oracle.com/SeiLessons/HSN_BO/MedicinesStockManagementBPELProcess" id="BpPrc0">
+  <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="reexecutetriagebpelprocess_client" partnerLinkType="client:ReexecuteTriageBPELProcess" myRole="ReexecuteTriageBPELProcessProvider"/>
+    <partnerLink name="PatientTriageDBAdapter" partnerLinkType="ns3:PatientTriageDBAdapter_plt" partnerRole="PatientTriageDBAdapter_role"/>
+    <partnerLink name="MedicineRequestBPELProcess.medicinerequestbpelprocess_client" partnerLinkType="ns7:MedicineRequestBPELProcess" partnerRole="MedicineRequestBPELProcessProvider"/>
+    <partnerLink name="MedicineStockMedicineIDDBAdapter" partnerLinkType="ns8:MedicineStockMedicineIDDBAdapter_plt" partnerRole="MedicineStockMedicineIDDBAdapter_role"/>
+    <partnerLink name="MedicinesPrescriptionBPELProcess.medicinesprescriptionbpelprocess_client" partnerLinkType="ns9:MedicinesPrescriptionBPELProcess" partnerRole="MedicinesPrescriptionBPELProcessProvider"/>
+    <partnerLink name="TriageOfficeFileAdapter" partnerLinkType="ns11:WritePatient_plt" partnerRole="WritePatient_role"/>
+    <partnerLink name="GetPatientNameBirthAndInsuranceDBAdapter" partnerLinkType="ns13:GetPatientNameBirthAndInsuranceDBAdapter_plt" partnerRole="GetPatientNameBirthAndInsuranceDBAdapter_role"/>
+    <partnerLink name="BackOfficeInputFileAdapter" partnerLinkType="ns15:Write_plt" partnerRole="Write_role"/>
+    <partnerLink name="GetTriageIDDBAdapter" partnerLinkType="ns16:GetTriageIDDBAdapter_plt" partnerRole="GetTriageIDDBAdapter_role"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:ReexecuteTriageBPELProcessResponseMessage"/>
+    <variable name="getOfficeInformationInputVariable" messageType="ns1:GetOfficeInformationDBAdapterSelect_inputParameters"/>
+    <variable name="getOfficeInformationOutputVariable" messageType="ns1:GabinetesCollection_msg"/>
+    <variable name="inputVariable" messageType="client:ReexecuteTriageBPELProcessRequestMessage"/>
+    <variable name="newTriageVariable" messageType="ns3:TriagemCollection_msg"/>
+    <variable name="newMedicinesVariable" element="ns5:medicinesCollection"/>
+    <variable name="medicineRequestProcessInputVariable" messageType="ns7:MedicineRequestBPELProcessRequestMessage"/>
+    <variable name="medicineStockMedicineIDInputVariable" messageType="ns8:MedicineStockMedicineIDDBAdapterSelect_inputParameters"/>
+    <variable name="medicineStockMedicineIDOutputVariable" messageType="ns8:MedicamentosstockCollection_msg"/>
+    <variable name="loopVariable" type="xsd:int"/>
+    <variable name="maxLoopVariable" type="xsd:int"/>
+    <variable name="medicinePrescriptionProcessInputVariable" messageType="ns9:MedicinesPrescriptionBPELProcessRequestMessage"/>
+    <variable name="medicinesPrescriptionAuxiliaryVariable" messageType="ns9:MedicinesPrescriptionBPELProcessRequestMessage"/>
+    <variable name="triageOfficeInputVariable" messageType="ns11:WritePatient_msg"/>
+    <variable name="patientNameBirthAndInsuranceInputVariable" messageType="ns13:selectByPrimaryKey_inputParameters"/>
+    <variable name="patientNameBirthAndInsuranceOutputVariable" messageType="ns13:DoenteCollection_msg"/>
+    <variable name="getTriageIDInputVariable" messageType="ns16:GetTriageIDDBAdapterInput_msg"/>
+    <variable name="getTriageIDOutputVariable" messageType="ns16:GetTriageIDDBAdapterOutput_msg"/>
+    <variable name="backOfficeInputInputVariable" messageType="ns15:Write_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq0">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ReexecuteTriageBPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="reexecutetriagebpelprocess_client" portType="client:ReexecuteTriageBPELProcess" operation="process" createInstance="yes" variable="inputVariable" id="BpRcv0"/>
+    <assign name="InitLoopVariable" id="BpAss0">
+      <copy>
+        <from expression="1"/>
+        <to variable="loopVariable"/>
+      </copy>
+      <copy>
+        <from expression="1"/>
+        <to variable="maxLoopVariable"/>
+      </copy>
+    </assign>
+    <assign name="InitTriageVariable" id="BpAss1">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/InitializeNewTriageVariable.xsl', $inputVariable.payload)"/>
+        <to variable="newTriageVariable" part="TriagemCollection"/>
+      </copy>
+    </assign>
+    <bpelx:exec import="pt.saude365.*" id="BxExe0"/>
+    <bpelx:exec import="java.util.Random" id="BxExe1"/>
+    <bpelx:exec name="GenerateNewTriageActivity" version="1.5" language="java" id="BxExe2">
+      <![CDATA[String triagemString = ReexecuteTriage.generateTriage();
+String[] triagem = triagemString.split("\\$");
+addAuditTrailEntry(triagem[0] + " " + triagem[1]);
+setVariableData("newTriageVariable","TriagemCollection","/ns4:TriagemCollection/ns4:Triagem/ns4:tipo",triagem[0]);
+setVariableData("newTriageVariable","TriagemCollection","/ns4:TriagemCollection/ns4:Triagem/ns4:nivel",triagem[1]);
+Random random = new Random();
+int max = random.nextInt(5) + 1;
+setVariableData("maxLoopVariable", max);
+addAuditTrailEntry("RANDOM " + max);
+addAuditTrailEntry("MAX LOOP VARIABLE " + getVariableData("maxLoopVariable"));]]>
+    </bpelx:exec>
+    <invoke name="InvokeTriageDB" bpelx:invokeAsDetail="no" inputVariable="newTriageVariable" partnerLink="PatientTriageDBAdapter" portType="ns3:PatientTriageDBAdapter_ptt" operation="insert" id="BpInv0"/>
+    <assign name="AssignPatientID" id="BpAss2">
+      <copy>
+        <from variable="inputVariable" part="payload" query="/client:process/client:doenteID"/>
+        <to variable="getTriageIDInputVariable" part="GetTriageIDDBAdapterInput_msg" query="/ns17:GetTriageIDDBAdapterInput/ns17:DOENTEID"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeGetTriageID" bpelx:invokeAsDetail="no" inputVariable="getTriageIDInputVariable" outputVariable="getTriageIDOutputVariable" partnerLink="GetTriageIDDBAdapter" portType="ns16:GetTriageIDDBAdapter_ptt" operation="GetTriageIDDBAdapter" id="BpInv1"/>
+    <assign name="AssignPatientID" id="BpAss3">
+      <copy>
+        <from variable="inputVariable" part="payload" query="/client:process/client:doenteID"/>
+        <to variable="patientNameBirthAndInsuranceInputVariable" part="selectByPrimaryKey_inputParameters" query="/ns14:DoentePrimaryKey/ns14:id"/>
+      </copy>
+    </assign>
+    <invoke name="InvokePatientNameBirthAndInsurance" bpelx:invokeAsDetail="no" inputVariable="patientNameBirthAndInsuranceInputVariable" outputVariable="patientNameBirthAndInsuranceOutputVariable" partnerLink="GetPatientNameBirthAndInsuranceDBAdapter" portType="ns13:GetPatientNameBirthAndInsuranceDBAdapter_ptt" operation="selectByPrimaryKey" id="BpInv2"/>
+    <assign name="AssignTriageOffice" id="BpAss4">
+      <copy>
+        <from variable="newTriageVariable" part="TriagemCollection" query="/ns4:TriagemCollection/ns4:Triagem/ns4:tipo"/>
+        <to variable="triageOfficeInputVariable" part="body" query="/ns12:OfficePatientElement/ns12:patientTreatment"/>
+      </copy>
+      <copy>
+        <from variable="patientNameBirthAndInsuranceOutputVariable" part="DoenteCollection" query="/ns14:DoenteCollection/ns14:Doente/ns14:nome"/>
+        <to variable="triageOfficeInputVariable" part="body" query="/ns12:OfficePatientElement/ns12:patientName"/>
+      </copy>
+      <copy>
+        <from variable="patientNameBirthAndInsuranceOutputVariable" part="DoenteCollection" query="/ns14:DoenteCollection/ns14:Doente/ns14:datanasc"/>
+        <to variable="triageOfficeInputVariable" part="body" query="/ns12:OfficePatientElement/ns12:patientBirth"/>
+      </copy>
+      <copy>
+        <from variable="patientNameBirthAndInsuranceOutputVariable" part="DoenteCollection" query="/ns14:DoenteCollection/ns14:Doente/ns14:seguro"/>
+        <to variable="triageOfficeInputVariable" part="body" query="/ns12:OfficePatientElement/ns12:patientInsurence"/>
+      </copy>
+      <copy>
+        <from variable="newTriageVariable" part="TriagemCollection" query="/ns4:TriagemCollection/ns4:Triagem/ns4:nivel"/>
+        <to variable="triageOfficeInputVariable" part="body" query="/ns12:OfficePatientElement/ns12:patientLevel"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeTriageOffice" bpelx:invokeAsDetail="no" inputVariable="triageOfficeInputVariable" partnerLink="TriageOfficeFileAdapter" portType="ns11:WritePatient_ptt" operation="WritePatient" id="BpInv3"/>
+    <assign name="InitMedicinesVariable" id="BpAss5">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/InitializeNewMedicinesVariable.xsl', $inputVariable.payload)"/>
+        <to variable="newMedicinesVariable"/>
+      </copy>
+    </assign>
+    <while name="WhileMedicinesExist" condition="bpws:getVariableData('loopVariable') &lt;=  bpws:getVariableData('maxLoopVariable')" id="BpWhl0">
+      <sequence id="BpSeq1">
+        <bpelx:exec name="GenerateNewMedicinesActivity" version="1.5" language="java" id="BxExe3">
+          <![CDATA[String medicamentoString = ReexecuteTriage.generateMedicine();
+String[] medicamento = medicamentoString.split("\\$");
+addAuditTrailEntry(medicamento[0] + " " + medicamento[1] + " " + medicamento[2]);
+setVariableData("newMedicinesVariable","/ns5:medicinesCollection/ns5:medicinesCollectionType/ns5:substance", medicamento[1]);
+setVariableData("newMedicinesVariable","/ns5:medicinesCollection/ns5:medicinesCollectionType/ns5:name", medicamento[0]);
+setVariableData("newMedicinesVariable","/ns5:medicinesCollection/ns5:medicinesCollectionType/ns5:dosage", medicamento[2]);]]>
+        </bpelx:exec>
+        <assign name="TransformNewMedicinesToMedicineStockID" id="BpAss6">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:doXSLTransformForDoc('xsl/TransformationNewMedicineToMedicineStockID.xsl', $newMedicinesVariable)"/>
+            <to variable="medicineStockMedicineIDInputVariable" part="MedicineStockMedicineIDDBAdapterSelect_inputParameters"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeMedicineStockMedicineID" bpelx:invokeAsDetail="no" inputVariable="medicineStockMedicineIDInputVariable" outputVariable="medicineStockMedicineIDOutputVariable" partnerLink="MedicineStockMedicineIDDBAdapter" portType="ns8:MedicineStockMedicineIDDBAdapter_ptt" operation="MedicineStockMedicineIDDBAdapterSelect" id="BpInv4"/>
+        <assign name="TransformNewMedicinesToMedicineRequestProcess" id="BpAss7">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:doXSLTransformForDoc('xsl/TransformationMedicineStockIDToMedicineRequestProcess.xsl', $medicineStockMedicineIDOutputVariable.MedicamentosstockCollection)"/>
+            <to variable="medicineRequestProcessInputVariable" part="payload"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeMedicineRequestProcess" bpelx:invokeAsDetail="no" inputVariable="medicineRequestProcessInputVariable" partnerLink="MedicineRequestBPELProcess.medicinerequestbpelprocess_client" portType="ns7:MedicineRequestBPELProcess" operation="process" id="BpInv5"/>
+        <assign name="AssignMedicinePrescription" id="BpAss8">
+          <copy>
+            <from variable="medicineStockMedicineIDOutputVariable" part="MedicamentosstockCollection" query="/ns10:MedicamentosstockCollection/ns10:Medicamentosstock/ns10:medicamentoid"/>
+            <to variable="medicinesPrescriptionAuxiliaryVariable" part="payload" query="/ns5:prescriptionElement/ns5:medicinesList/ns5:id"/>
+          </copy>
+          <copy>
+            <from variable="medicineStockMedicineIDOutputVariable" part="MedicamentosstockCollection" query="/ns10:MedicamentosstockCollection/ns10:Medicamentosstock/ns10:nome"/>
+            <to variable="medicinesPrescriptionAuxiliaryVariable" part="payload" query="/ns5:prescriptionElement/ns5:medicinesList/ns5:name"/>
+          </copy>
+          <copy>
+            <from variable="medicineStockMedicineIDOutputVariable" part="MedicamentosstockCollection" query="/ns10:MedicamentosstockCollection/ns10:Medicamentosstock/ns10:substancia"/>
+            <to variable="medicinesPrescriptionAuxiliaryVariable" part="payload" query="/ns5:prescriptionElement/ns5:medicinesList/ns5:substance"/>
+          </copy>
+          <copy>
+            <from variable="medicineStockMedicineIDOutputVariable" part="MedicamentosstockCollection" query="/ns10:MedicamentosstockCollection/ns10:Medicamentosstock/ns10:dose"/>
+            <to variable="medicinesPrescriptionAuxiliaryVariable" part="payload" query="/ns5:prescriptionElement/ns5:medicinesList/ns5:dosage"/>
+          </copy>
+          <bpelx:insertAfter>
+            <bpelx:from variable="medicinesPrescriptionAuxiliaryVariable" part="payload" query="/ns5:prescriptionElement/ns5:medicinesList"/>
+            <bpelx:to variable="medicinePrescriptionProcessInputVariable" part="payload" query="/ns5:prescriptionElement/ns5:patientID"/>
+          </bpelx:insertAfter>
+        </assign>
+        <assign name="IncrementLoopVariable" id="BpAss9">
+          <copy>
+            <from expression="bpws:getVariableData('loopVariable') + 1"/>
+            <to variable="loopVariable"/>
+          </copy>
+        </assign>
+      </sequence>
+    </while>
+    <assign name="AssignPatientID" id="BpAss10">
+      <copy>
+        <from variable="inputVariable" part="payload" query="/client:process/client:doenteID"/>
+        <to variable="medicinePrescriptionProcessInputVariable" part="payload" query="/ns5:prescriptionElement/ns5:patientID"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeMedicinePrescriptionProcess" inputVariable="medicinePrescriptionProcessInputVariable" partnerLink="MedicinesPrescriptionBPELProcess.medicinesprescriptionbpelprocess_client" portType="ns9:MedicinesPrescriptionBPELProcess" operation="process" bpelx:invokeAsDetail="no" id="BpInv6"/>
+    <assign name="AssignReplyOutput" id="BpAss11">
+      <copy>
+        <from variable="newTriageVariable" part="TriagemCollection" query="/ns4:TriagemCollection/ns4:Triagem/ns4:tipo"/>
+        <to variable="outputVariable" part="payload" query="/client:processResponse/client:typeOfTreatment"/>
+      </copy>
+      <copy>
+        <from variable="newTriageVariable" part="TriagemCollection" query="/ns4:TriagemCollection/ns4:Triagem/ns4:classificacao"/>
+        <to variable="outputVariable" part="payload" query="/client:processResponse/client:classification"/>
+      </copy>
+      <copy>
+        <from variable="newTriageVariable" part="TriagemCollection" query="/ns4:TriagemCollection/ns4:Triagem/ns4:nivel"/>
+        <to variable="outputVariable" part="payload" query="/client:processResponse/client:level"/>
+      </copy>
+    </assign>
+    <assign name="AssignBackOfficeInput" id="BpAss12">
+      <copy>
+        <from expression="number(bpws:getVariableData('getTriageIDOutputVariable','GetTriageIDDBAdapterOutput','/ns17:GetTriageIDDBAdapterOutput/ns17:MAX_TRIAGEMID_'))"/>
+        <to variable="backOfficeInputInputVariable" part="body" query="/ns18:process/ns18:triageID"/>
+      </copy>
+      <copy>
+        <from expression="number(bpws:getVariableData('getTriageIDInputVariable','GetTriageIDDBAdapterInput_msg','/ns17:GetTriageIDDBAdapterInput/ns17:DOENTEID'))"/>
+        <to variable="backOfficeInputInputVariable" part="body" query="/ns18:process/ns18:patientID"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeBackOfficeInput" bpelx:invokeAsDetail="no" inputVariable="backOfficeInputInputVariable" partnerLink="BackOfficeInputFileAdapter" portType="ns15:Write_ptt" operation="Write" id="BpInv7"/>
+    <bpelx:exec import="pt.saude365.*" id="BxExe4"/>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="reexecutetriagebpelprocess_client" portType="client:ReexecuteTriageBPELProcess" operation="process" variable="outputVariable" id="BpRpl0"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Apr 22 12:16:02 WEST 2013
+  Author:  oracle
+  Type: BPEL 1.1 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

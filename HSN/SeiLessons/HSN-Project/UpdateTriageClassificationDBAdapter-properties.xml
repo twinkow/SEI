@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="TRIAGEM.TIPO:db_column_not_null">false</entry>
+   <entry key="TRIAGEM.NIVEL:db_column_size">255</entry>
+   <entry key="TRIAGEM.DATAHORA:db_column_not_null">false</entry>
+   <entry key="TRIAGEM.CLASSIFICACAO:db_column_not_null">false</entry>
+   <entry key="TRIAGEM.TRIAGEMID:db_column_not_null">true</entry>
+   <entry key="TRIAGEM.DOENTEID:db_column_scale">0</entry>
+   <entry key="TRIAGEM.NIVEL:db_column_not_null">false</entry>
+   <entry key="TRIAGEM.CLASSIFICACAO:db_column_size">255</entry>
+   <entry key="TRIAGEM.DOENTEID:db_column_type">NUMBER</entry>
+   <entry key="TRIAGEM.TIPO:db_column_type">VARCHAR2</entry>
+   <entry key="TRIAGEM.DATAHORA:db_column_type">DATE</entry>
+   <entry key="TRIAGEM:db_column_5">DATAHORA</entry>
+   <entry key="TRIAGEM.TRIAGEMID:db_column_scale">0</entry>
+   <entry key="TRIAGEM.TRIAGEMID:db_column_type">NUMBER</entry>
+   <entry key="TRIAGEM:db_column_4">CLASSIFICACAO</entry>
+   <entry key="TRIAGEM.DOENTEID:db_column_not_null">true</entry>
+   <entry key="TRIAGEM:db_column_3">NIVEL</entry>
+   <entry key="TRIAGEM.DOENTEID:db_column_precision">6</entry>
+   <entry key="TRIAGEM:db_column_2">TIPO</entry>
+   <entry key="TRIAGEM:db_column_1">DOENTEID</entry>
+   <entry key="TRIAGEM:db_column_0">TRIAGEMID</entry>
+   <entry key="TRIAGEM.TRIAGEMID:db_column_precision">6</entry>
+   <entry key="root_descriptor_alias">TRIAGEM</entry>
+   <entry key="TRIAGEM.TIPO:db_column_size">255</entry>
+   <entry key="TRIAGEM:db_table_type">TABLE</entry>
+   <entry key="TRIAGEM.NIVEL:db_column_type">VARCHAR2</entry>
+   <entry key="TRIAGEM.CLASSIFICACAO:db_column_type">VARCHAR2</entry>
+</properties>

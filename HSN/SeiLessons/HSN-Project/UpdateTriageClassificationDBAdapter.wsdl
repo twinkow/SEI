@@ -1,0 +1,21 @@
+<?binding.jca UpdateTriageClassificationDBAdapter_db.jca?>
+<wsdl:definitions name="UpdateTriageClassificationDBAdapter" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/UpdateTriageClassificationDBAdapter" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/UpdateTriageClassificationDBAdapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateTriageClassificationDBAdapter">
+    <plt:partnerLinkType name="UpdateTriageClassificationDBAdapter_plt">
+        <plt:role name="UpdateTriageClassificationDBAdapter_role">
+            <plt:portType name="tns:UpdateTriageClassificationDBAdapter_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateTriageClassificationDBAdapter" schemaLocation="xsd/UpdateTriageClassificationDBAdapter_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="TriagemCollection_msg">
+        <wsdl:part name="TriagemCollection" element="top:TriagemCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="UpdateTriageClassificationDBAdapter_ptt">
+        <wsdl:operation name="merge">
+            <wsdl:input message="tns:TriagemCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

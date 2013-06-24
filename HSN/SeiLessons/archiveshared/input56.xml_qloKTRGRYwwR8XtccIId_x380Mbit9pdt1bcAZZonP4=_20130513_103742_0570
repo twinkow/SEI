@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?><process xmlns="http://xmlns.oracle.com/SeiLessons/HSN_BO/MedicinesStockManagementBPELProcess">
+   <triageID>5</triageID>
+   <patientID>543344</patientID>
+</process>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:relatorio xmlns:ns0="http://saude365.pt">
+   <ns0:dataHora>2013-06-13T10:45:00.396+01:00</ns0:dataHora>
+   <ns0:doente>
+      <ns0:nome>João Loff</ns0:nome>
+      <ns0:dataNasc>1986-09-12</ns0:dataNasc>
+      <ns0:id>964344</ns0:id>
+      <ns0:seguroSaude>Sim</ns0:seguroSaude>
+      <ns0:morada>
+         <ns0:codigoPostal>2792-140</ns0:codigoPostal>
+         <ns0:rua>Rua do Monte</ns0:rua>
+         <ns0:num>7</ns0:num>
+         <ns0:andar>1</ns0:andar>
+         <ns0:apartamento>A</ns0:apartamento>
+      </ns0:morada>
+   </ns0:doente>
+   <ns0:triagem>
+      <ns0:tipo>Cirurgia</ns0:tipo>
+      <ns0:nivel>vermelho</ns0:nivel>
+      <ns0:medicamento>
+         <ns0:substancia>Acarbose</ns0:substancia>
+         <ns0:nome>Acarbose Alsucril</ns0:nome>
+         <ns0:dose>100 mg</ns0:dose>
+      </ns0:medicamento>
+      <ns0:medicamento>
+         <ns0:substancia>Ibuprofeno</ns0:substancia>
+         <ns0:nome>Brufen</ns0:nome>
+         <ns0:dose>600 mg</ns0:dose>
+      </ns0:medicamento>
+   </ns0:triagem>
+</ns0:relatorio>

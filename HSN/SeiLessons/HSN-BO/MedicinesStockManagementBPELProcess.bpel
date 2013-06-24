@@ -1,0 +1,345 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Apr 10 14:16:10 PDT 2013
+  Author:  oracle
+  Type: BPEL 1.1 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="MedicinesStockManagementBPELProcess"
+               targetNamespace="http://xmlns.oracle.com/SeiLessons/HSN_BO/MedicinesStockManagementBPELProcess"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/SeiLessons/HSN_BO/MedicinesStockManagementBPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-BO/GetTriagemIDDBAdapter"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-BO/MedicineStockAndRequestInformationDBAdapter"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-BO/GetMedicineStockAndRequestedInformationDBAdapter"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetTriagemIDDBAdapter"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns4="http://xmlns.oracle.com/MedicineStockManagementBusinessRule/MedicineStockManagementBusinessRule_DecisionService_1"
+         xmlns:ns5="http://xmlns.oracle.com/SeiLessons/HSN_BO/StockJustInTimeBPELProcess"
+         xmlns:ns8="http://xmlns.oracle.com/SeiLessons/HSN_BO/PlaceMedicineOrderBPELProcess"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/GetMedicineStockAndRequestedInformationDBAdapter"
+         xmlns:ns9="http://xmlns.oracle.com/SeiLessons/HSN_BO/PlaceMedicineInvoiceBPELProcess"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/file/SeiLessons/HSN-BO/MedicineStockManagementInputFileAdapter"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-BO/UpdateMedicineRequestDBAdapter"
+         xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateMedicineRequestDBAdapter"
+         xmlns:ns13="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-BO/UpdateMedicinesStockDBAdapter"
+         xmlns:ns14="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateMedicinesStockDBAdapter">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="medicinesstockmanagementbpelprocess_client" partnerLinkType="client:MedicinesStockManagementBPELProcess" myRole="MedicinesStockManagementBPELProcessProvider"/>
+    <partnerLink name="GetMedicineStockAndRequestedInformationDBAdapter"
+                 partnerLinkType="ns3:GetMedicineStockAndRequestedInformationDBAdapter_plt"
+                 partnerRole="GetMedicineStockAndRequestedInformationDBAdapter_role"/>
+    <partnerLink name="StockJustInTimeBPELProcess.stockjustintimebpelprocess_client"
+                 partnerLinkType="ns5:StockJustInTimeBPELProcess"
+                 partnerRole="StockJustInTimeBPELProcessProvider"/>
+    <partnerLink name="PlaceMedicineOrderBPELProcess.placemedicineorderbpelprocess_client"
+                 partnerLinkType="ns8:PlaceMedicineOrderBPELProcess"
+                 partnerRole="PlaceMedicineOrderBPELProcessProvider"/>
+    <partnerLink name="PlaceMedicineInvoiceBPELProcess.placemedicineinvoicebpelprocess_client"
+                 partnerLinkType="ns9:PlaceMedicineInvoiceBPELProcess"
+                 partnerRole="PlaceMedicineInvoiceBPELProcessProvider"/>
+    <partnerLink name="MedicineStockManagementInputFileAdapter"
+                 partnerLinkType="ns10:Read_plt" myRole="Read_role"/>
+    <partnerLink name="UpdateMedicineRequestDBAdapter"
+                 partnerLinkType="ns11:UpdateMedicineRequestDBAdapter_plt"
+                 partnerRole="UpdateMedicineRequestDBAdapter_role"/>
+    <partnerLink name="UpdateMedicinesStockDBAdapter"
+                 partnerLinkType="ns13:UpdateMedicinesStockDBAdapter_plt"
+                 partnerRole="UpdateMedicinesStockDBAdapter_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns10:Read_msg"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="medicineStockAndRequestedInformationDBInputVariable"
+              messageType="ns3:GetMedicineStockAndRequestedInformationDBAdapterInput_msg"/>
+    <variable name="medicineStockAndRequestedInformationDBOutputVariable"
+              messageType="ns3:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection_msg"/>
+    <variable name="MedicineStockAndRequestedInformationVariable"
+              messageType="ns3:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection_msg"/>
+    <variable name="loopVariable" type="xsd:int"/>
+    <variable name="teste" type="xsd:int"/>
+    <variable name="stockJustInTimeProcessInputVariable"
+              messageType="ns5:StockJustInTimeBPELProcessRequestMessage"/>
+    <variable name="stockJustInTimeProcessOutputVariable"
+              messageType="ns5:StockJustInTimeBPELProcessResponseMessage"/>
+    <variable name="placeMedicineOrderProcessInputVariable"
+              messageType="ns8:PlaceMedicineOrderBPELProcessRequestMessage"/>
+    <variable name="medicineInvoiceProcessInputVariable"
+              messageType="ns9:PlaceMedicineInvoiceBPELProcessRequestMessage"/>
+    <variable name="medicineRequestInputVariable"
+              messageType="ns11:MedicamentospedidosCollection_msg"/>
+    <variable name="updateStockInputVariable"
+              messageType="ns13:MedicamentosstockCollection_msg"/>
+    <variable name="updateStockAfterOrderInputVariable"
+              messageType="ns13:MedicamentosstockCollection_msg"/>
+    <variable name="flag" type="xsd:int"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in MedicinesStockManagementBPELProcess.wsdl) -->
+    <receive name="receiveInput" variable="inputVariable" createInstance="yes"
+             partnerLink="MedicineStockManagementInputFileAdapter"
+             portType="ns10:Read_ptt" operation="Read"/>
+    <assign name="InitializeLoopVariable">
+      <copy>
+        <from expression="1"/>
+        <to variable="loopVariable"/>
+      </copy>
+    </assign>
+    <assign name="TransformToGetMedicineStockAndRequestedInformationDB">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/TransformationMedicineStockAndRequestedInformationDB.xsl', $inputVariable.body)"/>
+        <to variable="medicineStockAndRequestedInformationDBInputVariable"
+            part="GetMedicineStockAndRequestedInformationDBAdapterInput_msg"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeGetMedicineStockAndRequestedInformation"
+            partnerLink="GetMedicineStockAndRequestedInformationDBAdapter"
+            portType="ns3:GetMedicineStockAndRequestedInformationDBAdapter_ptt"
+            operation="GetMedicineStockAndRequestedInformationDBAdapter"
+            inputVariable="medicineStockAndRequestedInformationDBInputVariable"
+            outputVariable="medicineStockAndRequestedInformationDBOutputVariable"
+            bpelx:invokeAsDetail="no"/>
+    <while name="WhileExistMedicines"
+           condition="bpws:getVariableData('loopVariable') &lt;= ora:countNodes('medicineStockAndRequestedInformationDBOutputVariable','GetMedicineStockAndRequestedInformationDBAdapterOutputCollection','/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput')">
+      <sequence name="SequenceMedicineElements">
+        <assign name="AssignMedicineStockAndRequestedInformationToSingleElement">
+          <copy>
+            <from expression="ora:getElement('medicineStockAndRequestedInformationDBOutputVariable','GetMedicineStockAndRequestedInformationDBAdapterOutputCollection','/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput', bpws:getVariableData('loopVariable'))"/>
+            <to variable="MedicineStockAndRequestedInformationVariable"
+                part="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"
+                query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput"/>
+          </copy>
+          <copy>
+            <from expression="0"/>
+            <to variable="flag"/>
+          </copy>
+        </assign>
+        <assign name="TransformMedicineElementToStockJustInTimeProcessFormat">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:doXSLTransformForDoc('xsl/TransformationMedicineElementToStockJustInTimeProcessFormat.xsl', $MedicineStockAndRequestedInformationVariable.GetMedicineStockAndRequestedInformationDBAdapterOutputCollection)"/>
+            <to variable="stockJustInTimeProcessInputVariable" part="payload"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeStockJustInTimeProcess" bpelx:invokeAsDetail="no"
+                inputVariable="stockJustInTimeProcessInputVariable"
+                outputVariable="stockJustInTimeProcessOutputVariable"
+                partnerLink="StockJustInTimeBPELProcess.stockjustintimebpelprocess_client"
+                portType="ns5:StockJustInTimeBPELProcess" operation="process"/>
+        <switch name="Switch1">
+          <case condition="bpws:getVariableData('stockJustInTimeProcessOutputVariable','payload','/ns5:processResponse/ns5:stockControlVariable') = 1">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">Order Needed</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence name="SequencePlaceOrders">
+              <assign name="AssignElementToPlaceMedicineOrderProcess">
+                <copy>
+                  <from variable="MedicineStockAndRequestedInformationVariable"
+                        part="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"
+                        query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:MEDICAMENTOID"/>
+                  <to variable="placeMedicineOrderProcessInputVariable"
+                      part="payload"
+                      query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:MEDICAMENTOID"/>
+                </copy>
+                <copy>
+                  <from variable="MedicineStockAndRequestedInformationVariable"
+                        part="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"
+                        query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEEXISTENTE"/>
+                  <to variable="placeMedicineOrderProcessInputVariable"
+                      part="payload"
+                      query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEEXISTENTE"/>
+                </copy>
+                <copy>
+                  <from variable="MedicineStockAndRequestedInformationVariable"
+                        part="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"
+                        query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADECRITICA"/>
+                  <to variable="placeMedicineOrderProcessInputVariable"
+                      part="payload"
+                      query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADECRITICA"/>
+                </copy>
+                <copy>
+                  <from variable="MedicineStockAndRequestedInformationVariable"
+                        part="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"
+                        query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:MEDICAMENTOID"/>
+                  <to variable="medicineInvoiceProcessInputVariable"
+                      part="payload"
+                      query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:MEDICAMENTOID"/>
+                </copy>
+                <copy>
+                  <from variable="MedicineStockAndRequestedInformationVariable"
+                        part="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"
+                        query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEEXISTENTE"/>
+                  <to variable="medicineInvoiceProcessInputVariable"
+                      part="payload"
+                      query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEEXISTENTE"/>
+                </copy>
+                <copy>
+                  <from variable="MedicineStockAndRequestedInformationVariable"
+                        part="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"
+                        query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADECRITICA"/>
+                  <to variable="medicineInvoiceProcessInputVariable"
+                      part="payload"
+                      query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADECRITICA"/>
+                </copy>
+                <copy>
+                  <from variable="MedicineStockAndRequestedInformationVariable"
+                        part="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"
+                        query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEPEDIDA"/>
+                  <to variable="medicineInvoiceProcessInputVariable"
+                      part="payload"
+                      query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEPEDIDA"/>
+                </copy>
+                <copy>
+                  <from variable="MedicineStockAndRequestedInformationVariable"
+                        part="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"
+                        query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEPEDIDA"/>
+                  <to variable="placeMedicineOrderProcessInputVariable"
+                      part="payload"
+                      query="/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEPEDIDA"/>
+                </copy>
+              </assign>
+              <invoke name="InvokePlaceMedicineOrderProcess"
+                      bpelx:invokeAsDetail="no"
+                      inputVariable="placeMedicineOrderProcessInputVariable"
+                      partnerLink="PlaceMedicineOrderBPELProcess.placemedicineorderbpelprocess_client"
+                      portType="ns8:PlaceMedicineOrderBPELProcess"
+                      operation="process"/>
+              <invoke name="InvokeMedicineInvoiceProcess"
+                      bpelx:invokeAsDetail="no"
+                      inputVariable="medicineInvoiceProcessInputVariable"
+                      partnerLink="PlaceMedicineInvoiceBPELProcess.placemedicineinvoicebpelprocess_client"
+                      portType="ns9:PlaceMedicineInvoiceBPELProcess"
+                      operation="process"/>
+              <assign name="AssignUpdateStock">
+                <copy>
+                  <from expression="number(bpws:getVariableData('MedicineStockAndRequestedInformationVariable','GetMedicineStockAndRequestedInformationDBAdapterOutputCollection','/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADECRITICA'))"/>
+                  <to variable="updateStockAfterOrderInputVariable"
+                      part="MedicamentosstockCollection"
+                      query="/ns14:MedicamentosstockCollection/ns14:Medicamentosstock/ns14:quantidadeexistente"/>
+                </copy>
+                <copy>
+                  <from expression="number(bpws:getVariableData('MedicineStockAndRequestedInformationVariable','GetMedicineStockAndRequestedInformationDBAdapterOutputCollection','/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:MEDICAMENTOID'))"/>
+                  <to variable="updateStockAfterOrderInputVariable"
+                      part="MedicamentosstockCollection"
+                      query="/ns14:MedicamentosstockCollection/ns14:Medicamentosstock/ns14:medicamentoid"/>
+                </copy>
+                <copy>
+                  <from expression="1"/>
+                  <to variable="flag"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeUpdateStock" bpelx:invokeAsDetail="no"
+                      inputVariable="updateStockAfterOrderInputVariable"
+                      partnerLink="UpdateMedicinesStockDBAdapter"
+                      portType="ns13:UpdateMedicinesStockDBAdapter_ptt"
+                      operation="update"/>
+            </sequence>
+          </case>
+        </switch>
+        <assign name="AssignMedicineRequest">
+          <copy>
+            <from expression="bpws:getVariableData('MedicineStockAndRequestedInformationVariable','GetMedicineStockAndRequestedInformationDBAdapterOutputCollection','/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEPEDIDA') - 1"/>
+            <to variable="medicineRequestInputVariable"
+                part="MedicamentospedidosCollection"
+                query="/ns12:MedicamentospedidosCollection/ns12:Medicamentospedidos/ns12:quantidadepedida"/>
+          </copy>
+          <copy>
+            <from expression="number(bpws:getVariableData('MedicineStockAndRequestedInformationVariable','GetMedicineStockAndRequestedInformationDBAdapterOutputCollection','/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:MEDICAMENTOID'))"/>
+            <to variable="medicineRequestInputVariable"
+                part="MedicamentospedidosCollection"
+                query="/ns12:MedicamentospedidosCollection/ns12:Medicamentospedidos/ns12:medicamentoid"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeMedicineRequest" bpelx:invokeAsDetail="no"
+                inputVariable="medicineRequestInputVariable"
+                partnerLink="UpdateMedicineRequestDBAdapter"
+                portType="ns11:UpdateMedicineRequestDBAdapter_ptt"
+                operation="update"/>
+        <assign name="AssignUpdateStock"
+                bpelx:skipCondition="bpws:getVariableData('flag') = 1">
+          <copy>
+            <from expression="number(bpws:getVariableData('MedicineStockAndRequestedInformationVariable','GetMedicineStockAndRequestedInformationDBAdapterOutputCollection','/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:MEDICAMENTOID'))"/>
+            <to variable="updateStockInputVariable"
+                part="MedicamentosstockCollection"
+                query="/ns14:MedicamentosstockCollection/ns14:Medicamentosstock/ns14:medicamentoid"/>
+          </copy>
+          <copy>
+            <from expression="number(bpws:getVariableData('MedicineStockAndRequestedInformationVariable','GetMedicineStockAndRequestedInformationDBAdapterOutputCollection','/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEEXISTENTE') - bpws:getVariableData('MedicineStockAndRequestedInformationVariable','GetMedicineStockAndRequestedInformationDBAdapterOutputCollection','/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutputCollection/ns6:GetMedicineStockAndRequestedInformationDBAdapterOutput/ns6:QUANTIDADEPEDIDA'))"/>
+            <to variable="updateStockInputVariable"
+                part="MedicamentosstockCollection"
+                query="/ns14:MedicamentosstockCollection/ns14:Medicamentosstock/ns14:quantidadeexistente"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeUpdateStock"
+                inputVariable="updateStockInputVariable"
+                partnerLink="UpdateMedicinesStockDBAdapter"
+                portType="ns13:UpdateMedicinesStockDBAdapter_ptt"
+                operation="update"
+                bpelx:skipCondition="bpws:getVariableData('flag') = 1"
+                bpelx:invokeAsDetail="no"/>
+        <assign name="IncrementLoopVariable">
+          <copy>
+            <from expression="bpws:getVariableData('loopVariable') + 1"/>
+            <to variable="loopVariable"/>
+          </copy>
+        </assign>
+      </sequence>
+    </while>
+    <!-- Generate reply to synchronous request -->
+  </sequence>
+</process>

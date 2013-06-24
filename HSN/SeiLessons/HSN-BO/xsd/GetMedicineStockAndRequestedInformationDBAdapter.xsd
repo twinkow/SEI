@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/GetMedicineStockAndRequestedInformationDBAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/GetMedicineStockAndRequestedInformationDBAdapter" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="GetMedicineStockAndRequestedInformationDBAdapterInput" type="GetMedicineStockAndRequestedInformationDBAdapterInput"/>
+   <xs:complexType name="GetMedicineStockAndRequestedInformationDBAdapterInput">
+      <xs:sequence>
+         <xs:element name="doenteid" type="xs:decimal" nillable="true"/>
+         <xs:element name="triagemid" type="xs:decimal" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection" type="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection"/>
+   <xs:complexType name="GetMedicineStockAndRequestedInformationDBAdapterOutputCollection">
+      <xs:sequence>
+         <xs:element name="GetMedicineStockAndRequestedInformationDBAdapterOutput" type="GetMedicineStockAndRequestedInformationDBAdapterOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="GetMedicineStockAndRequestedInformationDBAdapterOutput">
+      <xs:sequence>
+         <xs:element name="MEDICAMENTOID" type="xs:decimal" nillable="true"/>
+         <xs:element name="QUANTIDADEEXISTENTE" type="xs:decimal" nillable="true"/>
+         <xs:element name="QUANTIDADECRITICA" type="xs:decimal" nillable="true"/>
+         <xs:element name="QUANTIDADEPEDIDA" type="xs:decimal" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<graphics>
+   <diagram optimizeLayout="false" popupEditor="true" fixedWidthSwimlanes="true" roundedPartnerlinks="true" centerZoom="true" validateOnLoad="true" confirmBeforeDelete="true" selectedPartnerLinkColor="0,0,153" swimlaneBackground="240,240,240" swimlaneDividerBackground="218,218,218" graphBackground="255,255,255" selectedBorderBackground="49,105,198" connectedPartnerLinkColor="204,204,255" connectablePartnerLinkColor="0,0,255" unconnectedPartnerLinkColor="192,192,192"/>
+   <annotationfile/>
+   <iconize/>
+   <partnerlink_locations>
+      <partnerlink name="EntryPatientFileAdapter" x="0" y="189" side="left"/>
+      <partnerlink name="EntryRegisterDBAdapter" x="0" y="278" side="left"/>
+      <partnerlink name="CheckAddressValidFlagDB" x="0" y="461" side="left"/>
+      <partnerlink name="GetTriageInformationDBAdapter" x="0" y="826" side="left"/>
+      <partnerlink name="PatientInformationDBAdapter" x="0" y="18" side="left"/>
+      <partnerlink name="OfficeManagementBPELProcess.officemanagementbpelprocess_client" x="0" y="1098" side="left"/>
+      <partnerlink name="UpdatePatientAddressInformationDBAdapter" x="0" y="75" side="left"/>
+      <partnerlink name="ValidAddressFlagDBAdapter" x="0" y="132" side="left"/>
+      <partnerlink name="RectifyPatientAddressHumantask.TaskService_1" x="588" y="18" side="right"/>
+      <partnerlink name="BackOfficeInputFileAdapter" x="588" y="97" side="right"/>
+   </partnerlink_locations>
+   <graph_layout viewport="0,0,718,323" show_swimlanes="true">
+      <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
+      <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch" type="switch"/>
+      <layout_item collapsed="true" xpath="/process/sequence/switch/case/sequence" type="sequence"/>
+      <layout_item collapsed="true" xpath="/process/sequence/switch/case/sequence/scope" type="usertask" showhandlers="true"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch/case/sequence/scope/sequence" type="sequence"/>
+      <layout_item collapsed="true" xpath="/process/sequence/switch/case/sequence/switch" type="switch"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch/case/sequence/switch/case/sequence" type="sequence"/>
+   </graph_layout>
+   <bookmarks/>
+</graphics>

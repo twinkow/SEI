@@ -1,0 +1,15 @@
+<adapter-config name="MedicineRequestDBAdapter" adapter="Database Adapter" wsdlLocation="MedicineRequestDBAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/mydb" UIConnectionName="DbConnection" adapterRef=""/>
+  <endpoint-interaction portType="MedicineRequestDBAdapter_ptt" operation="merge">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="MedicineRequestDBAdapter.Medicamentospedidos"/>
+      <property name="DmlType" value="merge"/>
+      <property name="MappingsMetaDataURL" value="MedicineRequestDBAdapter-or-mappings.xml"/>
+      <property name="OptimizeMerge" value="true"/>
+      <property name="DetectOmissions" value="true"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,25 @@
+<?binding.jca GetAllTriageAssociatedWithPatientDBAdapter_db.jca?>
+<wsdl:definitions name="GetAllTriageAssociatedWithPatientDBAdapter" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetAllTriageAssociatedWithPatientDBAdapter" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetAllTriageAssociatedWithPatientDBAdapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter">
+    <plt:partnerLinkType name="GetAllTriageAssociatedWithPatientDBAdapter_plt">
+        <plt:role name="GetAllTriageAssociatedWithPatientDBAdapter_role">
+            <plt:portType name="tns:GetAllTriageAssociatedWithPatientDBAdapter_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetAllTriageAssociatedWithPatientDBAdapter" schemaLocation="xsd/GetAllTriageAssociatedWithPatientDBAdapter_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="GetAllTriageAssociatedWithPatientDBAdapterSelect_inputParameters">
+        <wsdl:part name="GetAllTriageAssociatedWithPatientDBAdapterSelect_inputParameters" element="top:GetAllTriageAssociatedWithPatientDBAdapterSelect_doenteInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="TriagemCollection_msg">
+        <wsdl:part name="TriagemCollection" element="top:TriagemCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="GetAllTriageAssociatedWithPatientDBAdapter_ptt">
+        <wsdl:operation name="GetAllTriageAssociatedWithPatientDBAdapterSelect">
+            <wsdl:input message="tns:GetAllTriageAssociatedWithPatientDBAdapterSelect_inputParameters"/>
+            <wsdl:output message="tns:TriagemCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

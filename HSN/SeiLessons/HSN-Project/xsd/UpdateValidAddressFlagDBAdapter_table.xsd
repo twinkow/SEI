@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateValidAddressFlagDBAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateValidAddressFlagDBAdapter" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="DoenteCollection" type="DoenteCollection"/>
+   <xs:complexType name="DoenteCollection">
+      <xs:sequence>
+         <xs:element name="Doente" type="Doente" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Doente">
+      <xs:sequence>
+         <xs:element name="id" type="xs:int"/>
+         <xs:element name="moradavalida" type="xs:int" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

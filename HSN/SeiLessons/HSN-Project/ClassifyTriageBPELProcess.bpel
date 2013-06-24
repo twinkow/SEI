@@ -1,0 +1,175 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sat Apr 20 15:53:39 WEST 2013
+  Author:  oracle
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ClassifyTriageBPELProcess"
+               targetNamespace="http://xmlns.oracle.com/SeiLessons/HSN_Project/ClassifyTriageBPELProcess"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/SeiLessons/HSN_Project/ClassifyTriageBPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/bpel/workflow/taskService"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns2="http://saude365.pt"
+         xmlns:task="http://xmlns.oracle.com/bpel/workflow/task"
+         xmlns:wfcommon="http://xmlns.oracle.com/bpel/workflow/common"
+         xmlns:ns3="http://xmlns.oracle.com/bpel/workflow/TaskEvidenceService"
+         xmlns:wf="http://schemas.oracle.com/bpel/extensions/workflow"
+         xmlns:ns4="http://xmlns.oracle.com/bpel/workflow/routingSlip"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/GetTriageIDDBAdapter"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/GetTriageIDDBAdapter"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/GetTriageIDDBAdapter"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/SeiLessons/HSN-Project/UpdateTriageClassificationDBAdapter">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="classifytriagebpelprocess_client" partnerLinkType="client:ClassifyTriageBPELProcess" myRole="ClassifyTriageBPELProcessProvider"/>
+    <partnerLink name="ClassifyTriageHumantask.TaskService"
+                 partnerLinkType="ns1:TaskService" partnerRole="TaskService"
+                 myRole="TaskServiceCallbackListener"/>
+    <partnerLink name="GetTriageIDDBAdapter"
+                 partnerLinkType="ns5:GetTriageIDDBAdapter_plt"
+                 partnerRole="GetTriageIDDBAdapter_role"/>
+    <partnerLink name="UpdateTriageClassificationDBAdapter"
+                 partnerLinkType="ns8:UpdateTriageClassificationDBAdapter_plt"
+                 partnerRole="UpdateTriageClassificationDBAdapter_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ClassifyTriageBPELProcessRequestMessage"/>
+    <variable name="ClassifyTriageHumantask1_globalVariable"
+              messageType="ns1:taskMessage"/>
+    <variable name="getTriageIDInputVariable"
+              messageType="ns5:GetTriageIDDBAdapterInput_msg"/>
+    <variable name="getTriageIDOutputVariable"
+              messageType="ns5:GetTriageIDDBAdapterOutput_msg"/>
+    <variable name="updateTriageClassificationInputVariable"
+              messageType="ns8:TriagemCollection_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ClassifyTriageBPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="classifytriagebpelprocess_client" portType="client:ClassifyTriageBPELProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <scope name="ClassifyTriageHumantask1"
+           xmlns:wf="http://schemas.oracle.com/bpel/extensions/workflow"
+           wf:key="ClassifyTriageHumantask1_globalVariable">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:workflow"></bpelx:pattern>
+        <bpelx:general>
+          <bpelx:property name="userLabel">ClassifyTriageHumantask</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <variables>
+        <variable name="initiateTaskInput"
+                  messageType="ns1:initiateTaskMessage"/>
+        <variable name="initiateTaskResponseMessage"
+                  messageType="ns1:initiateTaskResponseMessage"/>
+      </variables>
+      <sequence>
+        <assign name="ClassifyTriageHumantask1_AssignTaskAttributes">
+          <copy>
+            <from expression="number(3)"/>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns1:initiateTask/task:task/task:priority"/>
+          </copy>
+          <copy>
+            <from><payload xmlns="http://xmlns.oracle.com/bpel/workflow/task">
+	<relatorio xmlns="http://saude365.pt"/> 
+</payload></from>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns1:initiateTask/task:task/task:payload"/>
+          </copy>
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/ns2:relatorio"/>
+            <to variable="initiateTaskInput" part="payload"
+                query="/ns1:initiateTask/task:task/task:payload/ns2:relatorio"/>
+          </copy>
+        </assign>
+        <invoke name="initiateTask_ClassifyTriageHumantask1"
+                partnerLink="ClassifyTriageHumantask.TaskService"
+                operation="initiateTask" portType="ns1:TaskService"
+                inputVariable="initiateTaskInput"
+                outputVariable="initiateTaskResponseMessage"/>
+        <receive name="receiveCompletedTask_ClassifyTriageHumantask1"
+                 partnerLink="ClassifyTriageHumantask.TaskService"
+                 portType="ns1:TaskServiceCallback" operation="onTaskCompleted"
+                 variable="ClassifyTriageHumantask1_globalVariable"
+                 createInstance="no"/>
+      </sequence>
+    </scope>
+    <assign name="TransformGetTriageID">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/TransformationGetTriageID.xsl', $inputVariable.payload)"/>
+        <to variable="getTriageIDInputVariable"
+            part="GetTriageIDDBAdapterInput_msg"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeGetTriageID" inputVariable="getTriageIDInputVariable"
+            outputVariable="getTriageIDOutputVariable" bpelx:invokeAsDetail="no"
+            partnerLink="GetTriageIDDBAdapter"
+            portType="ns5:GetTriageIDDBAdapter_ptt"
+            operation="GetTriageIDDBAdapter"/>
+    <assign name="TransformUpdateTriageClassification">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/TransformationUpdateTriageClassification.xsl', $getTriageIDOutputVariable.GetTriageIDDBAdapterOutput, 'ClassifyTriageHumantask1_globalVariable.payload', $ClassifyTriageHumantask1_globalVariable.payload)"/>
+        <to variable="updateTriageClassificationInputVariable"
+            part="TriagemCollection"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeUpdateTriageClassification" bpelx:invokeAsDetail="no"
+            inputVariable="updateTriageClassificationInputVariable"
+            partnerLink="UpdateTriageClassificationDBAdapter"
+            portType="ns8:UpdateTriageClassificationDBAdapter_ptt"
+            operation="merge"/>
+  </sequence>
+</process>
