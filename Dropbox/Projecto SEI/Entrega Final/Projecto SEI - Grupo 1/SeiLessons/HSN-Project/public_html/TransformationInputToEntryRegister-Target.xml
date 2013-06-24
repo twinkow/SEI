@@ -1,7 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<top:RegistoentradaCollection xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/EntryRegisterDBAdapter">
-   <top:Registoentrada>
-      <top:datahora/>
-      <top:doenteid/>
-   </top:Registoentrada>
-</top:RegistoentradaCollection>

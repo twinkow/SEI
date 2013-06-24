@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?><OfficePatientElement xmlns="http://pt.saude365">
-   <patientName>Aarão Pestana</patientName>
-   <patientBirth>2012-08-26T00:00:00.000+01:00</patientBirth>
-   <patientInsurence>Não</patientInsurence>
-   <patientTreatment>Ortopedia</patientTreatment>
-   <patientLevel>vermelho</patientLevel>
-   <patientHealed/>
-   <doctorComment/>
-</OfficePatientElement>

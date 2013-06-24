@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?><OfficePatientElement xmlns="http://pt.saude365">
-   <patientName>Celso Padilha</patientName>
-   <patientBirth>1989-01-09T00:00:00.000+00:00</patientBirth>
-   <patientInsurence>Não</patientInsurence>
-   <patientTreatment>Cirurgia</patientTreatment>
-   <patientLevel>amarelo</patientLevel>
-   <patientHealed/>
-   <doctorComment/>
-</OfficePatientElement>
